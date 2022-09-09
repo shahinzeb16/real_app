@@ -273,7 +273,7 @@
                                                 class="la la-star-o"></i> Favorites</a></li>
                                 <li><a href="javascript:;" class=" waves-effect waves-light"><i class="la la-file"></i>
                                             Collections</a></li>
-                                <li><a href="javascript:;" class=" waves-effect waves-light"><i
+                                <li><a href="logout.php" class=" waves-effect waves-light"><i
                                                 class="la la-power-off"></i> Sign Out</a></li>
                             </ul>
                         </div>

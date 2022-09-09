@@ -6,6 +6,16 @@ if(isset($_POST['submit']))
 	$email=$_REQUEST['email'];
 	$password=$_REQUEST['pass'];
     $dataobj->adminlogin($email,$password);
+    if(isset($_POST['remember_me'])){
+								
+        setcookie('emailcookie',$email, time()+86400);
+        setcookie('passwordcookie',$password, time()+86400);
+                
+        header('location:elements.php');
+    }
+    else {
+        header('location:elements.php');
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -53,17 +63,21 @@ if(isset($_POST['submit']))
                         <div class="form-group mb-4">
                             <label>Email Id</label>
                             <input type="text" name="email" class="form-control border-light input-h-42"
-                                placeholder="john.doe@domain.com" required>
+                                placeholder="john.doe@domain.com" value="<?php if(isset($_COOKIE['emailcookie'])) { echo $_COOKIE['emailcookie']; } ?>"  required>
                         </div>
                         <div class="form-group mb-4">
                             <label>Password</label>
                             <div class="input-group border border-light">
                                 <input  id="password-field" type="password" name="pass" class="form-control input-h-42"
-                                    placeholder="Password" aria-label="Password" required>
+                                    placeholder="Password" aria-label="Password" value="<?php if(isset($_COOKIE['passwordcookie'])) { echo $_COOKIE['passwordcookie']; } ?>"  required>
                                 <div class="input-group-prepend">
                                     <span toggle="#password-field" class="input-group-text la la-eye" id="Password"></span>
                                 </div>
                             </div>
+                        </div>
+                        <div>
+                        <input type="checkbox" name="remember_me" <?php if(isset($_COOKIE['emailcookie'])) {?> checked <?php } ?> >Remember Me<br><br>
+
                         </div>
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <a href="forgot.html" class="text-primary btn-link">Forgot password?</a>
