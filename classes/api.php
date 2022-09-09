@@ -34,27 +34,6 @@ class users extends DB
      }
    }
 
-//    public function deleteproduct($product_id){
-//     $delete_query = "DELETE FROM product WHERE product_id='$product_id' ";
-//     $data = mysqli_query($this->conn,$delete_query);
-//     if($data){
-//         return 200;
-//     }else{
-//         return 404;
-//     }
-//    }
-
-//    public function updateproduct(){
-//     $update_query = " UPDATE product SET product_title='$product_title',product_price = '$product_price',product_description = '$product_description'
-//     product_quantity = '$product_quantity',product_image = '$product_image',product_size='$product_size',product_color = '$product_color',
-//     product_discount='$product_discount',product_status='$product_status' WHERE product_id='$product_id' ";
-//     $data = mysqli_query($this->conn,$update_query);
-//     if($data){
-//         return 200;
-//     }else{
-//         return 404;
-//     }
-//   }
 
 public function deleteproduct($product_id){
     $sql = "DELETE FROM product WHERE product_id='$product_id'";
