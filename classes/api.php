@@ -17,9 +17,9 @@ class users extends DB
       }
       else
       {
-         echo "login Fail";
+         return 404;
          $_SESSION['id']="";
-         
+
       }
    }
 
@@ -32,7 +32,7 @@ class users extends DB
       $data = mysqli_query($this->conn,$insert_query);
       if($data){
          return 200;
-         
+
       }else{
          return 404;
       }
@@ -43,7 +43,7 @@ class users extends DB
       $data = mysqli_query($this->conn, $sql);
       if($data){
          return 200;
-         
+
       }
      else{
       return 404;
@@ -59,10 +59,10 @@ class users extends DB
       $data = mysqli_query($this->conn, $update_query);
       if($data){
          return 200;
-         
+
       }else{
          return 404;
-      }  
+      }
    }
 }
 
