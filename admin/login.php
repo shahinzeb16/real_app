@@ -17,20 +17,20 @@ if(isset($_POST['submit']))
 <body>    
     <h2>Login Page</h2><br>    
     <div class="login">    
-    <form  method="post" action=""> 
+        <form  method="post" action=""> 
 
-        <label><b>Email Id</b></label><br>     
-        <input type="text" name="email" id="Uname" placeholder="Email"> <br><br>
+            <label><b>Email Id</b></label><br>     
+            <input type="text" name="email" id="Uname" placeholder="Email"> <br><br>
 
-        <label><b>Password</b></label>   
-        <input type="text" name="pass" id="Pass" placeholder="Password"><br><br><br>  
+            <label><b>Password</b></label>   
+            <input type="text" name="pass" id="Pass" placeholder="Password"><br><br><br>  
 
-        <button type="submit" name="submit" id="log">Login</button><br><br><br>    
-        <input type="checkbox" id="check" name="remember">    
-        <span>Remember me</span>    
-        <br><br>    
-        <a href="passwordchange.php">ForgotPassword</a>    
-    </form>     
-</div>    
+            <button type="submit" name="submit" id="log">Login</button><br><br><br>    
+            <input type="checkbox" id="check" name="remember">    
+            <span>Remember me</span>    
+            <br><br>    
+            <a href="passwordchange.php">ForgotPassword</a>    
+        </form>     
+    </div>    
 </body>    
 </html>     
