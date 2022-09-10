@@ -25,8 +25,9 @@ class users extends DB
 
    public function addproduct(Array $product_array)
    {
-      $sqlstr = implode("','",$product_array);
-      $insert_query = "INSERT INTO product(product_title, product_price, product_description, product_category, product_subcategory,  product_quantity, product_image, product_size, product_color, product_discount, product_status, product_location) VALUES ('$sqlstr')";
+      $sqlstr=implode("','",$product_array);
+      $insert_query = "INSERT INTO product(product_title, product_price, product_description, product_quantity, product_image, product_size, product_color, product_discount)
+      VALUES ('$sqlstr')";
 
       $data = mysqli_query($this->conn,$insert_query);
       if($data){
@@ -43,9 +44,10 @@ class users extends DB
       if($data){
          return 200;
          
-      }else{
-         return 404;
       }
+     else{
+      return 404;
+     }
    }
 
    public function updateproduct($product_title, $product_price, $product_description, $product_category, $product_subcategory , $product_quantity, $product_image, $product_size, $product_color, $product_discount, $product_status, $product_location, $product_id)
