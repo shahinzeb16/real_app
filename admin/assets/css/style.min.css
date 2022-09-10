@@ -1,5 +1,5 @@
 /*
- * Thin 
+ * Thin
  * ExtraLight
  * Light
  * Regular
@@ -80,7 +80,7 @@ hr {
 /******************* KeyFrames ***********************/
 /******************* Animation ***********************/
 /*
-    Example usage: 
+    Example usage:
     @include animation(rotate, 5s, 10s, linear, infinite)
  */
 a {
@@ -1689,6 +1689,32 @@ h1, h2, h3, h4, h5, h6 {
   top: 20%;
   right: 25%;
   font-weight: 400; }
+  .td_action i{
+    font-size: 20px;
+    cursor:pointer;
+  }
+  .td_action i:hover{
+    color:#0E5DCF;
+  }
+  [data-title]:hover:after {
+    visibility: visible;
+  }
+  [data-title]:after{
+    content: attr(data-title);
+    background: rgba(0,0,0,0.9);
+    border-radius:15px;
+    z-index: 99999;
+    color:#ffffff;
+    position:absolute;
+    top:80%;
+    left:80%;
+    font-size:15px;
+    padding:2px 4px 2px 4px;
+    visibility: hidden;
+  }
+  [data-title] {
+    position: relative;
+  }
   @media screen and (max-width: 768px) {
     .badge {
       top: 15%;

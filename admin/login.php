@@ -57,7 +57,7 @@ if(isset($_POST['submit']))
                 </div>
                 <div class="col-12 col-lg-6 pl-lg-2">
                     <div class="pagetitle mb-4">
-                        <h2>Component</h2>
+                        <h2>Admin Login</h2>
                     </div>
                     <form method="post" action="">
                         <div class="form-group mb-4">
@@ -80,14 +80,14 @@ if(isset($_POST['submit']))
 
                         </div>
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <a href="forgot.html" class="text-primary btn-link">Forgot password?</a>
+                            <!--<a href="forgot.html" class="text-primary btn-link">Forgot password?</a>-->
                             <button type="submit" name="submit"
                                 class="btn btn-primary waves-effect waves-primary btn-md w-50">Login</button>
                         </div>
                         <hr class="mb-4">
-                        <a href="register.html"
+                        <!--<a href="register.html"
                             class="btn btn-outline-primary waves-effect waves-primary w-100 btn-md">Create an
-                            account</a>
+                            account</a>-->
                     </form>
                 </div>
             </div>
