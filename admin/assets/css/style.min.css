@@ -1715,6 +1715,7 @@ h1, h2, h3, h4, h5, h6 {
   [data-title] {
     position: relative;
   }
+  
   @media screen and (max-width: 768px) {
     .badge {
       top: 15%;
