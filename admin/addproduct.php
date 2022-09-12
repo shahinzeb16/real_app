@@ -56,7 +56,7 @@
         <!-- ########## START: HEAD PANEL ########## -->
         <a href="index.php"><img src="assets/image/logo.png" alt="MS Admin Panel" width="80" /></a>
         <div class="br-header d-flex w-100">
-            
+
             <div class="br-header-left">
                 <a href="javascript:;" class="searchbar-toggle la la-search d-flex d-md-none"></a>
                 <form class="searchbar d-flex align-items-center pl-3">
@@ -239,7 +239,16 @@
         </div>
         <!-- br-header -->
         <!-- ########## END: HEAD PANEL ########## -->
+
     </header>
+    <section style="padding-top:120px;" class="container">
+
+          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Product Name">
+          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Product Name">
+          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Product Name">
+
+    </section>
+
 
     <script src="assets/scripts/jquery.min.js"></script>
     <script src="assets/scripts/popper.min.js"></script>
