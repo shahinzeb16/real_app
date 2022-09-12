@@ -1735,6 +1735,8 @@ h1, h2, h3, h4, h5, h6 {
     color:#fff !important;
     background: #7A33FF !important;
     border-color: skyblue;
+    margin-bottom:20px;
+    width:50%;
   }
 
   @media screen and (max-width: 768px) {
