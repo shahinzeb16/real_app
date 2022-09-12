@@ -242,11 +242,11 @@
 
     </header>
     <section style="padding-top:120px;" class="container">
-
+      <div class="input-center">
           <input type="text" class="form-control bg-secondary input-h-42" placeholder="Product Name">
           <input type="text" class="form-control bg-secondary input-h-42" placeholder="Product Name">
           <input type="text" class="form-control bg-secondary input-h-42" placeholder="Product Name">
-
+      </div>
     </section>
 
 

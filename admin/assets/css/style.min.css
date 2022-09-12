@@ -1739,7 +1739,10 @@ h1, h2, h3, h4, h5, h6 {
     width:50%;
     text-align: center;
   }
-
+  .input-center{
+    display: grid;
+    place-items:center;
+  }
   @media screen and (max-width: 768px) {
     .badge {
       top: 15%;
