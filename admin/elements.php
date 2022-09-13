@@ -1,3 +1,9 @@
+<?php
+include '../classes/api.php';
+$productobj=new users();
+$display=$productobj->productDisplay();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -308,20 +314,38 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php
+                            while($result=mysqli_fetch_assoc($display))
+                            {
+                            ?>
                             <tr>
-                                <td>Acer i series smart tv</td>
-                                <td>Electronics</td>
-                                <td>10</td>
-                                <td>16999</td>
-                                <td>Out of stock</td>
+                                <td><?php echo $result['product_title'];?></td>
+                                <td><?php echo $result['product_category'];?></td>
+                                <td><?php echo $result['product_quantity'];?></td>
+                                <td><?php echo $result['product_status'];?></td>
+                                <td><?php 
+
+                                $status=$result['product_status'];
+                                if($status==0)
+                                {
+                                    echo "out of stock";
+                                }
+                                else
+                                {
+                                    echo "Available";
+                                }
+
+                            ?></td>
                                 <td class="td_action" align="center">
                                   <i data-title="View" id="viewdetails" class="la la-eye"></i>
                                   <i data-title="Edit" id="editdetails" class="la la-edit"></i>
                                   <i data-title="Delete" id="deleteproduct" class="la la-trash"></i>
                                 </td>
                             </tr>
-
-                            <tr>
+                            <?php
+                              }
+                            ?>
+                           <!--  <tr>
                                 <td>Realme 5 pro</td>
                                 <td>Mobiles</td>
                                 <td>10</td>
@@ -332,9 +356,9 @@
                                   <i data-title="Edit" id="editdetails" class="la la-edit"></i>
                                   <i data-title="Delete" id="deleteproduct" class="la la-trash"></i>
                                 </td>
-                            </tr>
+                            </tr> -->
 
-                            <tr>
+                            <!-- <tr>
                                 <td>Lg 5 star refrigerator 190L</td>
                                 <td>Appliances</td>
                                 <td>5</td>
@@ -345,7 +369,7 @@
                                   <i data-title="Edit" id="editdetails" class="la la-edit"></i>
                                   <i data-title="Delete" id="deleteproduct" class="la la-trash"></i>
                                 </td>
-                            </tr>
+                            </tr> -->
 
 
 

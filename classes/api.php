@@ -64,6 +64,13 @@ class users extends DB
          return 404;
       }
    }
+
+   public function productDisplay()
+   {
+      $sql="SELECT * FROM product";
+      $data=mysqli_query($this->conn,$sql);
+      return $data;
+   }
 }
 
 ?>
