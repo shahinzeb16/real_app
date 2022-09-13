@@ -1,3 +1,34 @@
+<?php 
+include('../classes/api.php');
+$dataobj=new users();
+$product_title = $product_price = $product_description = $product_category = $product_subcategory = $product_quantity = $product_image = $product_size = $product_color = $product_discount =$product_status =$product_location = "";
+if(isset($_POST['product_add'])){
+    $product_title = $_POST['product_title'];
+    $product_price = $_POST['product_price'];
+    $product_description = $_POST['product_description'];
+    $product_category = $_POST['product_category'];
+    $product_subcategory = $_POST['product_subcategory'];
+    $product_quantity = $_POST['product_quantity'];
+
+    $extension = strtolower(pathinfo($_FILES['product_image']['name'], PATHINFO_EXTENSION));
+    $filename = $_FILES['product_image']['name']; 
+    $product_image="uploads/product".$filename;
+    $tmpname = $_FILES['product_image']['tmp_name'];
+    $a=move_uploaded_file($tmpname, $product_image);
+
+    $product_size = $_POST['product_size'];
+    $product_color = $_POST['product_color'];
+    $product_discount = $_POST['product_discount'];
+    $product_status = $_POST['product_status'];
+    $product_location = $_POST['product_location'];
+
+    $product_array =array($product_title,$product_price,$product_description,$product_category,$product_subcategory,$product_quantity,$product_image,$product_size,$product_color,$product_discount,$product_status,$product_location);
+    $dataobj->addproduct($product_array);
+    
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -242,12 +273,14 @@
 
     </header>
     <section style="padding-top:120px;" class="container">
+    <form method="post" action="" enctype="multipart/form-data">
+
       <div class="input-center">
-          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Name">
-          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Price">
-          <textarea class="form-control border-light" rows="3" spellcheck="true" placeholder="Description"></textarea>
+          <input type="text" class="form-control bg-secondary input-h-42" name="product_title" placeholder="Name">
+          <input type="text" class="form-control bg-secondary input-h-42" name="product_price" placeholder="Price">
+          <textarea class="form-control border-light" rows="3" spellcheck="true" name="product_description" placeholder="Description"></textarea>
           <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" name="product_category" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Category
             </button>
             <div id="dropdown-menucat" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -257,7 +290,7 @@
             </div>
           </div><br><br>
           <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" name="product_subcategory" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 SubCategory
             </button>
             <div id="dropdown-menusubcat"  class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
@@ -266,10 +299,10 @@
               <a class="dropdown-item" href="#">Tv</a>
             </div>
           </div><br><br>
-          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Units">
-          <input type="file" class="form-control bg-secondary input-h-42" placeholder="Image">
+          <input type="text" class="form-control bg-secondary input-h-42" name="product_quantity" placeholder="Units">
+          <input type="file" class="form-control bg-secondary input-h-42" name="product_image" placeholder="Image">
           <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" name="product_status"  id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Status
             </button>
             <div id="dropdown-menustat" class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
@@ -278,16 +311,22 @@
               <a class="dropdown-item" href="#">Disabled</a>
             </div>
           </div><br><br>
-          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Size">
-          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Colour">
-          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Discount">
-          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Location">
+          <input type="text" class="form-control bg-secondary input-h-42" name="product_size" placeholder="Size">
+          <input type="text" class="form-control bg-secondary input-h-42" name="product_color" placeholder="Colour">
+          <input type="text" class="form-control bg-secondary input-h-42" name="product_discount" placeholder="Discount">
+          <input type="text" class="form-control bg-secondary input-h-42" name="product_location" placeholder="Location">
           <div class="button-flex">
-            <button type="button" class="btn btn-success waves-effect waves-green">Add</button>
-            <button type="button" class="btn btn-danger waves-effect waves-red">Cancel</button>
+            <button type="button" name="product_add" class="btn btn-success waves-effect waves-green">Add</button>
+            <button type="button" onclick="product_cancel()" class="btn btn-danger waves-effect waves-red">Cancel</button>
           </div><br><br>
+      </div>
+    </form>  
     </section>
-
+    <script>
+        function product_cancel(){
+           window.location.href = "elements.php";
+        }
+    </script>
 
     <script src="assets/scripts/jquery.min.js"></script>
     <script src="assets/scripts/popper.min.js"></script>

@@ -295,7 +295,7 @@ $display=$productobj->productDisplay();
     <section class="mainpanel">
       <div class="pagebody">
         <br><br>
-        <button type="button" class="btn btn-success waves-effect waves-green">Add Product</button>
+        <button type="button" onclick="add_product()" class="btn btn-success waves-effect waves-green">Add Product</button>
         <br><br>
             <div class="card  border-0">
                 <div class="card-header py-4">
@@ -383,7 +383,11 @@ $display=$productobj->productDisplay();
     <!-- ########## END: MAIN PANEL ########## -->
 
 </body>
-
+<script>
+    function add_product(){
+        window.location.href = "addproduct.php";
+    }
+</script>
 <script src="assets/scripts/jquery.min.js"></script>
 <script src="assets/scripts/popper.min.js"></script>
 <script src="assets/scripts/bootstrap-slider.min.js"></script>
