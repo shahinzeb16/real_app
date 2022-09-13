@@ -1731,6 +1731,9 @@ h1, h2, h3, h4, h5, h6 {
   .container input::placeholder{
     color:#fff !important;
   }
+  .container textarea::placeholder{
+    color:#fff !important;
+  }
   .container input{
     color:#fff !important;
     background: #7A33FF !important;
@@ -1738,9 +1741,26 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom:20px;
     width:50%;
   }
+  .container textarea{
+    color:#fff !important;
+    background: #7A33FF !important;
+    border-color: skyblue;
+    margin-bottom:20px;
+    width:50%;
+  }
+  .container select{
+    width:50% !important;
+  }
   .input-center{
     display: grid;
     place-items:center;
+  }
+  .button-flex{
+    display:flex;
+    gap: 1rem;
+  }
+  .button-flex button{
+    width:150px !important;
   }
   @media screen and (max-width: 768px) {
     .badge {

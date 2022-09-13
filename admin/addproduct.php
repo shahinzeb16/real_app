@@ -243,10 +243,49 @@
     </header>
     <section style="padding-top:120px;" class="container">
       <div class="input-center">
-          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Product Name">
-          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Product Name">
-          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Product Name">
-      </div>
+          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Name">
+          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Price">
+          <textarea class="form-control border-light" rows="3" spellcheck="true" placeholder="Description"></textarea>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Category
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Electronics</a>
+              <a class="dropdown-item" href="#">Clothing</a>
+              <a class="dropdown-item" href="#">Mobiles</a>
+            </div>
+          </div><br><br>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                SubCategory
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Smartwatch</a>
+              <a class="dropdown-item" href="#">Refrigerator</a>
+              <a class="dropdown-item" href="#">Tv</a>
+            </div>
+          </div><br><br>
+          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Units">
+          <input type="file" class="form-control bg-secondary input-h-42" placeholder="Image">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Status
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">In stock</a>
+              <a class="dropdown-item" href="#">Pending</a>
+              <a class="dropdown-item" href="#">Disabled</a>
+            </div>
+          </div><br><br>
+          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Size">
+          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Colour">
+          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Discount">
+          <input type="text" class="form-control bg-secondary input-h-42" placeholder="Location">
+          <div class="button-flex">
+            <button type="button" class="btn btn-success waves-effect waves-green">Add</button>
+            <button type="button" class="btn btn-danger waves-effect waves-red">Cancel</button>
+          </div><br><br>
     </section>
 
 
