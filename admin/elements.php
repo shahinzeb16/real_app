@@ -322,17 +322,23 @@ $display=$productobj->productDisplay();
                                 <td><?php echo $result['product_title'];?></td>
                                 <td><?php echo $result['product_category'];?></td>
                                 <td><?php echo $result['product_quantity'];?></td>
-                                <td><?php echo $result['product_status'];?></td>
-                                <td><?php 
+                                <td><?php echo $result['product_price'];?></td>
+                                <td><?php
 
                                 $status=$result['product_status'];
                                 if($status==0)
                                 {
-                                    echo "out of stock";
+                                    echo "Out of stock";
                                 }
-                                else
+                                else if($status==1)
                                 {
-                                    echo "Available";
+                                    echo "In Stock";
+                                }
+                                else if($status==2){
+                                  echo "Pending";
+                                }
+                                else{
+                                  echo "Disabled";
                                 }
 
                             ?></td>
