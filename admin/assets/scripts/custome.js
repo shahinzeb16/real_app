@@ -128,15 +128,6 @@ $(function() {
 
     /**************** Range Slider **************/
     $(document).ready(function() {
-        $("#dropdown-menucat a").click(function(){
-          $("#dropdownMenuButton1").text($(this).html());
-        });
-        $("#dropdown-menusubcat a").click(function(){
-          $("#dropdownMenuButton2").text($(this).html());
-        });
-        $("#dropdown-menustat a").click(function(){
-          $("#dropdownMenuButton3").text($(this).html());
-        });
         $('.input-range').each(function() {
             var value = $(this).attr('data-slider-value');
             var separator = value.indexOf(',');
