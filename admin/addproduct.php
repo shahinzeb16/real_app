@@ -247,20 +247,20 @@
           <input type="text" class="form-control bg-secondary input-h-42" placeholder="Price">
           <textarea class="form-control border-light" rows="3" spellcheck="true" placeholder="Description"></textarea>
           <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Category
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div id="dropdown-menucat" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <a class="dropdown-item" href="#">Electronics</a>
               <a class="dropdown-item" href="#">Clothing</a>
               <a class="dropdown-item" href="#">Mobiles</a>
             </div>
           </div><br><br>
           <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 SubCategory
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div id="dropdown-menusubcat"  class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
               <a class="dropdown-item" href="#">Smartwatch</a>
               <a class="dropdown-item" href="#">Refrigerator</a>
               <a class="dropdown-item" href="#">Tv</a>
@@ -269,10 +269,10 @@
           <input type="text" class="form-control bg-secondary input-h-42" placeholder="Units">
           <input type="file" class="form-control bg-secondary input-h-42" placeholder="Image">
           <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Status
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div id="dropdown-menustat" class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
               <a class="dropdown-item" href="#">In stock</a>
               <a class="dropdown-item" href="#">Pending</a>
               <a class="dropdown-item" href="#">Disabled</a>
