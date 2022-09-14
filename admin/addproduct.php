@@ -279,40 +279,28 @@ if(isset($_POST['product_add'])){
           <input type="text" class="form-control bg-secondary input-h-42" name="product_title" placeholder="Name">
           <input type="text" class="form-control bg-secondary input-h-42" name="product_price" placeholder="Price">
           <textarea class="form-control border-light" rows="3" spellcheck="true" name="product_description" placeholder="Description"></textarea>
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" name="product_category" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Category
-            </button>
-            <div id="dropdown-menucat" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <a class="dropdown-item" href="#">Electronics</a>
-              <a class="dropdown-item" href="#">Clothing</a>
-              <a class="dropdown-item" href="#">Mobiles</a>
-            </div>
-          </div><br><br>
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" name="product_subcategory" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                SubCategory
-            </button>
-            <div id="dropdown-menusubcat"  class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-              <a class="dropdown-item" href="#">Smartwatch</a>
-              <a class="dropdown-item" href="#">Refrigerator</a>
-              <a class="dropdown-item" href="#">Tv</a>
-            </div>
-          </div><br><br>
-          <input type="text" class="form-control bg-secondary input-h-42" name="product_quantity" placeholder="Units">
+          <select class="form-control col-sm-4" id="select_1" name="product_category">
+            <option value="one">Category</option>
+            <option value="electronics">Electronics</option>
+            <option value="clothing">Clothing</option>
+            <option value="appliances">Appliances</option>
+          </select><br><br>
+          <select class="form-control col-sm-4" id="select_1" name="product_subcategory">
+            <option value="one">SubCategory</option>
+            <option value="smartphone">Smartphone</option>
+            <option value="tv">Tv</option>
+            <option value="refrigerator">Refrigerator</option>
+          </select><br><br>
+          <input type="text" class="form-control bg-secondary input-h-42" name="product_quntity" placeholder="Units">
           <input type="file" class="form-control bg-secondary input-h-42" name="product_image" placeholder="Image">
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" name="product_status"  id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Status
-            </button>
-            <div id="dropdown-menustat" class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-              <a class="dropdown-item" href="#">In stock</a>
-              <a class="dropdown-item" href="#">Pending</a>
-              <a class="dropdown-item" href="#">Disabled</a>
-            </div>
-          </div><br><br>
+          <select class="form-control col-sm-4" id="select_1" name="product_status">
+            <option value="one">Status</option>
+            <option value="instock">In stock</option>
+            <option value="pending">Pending</option>
+            <option value="disabled">Disabled</option>
+          </select><br><br>
           <input type="text" class="form-control bg-secondary input-h-42" name="product_size" placeholder="Size">
-          <input type="text" class="form-control bg-secondary input-h-42" name="product_color" placeholder="Colour">
+          <input type="text" class="form-control bg-secondary input-h-42" name="product_color"  placeholder="Colour">
           <input type="text" class="form-control bg-secondary input-h-42" name="product_discount" placeholder="Discount">
           <input type="text" class="form-control bg-secondary input-h-42" name="product_location" placeholder="Location">
           <div class="button-flex">
