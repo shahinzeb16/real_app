@@ -15,19 +15,13 @@
         <input type="text" name="name" placeholder="Name"><br><br>
         <input type="number" name="price" placeholder="Price"><br><br>
         <textarea rows="3" name="description" placeholder="Description"></textarea><br><br>
-        <button type="button" id="addcat" class="addcat primary"><i class="la la-plus"></i>Add Category</button><br><br>
+        <button type="button" id="addcat" class="addcat primary"><i class="la la-plus"></i>Category</button>
+        <button id="addsubcat" type="button" class="addcat primary"><i class="la la-plus"></i>SubCategory</button><br><br>
         <div id="addcategory" style="display:none">
         <input type="text" name="addcategory" placeholder="New Category"><br>
         <button  class="success addcat" type="button">Add</button>
         <br><br>
         </div>
-        <select name="category">
-          <option selected>Category</option>
-          <option value="Electronics">Electronics</option>
-          <option value="Clothing">Clothing</option>
-          <option value="Appliances">Appliances</option>
-        </select><br><br>
-        <button id="addsubcat" type="button" class="addcat primary"><i class="la la-plus"></i>Add SubCategory</button><br><br>
         <div id="addsubcategory" style="display:none">
         <select name="category">
           <option selected>Category</option>
@@ -37,6 +31,13 @@
         </select><br><br><input type="text" name="addsubcategory" placeholder="New SubCategory"><br><br>
         <button  class="success addcat" type="button">Add</button><br><br>
         </div>
+        <select name="category">
+          <option selected>Category</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Clothing">Clothing</option>
+          <option value="Appliances">Appliances</option>
+        </select><br><br>
+        
         <select name="subcategory">
           <option selected>SubCategory</option>
           <option value="Smartphone">Smartphone</option>
