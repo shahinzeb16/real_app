@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>Addproduct</title>
     <link rel="stylesheet" href="assets/css/style.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/line-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
   <body>
     <div class="customcontainer">
@@ -13,12 +15,28 @@
         <input type="text" name="name" placeholder="Name"><br><br>
         <input type="number" name="price" placeholder="Price"><br><br>
         <textarea rows="3" name="description" placeholder="Description"></textarea><br><br>
+        <button type="button" id="addcat" class="addcat primary"><i class="la la-plus"></i>Add Category</button><br><br>
+        <div id="addcategory" style="display:none">
+        <input type="text" name="addcategory" placeholder="New Category"><br>
+        <button  class="success addcat" type="button">Add</button>
+        <br><br>
+        </div>
         <select name="category">
           <option selected>Category</option>
           <option value="Electronics">Electronics</option>
           <option value="Clothing">Clothing</option>
           <option value="Appliances">Appliances</option>
         </select><br><br>
+        <button id="addsubcat" type="button" class="addcat primary"><i class="la la-plus"></i>Add SubCategory</button><br><br>
+        <div id="addsubcategory" style="display:none">
+        <select name="category">
+          <option selected>Category</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Clothing">Clothing</option>
+          <option value="Appliances">Appliances</option>
+        </select><br><br><input type="text" name="addsubcategory" placeholder="New SubCategory"><br><br>
+        <button  class="success addcat" type="button">Add</button><br><br>
+        </div>
         <select name="subcategory">
           <option selected>SubCategory</option>
           <option value="Smartphone">Smartphone</option>
@@ -44,7 +62,7 @@
       </form>
     </div>
     </div>
-  <script src="assets/scripts/custome.js"></script>
-  <script src="assets/scripts/jquery.min.js"></script>
+  <script src="assets/scripts/custom.js"></script>
+  
   </body>
 </html>

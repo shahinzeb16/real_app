@@ -1788,6 +1788,19 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #D1200B;
     color:#fff;
   }
+  .primary{
+    background-color: #1257DA;
+    color:#fff;
+  }
+  .addcat{
+    width:120px;
+    padding:0.6rem;
+    outline: none;
+    border:none;
+    cursor:pointer;
+    font-size: 12px;
+    text-align: center;
+  }
   @media screen and (max-width: 768px) {
     .badge {
       top: 15%;
