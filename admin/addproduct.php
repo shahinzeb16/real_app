@@ -1,7 +1,7 @@
 <?php 
 include('../classes/api.php');
 $dataobj=new users();
-$product_title = $product_price = $product_description = $product_category = $product_subcategory = $product_quantity = $product_image = $product_size = $product_color = $product_discount =$product_status =$product_location = "";
+// $product_title = $product_price = $product_description = $product_category = $product_subcategory = $product_quantity = $product_image = $product_size = $product_color = $product_discount = $product_status = $product_location = "";
 if(isset($_POST['product_add'])){
     $product_title = $_POST['product_title'];
     $product_price = $_POST['product_price'];
@@ -10,7 +10,6 @@ if(isset($_POST['product_add'])){
     $product_subcategory = $_POST['product_subcategory'];
     $product_quantity = $_POST['product_quantity'];
 
-    $extension = strtolower(pathinfo($_FILES['product_image']['name'], PATHINFO_EXTENSION));
     $filename = $_FILES['product_image']['name']; 
     $product_image="uploads/product".$filename;
     $tmpname = $_FILES['product_image']['tmp_name'];
@@ -23,7 +22,14 @@ if(isset($_POST['product_add'])){
     $product_location = $_POST['product_location'];
 
     $product_array =array($product_title,$product_price,$product_description,$product_category,$product_subcategory,$product_quantity,$product_image,$product_size,$product_color,$product_discount,$product_status,$product_location);
-    $dataobj->addproduct($product_array);
+    $check = $dataobj->addproduct($product_array);
+    if($check==200){
+        
+        header('location:elements.php');
+    }else{
+        header('location:addproduct.php');
+
+    }
     
 }
 
@@ -273,42 +279,45 @@ if(isset($_POST['product_add'])){
 
     </header>
     <section style="padding-top:120px;" class="container">
-    <form method="post" action="" enctype="multipart/form-data">
-
+    
+    <div class="customcontainer">
       <div class="input-center">
-          <input type="text" class="form-control bg-secondary input-h-42" name="product_title" placeholder="Name">
-          <input type="text" class="form-control bg-secondary input-h-42" name="product_price" placeholder="Price">
-          <textarea class="form-control border-light" rows="3" spellcheck="true" name="product_description" placeholder="Description"></textarea>
-          <select class="form-control col-sm-4" id="select_1" name="product_category">
-            <option value="one">Category</option>
-            <option value="electronics">Electronics</option>
-            <option value="clothing">Clothing</option>
-            <option value="appliances">Appliances</option>
-          </select><br><br>
-          <select class="form-control col-sm-4" id="select_1" name="product_subcategory">
-            <option value="one">SubCategory</option>
-            <option value="smartphone">Smartphone</option>
-            <option value="tv">Tv</option>
-            <option value="refrigerator">Refrigerator</option>
-          </select><br><br>
-          <input type="text" class="form-control bg-secondary input-h-42" name="product_quntity" placeholder="Units">
-          <input type="file" class="form-control bg-secondary input-h-42" name="product_image" placeholder="Image">
-          <select class="form-control col-sm-4" id="select_1" name="product_status">
-            <option value="one">Status</option>
-            <option value="instock">In stock</option>
-            <option value="pending">Pending</option>
-            <option value="disabled">Disabled</option>
-          </select><br><br>
-          <input type="text" class="form-control bg-secondary input-h-42" name="product_size" placeholder="Size">
-          <input type="text" class="form-control bg-secondary input-h-42" name="product_color"  placeholder="Colour">
-          <input type="text" class="form-control bg-secondary input-h-42" name="product_discount" placeholder="Discount">
-          <input type="text" class="form-control bg-secondary input-h-42" name="product_location" placeholder="Location">
-          <div class="button-flex">
-            <button type="button" name="product_add" class="btn btn-success waves-effect waves-green">Add</button>
-            <button type="button" onclick="product_cancel()" class="btn btn-danger waves-effect waves-red">Cancel</button>
-          </div><br><br>
-      </div>
-    </form>  
+      <form action="" method="post" enctype="multipart/form-data">
+        <br><br>
+        <input type="text" name="product_title" placeholder="Name"><br><br>
+        <input type="number" name="product_price" placeholder="Price"><br><br>
+        <textarea rows="3" name="product_description" placeholder="Description"></textarea><br><br>
+        <select name="product_category">
+          <option selected>Category</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Clothing">Clothing</option>
+          <option value="Appliances">Appliances</option>
+        </select><br><br>
+        <select name="product_subcategory">
+          <option selected>SubCategory</option>
+          <option value="Smartphone">Smartphone</option>
+          <option value="Tv">Tv</option>
+          <option value="Refrigerator">Refrigerator</option>
+        </select><br><br>
+        <input type="text" name="product_quantity" placeholder="Unit"><br><br>
+        <input type="file" name="product_image"><br><br>
+        <input type="text" name="product_size" placeholder="Size"><br><br>
+        <input type="text" name="product_color" placeholder="Colour"><br><br>
+        <input type="text" name="product_discount" placeholder="Discount"><br><br>
+        <select name="product_status">
+          <option selected>Status</option>
+          <option value="1">In Stock</option>
+          <option value="2">Pending</option>
+          <option value="3">Disabled</option>
+        </select><br><br>
+        <input type="text" name="product_location" placeholder="Location"><br><br>
+        <div class="button-flex">
+          <button class="success" type="submit" name="product_add">Add</button>
+          <button class="danger" type="button" onclick="product_cancel()" name="product_Cancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+    </div>
     </section>
     <script>
         function product_cancel(){
@@ -327,5 +336,8 @@ if(isset($_POST['product_add'])){
     <script src="assets/scripts/datatables.min.js"></script>
     <script src="assets/scripts/ripple.min.js"></script>
     <script src="assets/scripts/custome.js"></script>
+    <script src="assets/scripts/custome.js"></script>
+    <script src="assets/scripts/jquery.min.js"></script>
+
   </body>
 </html>

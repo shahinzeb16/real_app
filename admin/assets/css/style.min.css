@@ -1723,42 +1723,70 @@ h1, h2, h3, h4, h5, h6 {
   [data-title] {
     position: relative;
   }
-  .add_container{
-    width:40%;
-    padding-top:3rem;
-    position:relative;
+  .customcontainer{
+    width:100%;
+    margin:0;
+    padding:0;
   }
-  .container input::placeholder{
+  .customcontainer input::placeholder{
     color:#fff !important;
   }
-  .container textarea::placeholder{
+  .customcontainer input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .customcontainer textarea::placeholder{
     color:#fff !important;
   }
-  .container input{
-    color:#fff !important;
-    background: #7A33FF !important;
-    border-color: skyblue;
-    margin-bottom:20px;
-    width:50%;
-    text-align: center;
-  }
-  .container textarea{
+  .customcontainer input{
     color:#fff !important;
     background: #7A33FF !important;
     border-color: skyblue;
     margin-bottom:20px;
-    width:50%;
+    padding:12px;
+    width:30%;
+    border-radius:15px;
+  }
+  .customcontainer textarea{
+    color:#fff !important;
+    background: #7A33FF !important;
+    border-color: skyblue;
+    margin-bottom:20px;
+    width:30%;
+    border-radius: 15px;
+    padding:10px;
+  }
+  .customcontainer select{
+    color:#fff !important;
+    background: #7A33FF !important;
+    border-color: skyblue;
+    margin-bottom:20px;
+    padding:12px;
+    width:32%;
+    border-radius:15px;
   }
   .input-center{
-    display: grid;
-    place-items:center;
+    text-align: center;
   }
   .button-flex{
     display:flex;
     gap: 1rem;
+    justify-content: center;
   }
   .button-flex button{
     width:150px !important;
+    margin-bottom:5rem;
+    border:none;
+    padding:12px;
+    cursor:pointer;
+  }
+  .success{
+    background-color: #4AD413;
+    color:#fff;
+  }
+  .danger{
+    background-color: #D1200B;
+    color:#fff;
   }
   @media screen and (max-width: 768px) {
     .badge {

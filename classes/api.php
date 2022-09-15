@@ -23,15 +23,16 @@ class users extends DB
       }
    }
 
-   public function addproduct(Array $product_array)
+   public function addproduct( $product_array)
    {
       $sqlstr=implode("','",$product_array);
-      $insert_query = "INSERT INTO product(product_title, product_price, product_description, product_quantity, product_image, product_size, product_color, product_discount)
+      $insert_query = "INSERT INTO product(product_title, product_price, product_description,product_category, product_subcategory , product_quantity, product_image, product_size, product_color, product_discount,product_status, product_location)
       VALUES ('$sqlstr')";
 
       $data = mysqli_query($this->conn,$insert_query);
       if($data){
          return 200;
+         // header('location:elements.php');
 
       }else{
          return 404;
@@ -70,6 +71,34 @@ class users extends DB
       $sql="SELECT * FROM product";
       $data=mysqli_query($this->conn,$sql);
       return $data;
+   }
+}
+
+class category extends DB{
+   public function addproduct( $category_name)
+   {
+      $insert_query = "INSERT INTO product(category_name) VALUES ('$category_name')";
+      $data = mysqli_query($this->conn,$insert_query);
+      if($data){
+         return 200;
+
+      }else{
+         return 404;
+      }
+   }
+}
+
+class subcategory extends DB{
+   public function addproduct( $category_id,$subcategory_name)
+   {
+      $insert_query = "INSERT INTO product(category_id,subcategory_name) VALUES ('$category_id','$subcategory_name')";
+      $data = mysqli_query($this->conn,$insert_query);
+      if($data){
+         return 200;
+
+      }else{
+         return 404;
+      }
    }
 }
 
