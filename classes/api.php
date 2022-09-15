@@ -26,7 +26,7 @@ class users extends DB
    public function addproduct( $product_array)
    {
       $sqlstr=implode("','",$product_array);
-      $insert_query = "INSERT INTO product(product_title, product_price, product_description,product_category, product_subcategory , product_quantity, product_image, product_size, product_color, product_discount,product_status, product_location)
+      $insert_query = "INSERT INTO product(product_title, product_price, product_description,product_category, product_quantity, product_image, product_size, product_color, product_discount,product_status)
       VALUES ('$sqlstr')";
 
       $data = mysqli_query($this->conn,$insert_query);
@@ -51,12 +51,12 @@ class users extends DB
      }
    }
 
-   public function updateproduct($product_title, $product_price, $product_description, $product_category, $product_subcategory , $product_quantity, $product_image, $product_size, $product_color, $product_discount, $product_status, $product_location, $product_id)
+   public function updateproduct($product_title, $product_price, $product_description, $product_category , $product_quantity, $product_image, $product_size, $product_color, $product_discount, $product_status, $product_id)
    {
 
       $update_query = "UPDATE product SET product_title='$product_title',product_price = '$product_price',product_description = '$product_description',product_category = '$product_category',
-        product_subcategory = '$product_subcategory',product_quantity = '$product_quantity',product_image = '$product_image',product_size='$product_size',product_color = '$product_color',
-        product_discount='$product_discount',product_status='$product_status',product_location = '$product_location' WHERE product_id='$product_id' ";
+        product_quantity = '$product_quantity',product_image = '$product_image',product_size='$product_size',product_color = '$product_color',
+        product_discount='$product_discount',product_status='$product_status', WHERE product_id='$product_id' ";
       $data = mysqli_query($this->conn, $update_query);
       if($data){
          return 200;
@@ -74,10 +74,12 @@ class users extends DB
    }
 }
 
+
+
 class category extends DB{
-   public function addproduct( $category_name)
+   public function addcategory( $name,$parent_id,$status)
    {
-      $insert_query = "INSERT INTO product(category_name) VALUES ('$category_name')";
+      $insert_query = "INSERT INTO categories(name,parent_id,status) VALUES ('$name','$parent_id','$status')";
       $data = mysqli_query($this->conn,$insert_query);
       if($data){
          return 200;
@@ -86,13 +88,36 @@ class category extends DB{
          return 404;
       }
    }
-}
 
-class subcategory extends DB{
-   public function addproduct( $category_id,$subcategory_name)
+   public function parentcategory(){
+      $sql = "SELECT * FROM categories WHERE parent_id=0";
+      $data = mysqli_query($this->conn,$sql);
+      $count = mysqli_num_rows($data);
+      if($count>0){
+         return $data;
+      }
+
+   }
+
+   public function categoryDisplay()
    {
-      $insert_query = "INSERT INTO product(category_id,subcategory_name) VALUES ('$category_id','$subcategory_name')";
-      $data = mysqli_query($this->conn,$insert_query);
+      $sql="SELECT * FROM categories";
+      $data=mysqli_query($this->conn,$sql);
+      return $data;
+   }
+
+   public function categoryfetch($id)
+   {
+      $sql="SELECT * FROM categories WHERE id = '$id'";
+      $data=mysqli_query($this->conn,$sql);
+      return $data;
+   }
+
+   public function updatecategory($name,$status,$id)
+   {
+
+      $update_query = "UPDATE categories SET name='$name', status='$status' WHERE id=$id";
+      $data = mysqli_query($this->conn, $update_query);
       if($data){
          return 200;
 
@@ -100,6 +125,20 @@ class subcategory extends DB{
          return 404;
       }
    }
+
+   public function deletecategory($id){
+      $sql = "DELETE FROM categories WHERE id='$id'";
+      $data = mysqli_query($this->conn, $sql);
+      if($data){
+         return 200;
+
+      }
+     else{
+      return 404;
+     }
+   }
 }
+
+
 
 ?>

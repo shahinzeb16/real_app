@@ -86,6 +86,8 @@ if(isset($_GET['delete'])){
             <li><a href="index.php" class="waves-effect waves-primary"><i
                             class="la la-dashboard"></i>Dashboard</a></li>
             <li class="active"><a href="elements.php" class="waves-effect waves-primary"><i class="la la-clone"></i>Products</a></li>
+            <li class="active"><a href="category.php" class="waves-effect waves-primary"><i class="la la-clone"></i>Categories</a></li>
+
             <!-- <li><a href="javascript:;" class="waves-effect waves-primary"><i
                             class="la la-bullhorn"></i>Campaign</a></li> -->
             <li class="dropdown-sub-menu">

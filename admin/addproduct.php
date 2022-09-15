@@ -1,13 +1,11 @@
 <?php 
 include('../classes/api.php');
 $dataobj=new users();
-// $product_title = $product_price = $product_description = $product_category = $product_subcategory = $product_quantity = $product_image = $product_size = $product_color = $product_discount = $product_status = $product_location = "";
 if(isset($_POST['product_add'])){
     $product_title = $_POST['product_title'];
     $product_price = $_POST['product_price'];
     $product_description = $_POST['product_description'];
     $product_category = $_POST['product_category'];
-    $product_subcategory = $_POST['product_subcategory'];
     $product_quantity = $_POST['product_quantity'];
 
     $filename = $_FILES['product_image']['name']; 
@@ -19,9 +17,8 @@ if(isset($_POST['product_add'])){
     $product_color = $_POST['product_color'];
     $product_discount = $_POST['product_discount'];
     $product_status = $_POST['product_status'];
-    $product_location = $_POST['product_location'];
 
-    $product_array =array($product_title,$product_price,$product_description,$product_category,$product_subcategory,$product_quantity,$product_image,$product_size,$product_color,$product_discount,$product_status,$product_location);
+    $product_array =array($product_title,$product_price,$product_description,$product_category,$product_quantity,$product_image,$product_size,$product_color,$product_discount,$product_status);
     $check = $dataobj->addproduct($product_array);
     if($check==200){
         
@@ -39,6 +36,7 @@ if(isset($_POST['product_add'])){
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+
     <title>Admin</title>
     <link rel="shortcut icon" type="image/png" href="#">
     <link rel="stylesheet" type="text/css" href="assets/css/datatables.min.css">
@@ -50,6 +48,11 @@ if(isset($_POST['product_add'])){
 
     <!-- Custom Css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.min.css">
+
+    <!-- <title>Addproduct</title> -->
+    <!-- <link rel="stylesheet" href="assets/css/style.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="assets/css/line-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
   <body>
     <div class="overlay-background"></div>
@@ -287,18 +290,22 @@ if(isset($_POST['product_add'])){
         <input type="text" name="product_title" placeholder="Name"><br><br>
         <input type="number" name="product_price" placeholder="Price"><br><br>
         <textarea rows="3" name="product_description" placeholder="Description"></textarea><br><br>
+        <button type="button" id="addcat" class="addcat primary"><i class="la la-plus"></i>Category</button>
+        <button id="addsubcat" type="button" class="addcat primary"><i class="la la-plus"></i>SubCategory</button><br><br>
+        <div id="addcategory" style="display:none">
+        <input type="text" name="newcategory" placeholder="New Category"><br>
+        <button  class="success addcat" name="addcategory" type="button">Add</button>
+        <br><br>
+        </div>
+        <div id="addsubcategory" style="display:none">
         <select name="product_category">
           <option selected>Category</option>
           <option value="Electronics">Electronics</option>
           <option value="Clothing">Clothing</option>
           <option value="Appliances">Appliances</option>
-        </select><br><br>
-        <select name="product_subcategory">
-          <option selected>SubCategory</option>
-          <option value="Smartphone">Smartphone</option>
-          <option value="Tv">Tv</option>
-          <option value="Refrigerator">Refrigerator</option>
-        </select><br><br>
+        </select><br><br><input type="text" name="newsubcategory" placeholder="New SubCategory"><br><br>
+        <button  class="success addcat" name="addsubcategory" type="button">Add</button><br><br>
+        </div>
         <input type="text" name="product_quantity" placeholder="Unit"><br><br>
         <input type="file" name="product_image"><br><br>
         <input type="text" name="product_size" placeholder="Size"><br><br>
@@ -338,6 +345,7 @@ if(isset($_POST['product_add'])){
     <script src="assets/scripts/custome.js"></script>
     <script src="assets/scripts/custome.js"></script>
     <script src="assets/scripts/jquery.min.js"></script>
-
+    <script src="assets/scripts/custom.js"></script>
+  
   </body>
 </html>

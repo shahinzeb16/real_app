@@ -1,44 +1,35 @@
 <?php 
 include('../classes/api.php');
-$dataobj=new users();
-$display = $dataobj->productDisplay();
-$result=mysqli_fetch_assoc($display);
+$categoryobj=new category();
+if(isset($_GET['edit'])){
+    $id = $_GET['edit'];
+    $display = $categoryobj->categoryfetch($id);
+    $result = mysqli_fetch_assoc($display);
+}
 
-if(isset($_POST['product_update'])){
-    $product_id = $result['product_id'];
-    $product_title = $_POST['product_title'];
-    $product_price = $_POST['product_price'];
-    $product_description = $_POST['product_description'];
-    $product_category = $_POST['product_category'];
-    $product_quantity = $_POST['product_quantity'];
+if(isset($_POST['category_update'])){
+    $id =$result['id'];
+    $name = $_POST['name'];
+    $status = $_POST['status'];
 
-    $filename = $_FILES['product_image']['name']; 
-    $product_image="uploads/product".$filename;
-    $tmpname = $_FILES['product_image']['tmp_name'];
-    $a=move_uploaded_file($tmpname, $product_image);
-
-    $product_size = $_POST['product_size'];
-    $product_color = $_POST['product_color'];
-    $product_discount = $_POST['product_discount'];
-    $product_status = $_POST['product_status'];
-    
-    $updateproduct = $dataobj->updateproduct($product_title, $product_price,$product_description, $product_category, $product_quantity,$product_image, $product_size, $product_color, $product_discount, $product_status, $product_id);
-    if($updateproduct == 200){
-        header('location:elements.php');
+    $check = $categoryobj->updatecategory($name,$status,$id);
+    if($check==200){
+        
+        header('location:category.php');
     }else{
-        header('location:editproduct.php');
-    
-    }
+        header('location:editcategory.php');
 
+    }
+    
 }
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
-<head>
+  <head>
     <meta charset="utf-8">
+
     <title>Admin</title>
     <link rel="shortcut icon" type="image/png" href="#">
     <link rel="stylesheet" type="text/css" href="assets/css/datatables.min.css">
@@ -50,15 +41,19 @@ if(isset($_POST['product_update'])){
 
     <!-- Custom Css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.min.css">
-</head>
 
-<body>
+    <!-- <title>Addproduct</title> -->
+    <!-- <link rel="stylesheet" href="assets/css/style.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="assets/css/line-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
     <div class="overlay-background"></div>
 
     <div class="theme-setting-wrapper">
         <button type="button" id="settings-trigger" class="btn btn-primary waves-effect waves-primary">
-            <i class="la la-cog"></i>
-        </button>
+			<i class="la la-cog"></i>
+		</button>
         <div class="theme-setting-sidebar">
             <div class="h-100">
                 <div class="mt-4 d-flex align-items-center flex-wrap px-4">
@@ -107,8 +102,7 @@ if(isset($_POST['product_update'])){
             <div class="br-header-right ml-auto">
                 <nav class="nav">
                     <div class="dropdown">
-                        <a href="" class="nav-link position-relative dropdown-toggle waves-effect waves-primary"
-                            id="dropdownMSG" data-toggle="dropdown">
+                        <a href="" class="nav-link position-relative dropdown-toggle waves-effect waves-primary" id="dropdownMSG" data-toggle="dropdown">
                             <i class="la la-envelope-o"></i>
                             <span class="badge badge-accent">2</span>
                         </a>
@@ -116,7 +110,7 @@ if(isset($_POST['product_update'])){
                             <div class="dropdown-menu-label">
                                 <label class="mb-0">Messages</label>
                                 <button type="button" class="btn btn-primary btn-sm waves-effect waves-primary">View
-                                    all</button>
+                                        all</button>
                             </div>
                             <!-- d-flex -->
                             <div class="dropdown-divider my-0"></div>
@@ -131,8 +125,7 @@ if(isset($_POST['product_update'])){
                                                 <span>2 minutes ago</span>
                                             </div>
                                             <!-- d-flex -->
-                                            <p class="mb-0">A wonderful serenity has taken possession of my entire soul,
-                                                like these sweet mornings of spring.</p>
+                                            <p class="mb-0">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring.</p>
                                         </div>
                                     </div>
                                     <!-- media -->
@@ -148,8 +141,7 @@ if(isset($_POST['product_update'])){
                                                 <span>2 minutes ago</span>
                                             </div>
                                             <!-- d-flex -->
-                                            <p class="mb-0">A wonderful serenity has taken possession of my entire soul,
-                                                like these sweet mornings of spring.</p>
+                                            <p class="mb-0">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring.</p>
                                         </div>
                                     </div>
                                     <!-- media -->
@@ -165,8 +157,7 @@ if(isset($_POST['product_update'])){
                                                 <span>2 minutes ago</span>
                                             </div>
                                             <!-- d-flex -->
-                                            <p class="mb-0">A wonderful serenity has taken possession of my entire soul,
-                                                like these sweet mornings of spring.</p>
+                                            <p class="mb-0">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring.</p>
                                         </div>
                                     </div>
                                     <!-- media -->
@@ -179,8 +170,7 @@ if(isset($_POST['product_update'])){
                     </div>
                     <!-- dropdown -->
                     <div class="dropdown">
-                        <a href="" class="nav-link position-relative dropdown-toggle waves-effect waves-primary"
-                            id="dropdownNOTY" data-toggle="dropdown">
+                        <a href="" class="nav-link position-relative dropdown-toggle waves-effect waves-primary" id="dropdownNOTY" data-toggle="dropdown">
                             <i class="la la-bell"></i>
                             <span class="badge badge-accent ">1</span>
                         </a>
@@ -188,7 +178,7 @@ if(isset($_POST['product_update'])){
                             <div class="dropdown-menu-label">
                                 <label class="mb-0">NOTIFICATIONS </label>
                                 <button type="button" class="btn btn-primary btn-sm waves-effect waves-light">View
-                                    all</button>
+                                        all</button>
                             </div>
                             <!-- d-flex -->
                             <div class="dropdown-divider my-0"></div>
@@ -246,34 +236,31 @@ if(isset($_POST['product_update'])){
                     </div>
                     <!-- dropdown -->
                     <div class="dropdown">
-                        <a href="" class="nav-link-profile d-flex dropdown-toggle" data-toggle="dropdown"
-                            id="dropdownprofile">
+                        <a href="" class="nav-link-profile d-flex dropdown-toggle" data-toggle="dropdown" id="dropdownprofile">
                             <img src="assets/image/img3.jpg" class="rounded" alt="" width="50">
                             <span class="logged-name px-3">Zahir Patel <br><small class="pt-3">Founder</small></span>
                             <i class="profile-dropdown la la-caret-square-o-down"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-header dropdown-menu-user"
-                            aria-labelledby="dropdownprofile">
+                        <div class="dropdown-menu dropdown-menu-header dropdown-menu-user" aria-labelledby="dropdownprofile">
                             <div class="text-center">
-                                <a href=""><img src="assets/image/img3.jpg" width="80" class="rounded-circle"
-                                        alt=""></a>
+                                <a href=""><img src="assets/image/img3.jpg" width="80" class="rounded-circle" alt=""></a>
                                 <h6 class="logged-fullname font-weight-bold mt-2">Zahir Patel</h6>
                                 <p class="my-0">youremail@domain.com</p>
                             </div>
                             <hr>
                             <ul class="list-unstyled user-profile-nav">
                                 <li><a href="javascript:;" class=" waves-effect waves-light"><i class="la la-user"></i>
-                                        Edit Profile</a></li>
+                                            Edit Profile</a></li>
                                 <li><a href="javascript:;" class=" waves-effect waves-light"><i class="la la-cog"></i>
-                                        Settings</a></li>
+                                            Settings</a></li>
                                 <li><a href="javascript:;" class=" waves-effect waves-light"><i
-                                            class="la la-download"></i> Downloads</a></li>
+                                                class="la la-download"></i> Downloads</a></li>
                                 <li><a href="javascript:;" class=" waves-effect waves-light"><i
-                                            class="la la-star-o"></i> Favorites</a></li>
+                                                class="la la-star-o"></i> Favorites</a></li>
                                 <li><a href="javascript:;" class=" waves-effect waves-light"><i class="la la-file"></i>
-                                        Collections</a></li>
-                                <li><a href="logout.php" class=" waves-effect waves-light"><i
-                                            class="la la-power-off"></i> Sign Out</a></li>
+                                            Collections</a></li>
+                                <li><a href="javascript:;" class=" waves-effect waves-light"><i
+                                                class="la la-power-off"></i> Sign Out</a></li>
                             </ul>
                         </div>
                         <!-- dropdown-menu -->
@@ -288,97 +275,41 @@ if(isset($_POST['product_update'])){
 
     </header>
     <section style="padding-top:120px;" class="container">
-
-        <div class="customcontainer">
-            <div class="input-center">
-
-                <form action="" method="post" enctype="multipart/form-data">
-                    <br><br>
-                    <input type="text" name="product_title" value="<?php echo $result['product_title'] ; ?>"
-                        placeholder="Name"><br><br>
-                    <input type="number" name="product_price" value="<?php echo $result['product_price'] ; ?>"
-                        placeholder="Price"><br><br>
-                    <textarea rows="3" name="product_description" value="<?php echo htmlspecialchars($result['product_description']) ; ?>"
-                        placeholder="Description"></textarea><br><br>
-                        
-                    <select name="product_category">
-                        <option selected>Category</option>
-                        <option value="Electronics" <?php
-                            if ($result['product_category'] == 'Electronics') {
-                                echo "selected";
-                            }
-                            ?>>Electronics</option>
-                        <option value="Clothing" <?php
-                            if ($result['product_category'] == 'Clothing') {
-                                echo "selected";
-                            }
-                        ?>>Clothing</option>
-                        <option value="Appliances" <?php 
-                            if ($result['product_category'] == 'Appliances') {
-                                echo "selected";
-                            }  
-                        ?>>Appliances</option>
-                    </select><br><br>
-                    <select name="product_subcategory">
-                        <option selected>SubCategory</option>
-                        <option value="Smartphone" <?php
-                            if ($result['product_subcategory'] == 'Smartphone') {
-                                echo "selected";
-                            }
-                         ?>>Smartphone</option>
-                        <option value="Tv" <?php
-                            if ($result['product_subcategory'] == 'Tv') {
-                                echo "selected";
-                            }
-                        ?>>Tv</option>
-                        <option value="Refrigerator" <?php
-                            if ($result['product_subcategory'] == 'Refrigerator') {
-                                echo "selected";
-                            }
-                         ?>>Refrigerator</option>
-                    </select><br><br>
-                    <input type="text" name="product_quantity" value="<?php echo $result['product_quantity'] ; ?>"
-                        placeholder="Unit"><br><br>
-                    <input type="file" name="product_image" value="<?php echo $result['product_image']; ?>"><br><br>
-                    <input type="text" name="product_size" value="<?php echo $result['product_size'] ; ?>"
-                        placeholder="Size"><br><br>
-                    <input type="text" name="product_color" value="<?php echo $result['product_color'] ; ?>"
-                        placeholder="Colour"><br><br>
-                    <input type="text" name="product_discount" value="<?php echo $result['product_discount'] ; ?>"
-                        placeholder="Discount"><br><br>
-                    <select name="product_status">
-                        <option selected>Status</option>
-                        <option value="1" <?php
-                            if ($result['product_status'] == '1') {
-                                echo "selected";
-                            }
-                        ?>>In Stock</option>
-                        <option value="2" <?php 
-                            if ($result['product_status'] == '2') {
-                                echo "selected";
-                            }
-                        ?>>Pending</option>
-                        <option value="3" <?php 
-                            if ($result['product_status'] == '3') {
-                                echo "selected";
-                            }
-                        ?>>Disabled</option>
-                    </select><br><br>
-                    <div class="button-flex">
-                        <button class="success" type="submit" value="product_update"
-                            name="product_update">update</button>
-                        <button class="danger" type="button" onclick="product_cancel()"
-                            name="product_Cancel">Cancel</button>
-                    </div>
-                </form>
-
-            </div>
+    
+    <div class="customcontainer">
+      <div class="input-center">
+      <form action="" method="post" >
+        <br><br>
+        <input type="text" name="name" value="<?php echo $result['name'] ; ?>" placeholder="Name"><br><br>
+        <input type="number" name="parent_id" value="<?php echo $result['parent_id'] ; ?>" placeholder="Parent_id"><br><br>
+    
+        <select name="status">
+          <option selected>Status</option>
+          <option value="1"<?php
+           if ($result['status'] == '1') {
+                echo "selected";
+            } ?>>In Stock</option>
+          <option value="2" <?php
+           if ($result['status'] == '2') {
+            echo "selected";
+           }?>>Pending</option>
+          <option value="3" <?php 
+           if ($result['status'] == '3') {
+                echo "selected";
+            } ?>>Disabled</option>
+        </select><br><br>
+        <div class="button-flex">
+          <button class="success" type="submit" name="category_update">Update</button>
+          <button class="danger" type="button" onclick="category_cancel()" name="product_Cancel">Cancel</button>
         </div>
+      </form>
+    </div>
+    </div>
     </section>
     <script>
-    function product_cancel() {
-        window.location.href = "elements.php";
-    }
+        function category_cancel(){
+           window.location.href = "category.php";
+        }
     </script>
 
     <script src="assets/scripts/jquery.min.js"></script>
@@ -394,7 +325,7 @@ if(isset($_POST['product_update'])){
     <script src="assets/scripts/custome.js"></script>
     <script src="assets/scripts/custome.js"></script>
     <script src="assets/scripts/jquery.min.js"></script>
-
-</body>
-
+    <script src="assets/scripts/custom.js"></script>
+  
+  </body>
 </html>
