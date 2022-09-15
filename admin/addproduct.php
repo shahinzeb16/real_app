@@ -47,10 +47,8 @@ if(isset($_POST['product_add'])){
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-slider.css">
 
     <!-- Custom Css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.min.css">
+    <link rel="stylesheet" href="assets/css/style.min.css">
 
-    <!-- <title>Addproduct</title> -->
-    <!-- <link rel="stylesheet" href="assets/css/style.min.css"> -->
     <link rel="stylesheet" type="text/css" href="assets/css/line-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
@@ -290,22 +288,12 @@ if(isset($_POST['product_add'])){
         <input type="text" name="product_title" placeholder="Name"><br><br>
         <input type="number" name="product_price" placeholder="Price"><br><br>
         <textarea rows="3" name="product_description" placeholder="Description"></textarea><br><br>
-        <button type="button" id="addcat" class="addcat primary"><i class="la la-plus"></i>Category</button>
-        <button id="addsubcat" type="button" class="addcat primary"><i class="la la-plus"></i>SubCategory</button><br><br>
-        <div id="addcategory" style="display:none">
-        <input type="text" name="newcategory" placeholder="New Category"><br>
-        <button  class="success addcat" name="addcategory" type="button">Add</button>
-        <br><br>
-        </div>
-        <div id="addsubcategory" style="display:none">
         <select name="product_category">
           <option selected>Category</option>
           <option value="Electronics">Electronics</option>
           <option value="Clothing">Clothing</option>
           <option value="Appliances">Appliances</option>
-        </select><br><br><input type="text" name="newsubcategory" placeholder="New SubCategory"><br><br>
-        <button  class="success addcat" name="addsubcategory" type="button">Add</button><br><br>
-        </div>
+        </select><br><br>
         <input type="text" name="product_quantity" placeholder="Unit"><br><br>
         <input type="file" name="product_image"><br><br>
         <input type="text" name="product_size" placeholder="Size"><br><br>
