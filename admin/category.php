@@ -1,44 +1,31 @@
-<?php 
-include('../classes/api.php');
-$dataobj=new users();
-if(isset($_POST['product_add'])){
-    $product_title = $_POST['product_title'];
-    $product_price = $_POST['product_price'];
-    $product_description = $_POST['product_description'];
-    $product_category = $_POST['product_category'];
-    $product_quantity = $_POST['product_quantity'];
-
-    $filename = $_FILES['product_image']['name']; 
-    $product_image="uploads/product".$filename;
-    $tmpname = $_FILES['product_image']['tmp_name'];
-    $a=move_uploaded_file($tmpname, $product_image);
-
-    $product_size = $_POST['product_size'];
-    $product_color = $_POST['product_color'];
-    $product_discount = $_POST['product_discount'];
-    $product_status = $_POST['product_status'];
-
-    $product_array =array($product_title,$product_price,$product_description,$product_category,$product_quantity,$product_image,$product_size,$product_color,$product_discount,$product_status);
-    $check = $dataobj->addproduct($product_array);
-    if($check==200){
-        
-        header('location:elements.php');
-    }else{
-        header('location:addproduct.php');
-
-    }
-    
+<?php
+include '../classes/api.php';
+$productobj=new category();
+$display=$productobj->categoryDisplay();
+if(isset($_GET['delete'])){
+    $id = $_GET['delete'];
+    $delete = $productobj->deletecategory($id);
+    header('location:category.php');
 }
+
+
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
+<html lang="en">
 
-    <title>Admin</title>
+<head>
+    <meta charset="utf-8">
+    <meta content='IE=edge' http-equiv=X-UA-Compatible>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>MS Admin Panel</title>
     <link rel="shortcut icon" type="image/png" href="#">
+
+    <!-- Core Css -->
     <link rel="stylesheet" type="text/css" href="assets/css/datatables.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/line-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
@@ -47,14 +34,16 @@ if(isset($_POST['product_add'])){
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-slider.css">
 
     <!-- Custom Css -->
-    <link rel="stylesheet" href="assets/css/style.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.min.css">
 
-    <link rel="stylesheet" type="text/css" href="assets/css/line-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  </head>
-  <body>
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
     <div class="overlay-background"></div>
-
+    <!-- ########## START: Setting Box ########## -->
     <div class="theme-setting-wrapper">
         <button type="button" id="settings-trigger" class="btn btn-primary waves-effect waves-primary">
 			<i class="la la-cog"></i>
@@ -69,7 +58,7 @@ if(isset($_POST['product_add'])){
                 <div class="theme-setting-sidebar-scroll">
                     <div class="px-4">
                         <div>
-                            <h5 class="mb-2">Modes</h5>
+                            <h5 class="mb-2">Dark Mode</h5>
                             <div class="d-flex align-items-center">
                                 <div class="radio theme-radio mr-4">
                                     <input type="radio" id="light" name="light" value="theme-light">
@@ -87,21 +76,54 @@ if(isset($_POST['product_add'])){
             </div>
         </div>
     </div>
+    <!-- ########## END: Setting Box ########## -->
 
+    <!-- ########## START: LEFT PANEL ########## -->
+    <div class="br-sideleft">
+        <a id="remove-menu" class="la la-close d-xl-none"></a>
+        <div class="br-logo d-flex justify-content-center align-items-center">
+            <a href="index.php"><img src="assets/image/logo.png" alt="MS Admin Panel" width="80" /></a>
+        </div>
+        <ul class="custom-scroll">
+            <li><a href="index.php" class="waves-effect waves-primary"><i
+                            class="la la-dashboard"></i>Dashboard</a></li>
+            <li class="active"><a href="elements.php" class="waves-effect waves-primary"><i class="la la-clone"></i>Products</a></li>
+            <li class="active"><a href="category.php" class="waves-effect waves-primary"><i class="la la-clone"></i>Categories</a></li>
 
+            <!-- <li><a href="javascript:;" class="waves-effect waves-primary"><i
+                            class="la la-bullhorn"></i>Campaign</a></li> -->
+            <li class="dropdown-sub-menu">
+                <a href="javascript:;" class="waves-effect waves-primary"><i
+                                class="la la-users"></i>Customers</a>
+                <!-- <ul class="sub-menu">
+                            <li><a href="javascript:;"><i class="la la-users"></i>New Customers</a></li>
+                            <li><a href="javascript:;"><i class="la la-users"></i>Old Customers</a></li>
+                        </ul> -->
+            </li>
+            <li><a href="javascript:;" class="waves-effect waves-primary"><i
+                                class="la la-cart-arrow-down"></i>Orders</a></li>
+            <li><a href="javascript:;" class="waves-effect waves-primary"><i
+                                class="la la-wechat"></i>Messages</a></li>
+            <li><a href="javascript:;" class="waves-effect waves-primary"><i class="la la-bank"></i>Payments</a>
+            </li>
+            <li><a href="javascript:;" class="waves-effect waves-primary"><i class="la la-image"></i>Media
+                            Manager</a></li>
+            <li><a href="javascript:;" class="waves-effect waves-primary"><i class="la la-cog"></i>Settings</a>
+            </li>
+        </ul>
+    </div>
+    <!-- ########## END: LEFT PANEL ########## -->
 
     <header class="header fixed-top d-flex align-items-center">
         <!-- ########## START: HEAD PANEL ########## -->
-        <a href="index.php"><img src="assets/image/logo.png" alt="MS Admin Panel" width="80" /></a>
         <div class="br-header d-flex w-100">
-
+            <a id="add-menu" class="la la-navicon d-flex d-xl-none align-items-center justify-content-center"></a>
             <div class="br-header-left">
                 <a href="javascript:;" class="searchbar-toggle la la-search d-flex d-md-none"></a>
                 <form class="searchbar d-flex align-items-center pl-3">
                     <i class="la la-search"></i>
                     <input class="form-control border-0 pl-2" type="search" placeholder="Search...">
                 </form>
-
             </div>
             <!-- br-header-left -->
             <div class="br-header-right ml-auto">
@@ -264,7 +286,7 @@ if(isset($_POST['product_add'])){
                                                 class="la la-star-o"></i> Favorites</a></li>
                                 <li><a href="javascript:;" class=" waves-effect waves-light"><i class="la la-file"></i>
                                             Collections</a></li>
-                                <li><a href="javascript:;" class=" waves-effect waves-light"><i
+                                <li><a href="logout.php" class=" waves-effect waves-light"><i
                                                 class="la la-power-off"></i> Sign Out</a></li>
                             </ul>
                         </div>
@@ -277,63 +299,90 @@ if(isset($_POST['product_add'])){
         </div>
         <!-- br-header -->
         <!-- ########## END: HEAD PANEL ########## -->
-
     </header>
-    <section style="padding-top:120px;" class="container">
-    
-    <div class="customcontainer">
-      <div class="input-center">
-      <form action="" method="post" enctype="multipart/form-data">
-        <br><br>
-        <input type="text" name="product_title" placeholder="Name"><br><br>
-        <input type="number" name="product_price" placeholder="Price"><br><br>
-        <textarea rows="3" name="product_description" placeholder="Description"></textarea><br><br>
-        <select name="product_category">
-          <option selected>Category</option>
-          <option value="Electronics">Electronics</option>
-          <option value="Clothing">Clothing</option>
-          <option value="Appliances">Appliances</option>
-        </select><br><br>
-        <input type="text" name="product_quantity" placeholder="Unit"><br><br>
-        <input type="file" name="product_image"><br><br>
-        <input type="text" name="product_size" placeholder="Size"><br><br>
-        <input type="text" name="product_color" placeholder="Colour"><br><br>
-        <input type="text" name="product_discount" placeholder="Discount"><br><br>
-        <select name="product_status">
-          <option selected>Status</option>
-          <option value="1">In Stock</option>
-          <option value="2">Pending</option>
-          <option value="3">Disabled</option>
-        </select><br><br>
-        <input type="text" name="product_location" placeholder="Location"><br><br>
-        <div class="button-flex">
-          <button class="success" type="submit" name="product_add">Add</button>
-          <button class="danger" type="button" onclick="product_cancel()" name="product_Cancel">Cancel</button>
-        </div>
-      </form>
-    </div>
-    </div>
-    </section>
-    <script>
-        function product_cancel(){
-           window.location.href = "elements.php";
-        }
-    </script>
+    <!-- ########## START: MAIN PANEL ########## -->
+    <section class="mainpanel">
+      <div class="pagebody">
+           <br><br>
+           <button type="button" onclick="add_category()" class="btn btn-success waves-effect waves-green">Add Category</button>
+           <br><br>
+            <div class="card  border-0">
+                <div class="card-header py-4">
+                    <h5 class="text-secondary font-weight-bold mb-0">Category Details</h5>
+                </div>
+                <div class="card-body">
+                    <table id="datatable1" class="table table-striped table-borderless w-100">
+                        <thead class="table-theme-bg">
+                            <tr>
+                                <th>Name</th>
+                                <th>Parent_id</th>
+                                <th>Status</th>
+                                <th class="text-center no-sorting">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            while($result=mysqli_fetch_assoc($display))
+                            {
 
-    <script src="assets/scripts/jquery.min.js"></script>
-    <script src="assets/scripts/popper.min.js"></script>
-    <script src="assets/scripts/bootstrap-slider.min.js"></script>
-    <script src="assets/scripts/bootstrap.min.js"></script>
-    <script src="assets/scripts/bootstrap.bundle.min.js"></script>
-    <script src="assets/scripts/bootstrap-select.min.js"></script>
-    <script src="assets/scripts/bootstrap-tooltip-custom-class.js"></script>
-    <script src="assets/scripts/jquery.mCustomScrollbar.js"></script>
-    <script src="assets/scripts/datatables.min.js"></script>
-    <script src="assets/scripts/ripple.min.js"></script>
-    <script src="assets/scripts/custome.js"></script>
-    <script src="assets/scripts/custome.js"></script>
-    <script src="assets/scripts/jquery.min.js"></script>
-    <script src="assets/scripts/custom.js"></script>
-  
-  </body>
+                            ?>
+                            <tr>
+                                <td><?php echo $result['name'];?></td>
+                                <td><?php echo $result['parent_id'];?></td>
+                                <td><?php
+
+                                $status=$result['status'];
+                                if($status==0)
+                                {
+                                    echo "Out of stock";
+                                }
+                                else if($status==1)
+                                {
+                                    echo "In Stock";
+                                }
+                                else if($status==2){
+                                  echo "Pending";
+                                }
+                                else{
+                                  echo "Disabled";
+                                }
+
+                            ?></td>
+                                <td class="td_action" align="center">
+                                  <i data-title="View" id="viewdetails" class="la la-eye"></i>
+                                  <a href="editcategory.php?edit=<?php echo $result['id'];  ?> "><i data-title="Edit" id="editdetails" class="la la-edit"></i></a>
+
+                                  <a href="category.php?delete=<?php echo $result['id'];  ?>"><i data-title="Delete"  id="deleteproduct" class="la la-trash"></i></a>
+                                </td>
+                            </tr>
+                            <?php
+                              }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div><br><br>
+
+        </div>
+    </section>
+    <!-- ########## END: MAIN PANEL ########## -->
+
+</body>
+<script>
+    function add_category(){
+        window.location.href = "addcategory.php";
+    }
+</script>
+<script src="assets/scripts/jquery.min.js"></script>
+<script src="assets/scripts/popper.min.js"></script>
+<script src="assets/scripts/bootstrap-slider.min.js"></script>
+<script src="assets/scripts/bootstrap.min.js"></script>
+<script src="assets/scripts/bootstrap.bundle.min.js"></script>
+<script src="assets/scripts/bootstrap-select.min.js"></script>
+<script src="assets/scripts/bootstrap-tooltip-custom-class.js"></script>
+<script src="assets/scripts/jquery.mCustomScrollbar.js"></script>
+<script src="assets/scripts/datatables.min.js"></script>
+<script src="assets/scripts/ripple.min.js"></script>
+<script src="assets/scripts/custome.js"></script>
+
 </html>

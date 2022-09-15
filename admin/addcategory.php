@@ -1,30 +1,18 @@
 <?php 
 include('../classes/api.php');
-$dataobj=new users();
-if(isset($_POST['product_add'])){
-    $product_title = $_POST['product_title'];
-    $product_price = $_POST['product_price'];
-    $product_description = $_POST['product_description'];
-    $product_category = $_POST['product_category'];
-    $product_quantity = $_POST['product_quantity'];
+$dataobj=new category();
+$parentfetch=$dataobj->parentcategory();
+if(isset($_POST['category_add'])){
+    $name = $_POST['name'];
+    $parent_id = $_POST['parent_id'];
+    $status = $_POST['status'];
 
-    $filename = $_FILES['product_image']['name']; 
-    $product_image="uploads/product".$filename;
-    $tmpname = $_FILES['product_image']['tmp_name'];
-    $a=move_uploaded_file($tmpname, $product_image);
-
-    $product_size = $_POST['product_size'];
-    $product_color = $_POST['product_color'];
-    $product_discount = $_POST['product_discount'];
-    $product_status = $_POST['product_status'];
-
-    $product_array =array($product_title,$product_price,$product_description,$product_category,$product_quantity,$product_image,$product_size,$product_color,$product_discount,$product_status);
-    $check = $dataobj->addproduct($product_array);
+    $check = $dataobj->addcategory($name,$parent_id,$status);
     if($check==200){
         
-        header('location:elements.php');
+        header('location:category.php');
     }else{
-        header('location:addproduct.php');
+        header('location:addcategory.php');
 
     }
     
@@ -47,8 +35,10 @@ if(isset($_POST['product_add'])){
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-slider.css">
 
     <!-- Custom Css -->
-    <link rel="stylesheet" href="assets/css/style.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.min.css">
 
+    <!-- <title>Addproduct</title> -->
+    <!-- <link rel="stylesheet" href="assets/css/style.min.css"> -->
     <link rel="stylesheet" type="text/css" href="assets/css/line-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
@@ -283,40 +273,34 @@ if(isset($_POST['product_add'])){
     
     <div class="customcontainer">
       <div class="input-center">
-      <form action="" method="post" enctype="multipart/form-data">
+      <form action="" method="post" >
         <br><br>
-        <input type="text" name="product_title" placeholder="Name"><br><br>
-        <input type="number" name="product_price" placeholder="Price"><br><br>
-        <textarea rows="3" name="product_description" placeholder="Description"></textarea><br><br>
-        <select name="product_category">
-          <option selected>Category</option>
-          <option value="Electronics">Electronics</option>
-          <option value="Clothing">Clothing</option>
-          <option value="Appliances">Appliances</option>
+        <input type="text" name="name" placeholder="Name"><br><br>
+
+        <select name="parent_id">
+          <option value="0">None</option>
+          <?php while($row=mysqli_fetch_assoc($parentfetch)){ ?>
+            <option value="<?php  echo $row['id'] ?> "><?php  echo $row['name'] ?> </option>
+         <?php }?>
         </select><br><br>
-        <input type="text" name="product_quantity" placeholder="Unit"><br><br>
-        <input type="file" name="product_image"><br><br>
-        <input type="text" name="product_size" placeholder="Size"><br><br>
-        <input type="text" name="product_color" placeholder="Colour"><br><br>
-        <input type="text" name="product_discount" placeholder="Discount"><br><br>
-        <select name="product_status">
+
+        <select name="status">
           <option selected>Status</option>
           <option value="1">In Stock</option>
           <option value="2">Pending</option>
           <option value="3">Disabled</option>
         </select><br><br>
-        <input type="text" name="product_location" placeholder="Location"><br><br>
         <div class="button-flex">
-          <button class="success" type="submit" name="product_add">Add</button>
-          <button class="danger" type="button" onclick="product_cancel()" name="product_Cancel">Cancel</button>
+          <button class="success" type="submit" name="category_add">Add</button>
+          <button class="danger" type="button" onclick="category_cancel()" name="product_Cancel">Cancel</button>
         </div>
       </form>
     </div>
     </div>
     </section>
     <script>
-        function product_cancel(){
-           window.location.href = "elements.php";
+        function category_cancel(){
+           window.location.href = "category.php";
         }
     </script>
 

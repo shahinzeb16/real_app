@@ -2,6 +2,12 @@
 include '../classes/api.php';
 $productobj=new users();
 $display=$productobj->productDisplay();
+if(isset($_GET['delete'])){
+    $product_id = $_GET['delete'];
+    $delete = $productobj->deleteproduct($product_id);
+    header('location:elements.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -80,6 +86,8 @@ $display=$productobj->productDisplay();
             <li><a href="index.php" class="waves-effect waves-primary"><i
                             class="la la-dashboard"></i>Dashboard</a></li>
             <li class="active"><a href="elements.php" class="waves-effect waves-primary"><i class="la la-clone"></i>Products</a></li>
+            <li class="active"><a href="category.php" class="waves-effect waves-primary"><i class="la la-clone"></i>Categories</a></li>
+
             <!-- <li><a href="javascript:;" class="waves-effect waves-primary"><i
                             class="la la-bullhorn"></i>Campaign</a></li> -->
             <li class="dropdown-sub-menu">
@@ -276,7 +284,7 @@ $display=$productobj->productDisplay();
                                                 class="la la-star-o"></i> Favorites</a></li>
                                 <li><a href="javascript:;" class=" waves-effect waves-light"><i class="la la-file"></i>
                                             Collections</a></li>
-                                <li><a href="javascript:;" class=" waves-effect waves-light"><i
+                                <li><a href="logout.php" class=" waves-effect waves-light"><i
                                                 class="la la-power-off"></i> Sign Out</a></li>
                             </ul>
                         </div>
@@ -290,13 +298,12 @@ $display=$productobj->productDisplay();
         <!-- br-header -->
         <!-- ########## END: HEAD PANEL ########## -->
     </header>
-
     <!-- ########## START: MAIN PANEL ########## -->
     <section class="mainpanel">
       <div class="pagebody">
-        <br><br>
-        <button type="button" class="btn btn-success waves-effect waves-green">Add Product</button>
-        <br><br>
+           <br><br>
+           <button type="button" onclick="add_product()" class="btn btn-success waves-effect waves-green">Add Product</button>
+           <br><br>
             <div class="card  border-0">
                 <div class="card-header py-4">
                     <h5 class="text-secondary font-weight-bold mb-0">Products Details</h5>
@@ -344,8 +351,9 @@ $display=$productobj->productDisplay();
                             ?></td>
                                 <td class="td_action" align="center">
                                   <i data-title="View" id="viewdetails" class="la la-eye"></i>
-                                  <i data-title="Edit" id="editdetails" class="la la-edit"></i>
-                                  <i data-title="Delete" id="deleteproduct" class="la la-trash"></i>
+                                  <a href="editproduct.php "><i data-title="Edit" id="editdetails" class="la la-edit"></i></a>
+
+                                  <a href="elements.php?delete=<?php echo $result['product_id'];  ?>"><i data-title="Delete"  id="deleteproduct" class="la la-trash"></i></a>
                                 </td>
                             </tr>
                             <?php
@@ -389,7 +397,11 @@ $display=$productobj->productDisplay();
     <!-- ########## END: MAIN PANEL ########## -->
 
 </body>
-
+<script>
+    function add_product(){
+        window.location.href = "addproduct.php";
+    }
+</script>
 <script src="assets/scripts/jquery.min.js"></script>
 <script src="assets/scripts/popper.min.js"></script>
 <script src="assets/scripts/bootstrap-slider.min.js"></script>
