@@ -21,13 +21,6 @@
           <option value="Clothing">Clothing</option>
           <option value="Appliances">Appliances</option>
         </select><br><br>
-
-        <select name="subcategory">
-          <option selected>SubCategory</option>
-          <option value="Smartphone">Smartphone</option>
-          <option value="Tv">Tv</option>
-          <option value="Refrigerator">Refrigerator</option>
-        </select><br><br>
         <input type="text" name="quantity" placeholder="Unit"><br><br>
         <input type="file" name="image"><br><br>
         <input type="text" name="size" placeholder="Size"><br><br>
