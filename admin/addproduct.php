@@ -1,19 +1,19 @@
 <?php 
 include('../classes/api.php');
 
-$dataobj=new users();
-$categoryobj=new category();
-$parentfetch=$categoryobj->parentcategory();
+ $dataobj=new users();
+ $categoryobj=new category();
+ $parentfetch=$categoryobj->parentcategory();
 
-if(isset($_POST['product_add'])){
-    $product_title = $_POST['product_title'];
-    $product_price = $_POST['product_price'];
-    $product_description = $_POST['product_description'];
-    $product_category = $_POST['subcategory'];
+ if(isset($_POST['product_add'])){
+   $product_title = $_POST['product_title'];
+   $product_price = $_POST['product_price'];
+   $product_description = $_POST['product_description'];
+   $product_category = $_POST['subcategory'];
     $product_quantity = $_POST['product_quantity'];
 
     $filename = $_FILES['product_image']['name']; 
-    $product_image="uploads/product".$filename;
+    $product_image="../user_visit/uploads/product".$filename;
     $tmpname = $_FILES['product_image']['tmp_name'];
     $a=move_uploaded_file($tmpname, $product_image);
 
@@ -31,8 +31,7 @@ if(isset($_POST['product_add'])){
         header('location:addproduct.php');
 
     }
-    
-}
+  }
 
 ?>
 
@@ -116,7 +115,7 @@ if(isset($_POST['product_add'])){
         <textarea rows="3" name="product_description" placeholder="Description"></textarea><br><br>
 
         <select id="product_category"  >
-          <option value="">category</option>
+          <option value="Selected">category</option>
           <?php while($row=mysqli_fetch_assoc($parentfetch)){ ?>
             <option value="<?php  echo $row['id']; ?> "><?php  echo $row['name']; ?> </option>
          <?php }?>
@@ -131,7 +130,7 @@ if(isset($_POST['product_add'])){
         <input type="text" name="product_color" placeholder="Colour"><br><br>
         <input type="text" name="product_discount" placeholder="Discount"><br><br>
       
-        <select name="status">
+        <select name="product_status">
           <option selected>Status</option>
           <option value="1">In Stock</option>
           <option value="2">Pending</option>

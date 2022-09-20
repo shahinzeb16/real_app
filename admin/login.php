@@ -5,17 +5,20 @@ if(isset($_POST['submit']))
 {
 	$email=$_REQUEST['email'];
 	$password=$_REQUEST['pass'];
-    $check=$dataobj->adminlogin($email,$password);
-		if($check==404){
-			header('location:login.php');
-		}
-		else{
-    	if($_POST['remember_me']){
+    $check=$dataobj->userlogin($email,$password);
+	if($check==404){
+		header('location:login.php');
+	}
+	else{
+        if($_POST['remember_me']){
 
-        	setcookie('emailcookie',$email, time()+86400);
-        	setcookie('passwordcookie',$password, time()+86400);
-    	}
-		}
+            setcookie('emailcookie',$email, time()+86400);
+            setcookie('passwordcookie',$password, time()+86400);
+
+
+        }
+        
+	}
 }
 ?>
 <!DOCTYPE html>
@@ -57,16 +60,16 @@ if(isset($_POST['submit']))
                 </div>
                 <div class="col-12 col-lg-6 pl-lg-2">
                     <div class="pagetitle mb-4">
-                        <h2>Admin Login</h2>
+                        <h2>Users Login</h2>
                     </div>
                     <form method="post" action="">
                         <div class="form-group mb-4">
-                            <label>Email Id</label>
+                            <label><b>Email Id</b></label>
                             <input type="text" name="email" class="form-control border-light input-h-42"
                                 placeholder="john.doe@domain.com" value="<?php if(isset($_COOKIE['emailcookie'])) { echo $_COOKIE['emailcookie']; } ?>"  required>
                         </div>
                         <div class="form-group mb-4">
-                            <label>Password</label>
+                            <label><b>Password</b></label>
                             <div class="input-group border border-light">
                                 <input  id="password-field" type="password" name="pass" class="form-control input-h-42"
                                     placeholder="Password" aria-label="Password" value="<?php if(isset($_COOKIE['passwordcookie'])) { echo $_COOKIE['passwordcookie']; } ?>"  required>
@@ -75,19 +78,22 @@ if(isset($_POST['submit']))
                                 </div>
                             </div>
                         </div>
+                        
                         <div>
-                        <input type="checkbox" name="remember_me" <?php if(in_array('emailcookie',$_COOKIE)) echo 'checked';?> >Remember Me<br><br>
 
+                        <input type="checkbox" name="remember_me" <?php  if(in_array('emailcookie',$_COOKIE)) echo 'checked';?> ><b>Remember Me</b><br><br>
                         </div>
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <!--<a href="forgot.html" class="text-primary btn-link">Forgot password?</a>-->
                             <button type="submit" name="submit"
                                 class="btn btn-primary waves-effect waves-primary btn-md w-50">Login</button>
                         </div>
+                        <div>
+                        <a href="forgot.html" class="text-primary btn-link"><b>Forgot password?</b></a>
+                        </div>
                         <hr class="mb-4">
-                        <!--<a href="register.html"
+                        <a href="register.html"
                             class="btn btn-outline-primary waves-effect waves-primary w-100 btn-md">Create an
-                            account</a>-->
+                            account</a>
                     </form>
                 </div>
             </div>

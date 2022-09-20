@@ -6,12 +6,7 @@ if(isset($_GET['edit'])){
     $product_id = $_GET['edit'];
     $display = $dataobj->productfetch($product_id);
     $result = mysqli_fetch_assoc($display);
-    // $parentfetch=$categoryobj->parentcategory($result['product_category']);
-
-
 }
-$subcat=$categoryobj->sub_cat_fetch($id);
-
 $parentfetch=$categoryobj->parentcategory();
 
 if(isset($_POST['product_update'])){
@@ -177,6 +172,7 @@ if(isset($_POST['product_update'])){
             </div>
         </div>
     </section>
+
     <script>
     function product_cancel() {
         window.location.href = "elements.php";
