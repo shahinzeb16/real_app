@@ -215,9 +215,7 @@ class castomer extends DB{
       return $data;
    }
 
-   public function A(){
 
-   }
 }
 
 ?>
