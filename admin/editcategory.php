@@ -5,14 +5,16 @@ if(isset($_GET['edit'])){
     $id = $_GET['edit'];
     $display = $categoryobj->categoryfetch($id);
     $result = mysqli_fetch_assoc($display);
+
 }
 
 if(isset($_POST['category_update'])){
     $id =$result['id'];
     $name = $_POST['name'];
+    $parent_id = $_POST['parent_id'];
     $status = $_POST['status'];
 
-    $check = $categoryobj->updatecategory($name,$status,$id);
+    $check = $categoryobj->updatecategory($name,$parent_id,$status,$id);
     if($check==200){
         
         header('location:category.php');
