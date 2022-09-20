@@ -137,6 +137,13 @@ class category extends DB{
       return 404;
      }
    }
+
+   public function subcatdisplay($category)
+   {
+       $sql="SELECT * FROM categories WHERE parent_id='".$category."'";
+       $data=mysqli_query($this->conn,$sql);
+       return $data;
+   }
 }
 
 
