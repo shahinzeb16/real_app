@@ -167,7 +167,9 @@ if(isset($_GET['delete'])){
 
                             ?></td>
                                 <td class="td_action" align="center">
-                                  <i data-title="View" id="viewdetails" class="la la-eye"></i>
+                                <a href="../user_visit/view_admin_product.php?product_id=<?php  echo $result['product_id']  ?> "><i data-title="View" id="viewdetails" class="la la-eye"></i></a>
+                                  <!-- <a href="viewproduct.php?product_id=<?php  echo $result['product_id']  ?> "><i data-title="View" id="viewdetails" class="la la-eye"></i></a> -->
+
                                   <a href="editproduct.php?edit=<?php echo $result['product_id']  ?> "><i data-title="Edit" id="editdetails" class="la la-edit"></i></a>
 
                                   <a href="elements.php?delete=<?php echo $result['product_id'];  ?>"><i data-title="Delete"  id="deleteproduct" class="la la-trash"></i></a>

@@ -19,7 +19,7 @@ class DB
       else
       {
          // echo "Connection Successfully";
-         session_start();
+         // session_start();
       }
    }
 }
