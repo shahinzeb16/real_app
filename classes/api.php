@@ -1,5 +1,7 @@
 <?php
 include 'database.php';
+session_start();
+
 class users extends DB
 {
    
@@ -103,7 +105,8 @@ class users extends DB
       return $data;
    }
 
-
+   
+   
 
 }
 
@@ -179,33 +182,42 @@ class category extends DB{
    }
 
    function sub_cat_fetch($cat_id)
+
    {
+
      $sql="SELECT * FROM categories WHERE parent_id='".$cat_id."'";
       $data=mysqli_query($this->conn,$sql);
       return $data;
    }
+
+   
 }
 
 
 class castomer extends DB{
+
    public function prx($arr){
       echo '<pre>';
       print_r($arr);
       die();
-  }
+   }
 
-  public function get_product(){
-      $sql="SELECT * FROM product";
+  public function get_product($category_id=""){
+      $condition = "";
+      if($category_id!=""){ 
+          $condition = " WHERE product_category = $category_id ";
+      }
+      $sql="SELECT * FROM product".$condition;
       $res=mysqli_query($this->conn,$sql);
       $data=array();
       while($row=mysqli_fetch_assoc($res)){
           $data[]=$row;
       }
       return $data;
-  }
+   }
 
   
-  public function get_category(){
+      public function get_category(){
       $sql="SELECT * FROM categories WHERE parent_id=0";
       $res=mysqli_query($this->conn,$sql);
       $data=array();
@@ -214,6 +226,9 @@ class castomer extends DB{
       }
       return $data;
    }
+
+   
+
 
 
 }

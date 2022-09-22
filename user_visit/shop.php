@@ -1,10 +1,15 @@
 <?php
 include '../classes/api.php';
 $productobj = new castomer();
-$display = $productobj->get_product();
 $get_category = $productobj->get_category();
 
-// $productobj->prx($get_category);
+if(isset($_REQUEST['cat_id'])){
+	$category_id=$_REQUEST['cat_id'];
+	$get_product = $productobj->get_product($category_id);
+}else{
+	$get_product = $productobj->get_product();
+
+}
 
 ?>
 
@@ -12,6 +17,7 @@ $get_category = $productobj->get_category();
 <html lang="en">
 <head>
 	<title>Product</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -63,8 +69,8 @@ $get_category = $productobj->get_category();
 						foreach($get_category as $list){
 
 					?>
-				   <button id="product_category" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-						<?php echo $list['name'] ?>
+				   <button   id="product_category" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+						<a href="shop.php?cat_id=<?php echo $list['id']; ?>" ><?php echo $list['name'] ?></a>
 					</button>
 					
 					<?php } ?>
@@ -99,7 +105,7 @@ $get_category = $productobj->get_category();
 
 			<div class="row isotope-grid">
 			   <?php 
-					foreach($display as $list){
+					foreach($get_product as $list){
 
 				?>
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
@@ -108,17 +114,15 @@ $get_category = $productobj->get_category();
 						<div class="block2-pic hov-img0">
 							<img src="<?php  echo  $list['product_image']; ?>" class="rounded mx-auto d-block" height="250"  alt="IMG-PRODUCT" >
 
-							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-								Quick View
-							</a>
 						</div>
-
+						<div>
+						<a href="view_product.php?product_id=<?php echo $list['product_id']; ?>">
+							View
+						</a> 
+						</div>
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
-								<!-- <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									View
-								</a> -->
-
+								
 								<span class="stext-105 cl3">
 									<?php  echo $list['product_title']; ?>
 								</span>
@@ -161,12 +165,16 @@ $get_category = $productobj->get_category();
 			<i class="zmdi zmdi-chevron-up"></i>
 		</span>
 	</div>
+	
 
 	<?php
-        include 'model1.php';
 		include 'script.php';
 
     ?>
+
+	<script src="js/custom.js" >
+        
+    </script>
 	
 </body>
 </html>
