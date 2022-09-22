@@ -115,11 +115,6 @@ if(isset($_REQUEST['cat_id'])){
 							<img src="<?php  echo  $list['product_image']; ?>" class="rounded mx-auto d-block" height="250"  alt="IMG-PRODUCT" >
 
 						</div>
-						<div>
-						<a href="view_product.php?product_id=<?php echo $list['product_id']; ?>">
-							View
-						</a> 
-						</div>
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
 								
@@ -130,14 +125,24 @@ if(isset($_REQUEST['cat_id'])){
 									<?php  echo "₹".$list['product_price']; ?>
 								</span>
 							</div>
-
 							<div class="block2-txt-child2 flex-r p-t-3">
-								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+								<a href="#"onClick="wishadd(<?php echo $list['product_id'];?>)" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
 									<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
 									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
 								</a>
 							</div>
+						<div>
+						<a type="button" class="btn btn-primary" href="view_product.php?product_id=<?php echo $list['product_id']; ?>">
+							View
+						</a> 
+
+						<a type="button" class="btn btn-primary" onClick="cartadd(<?php echo $list['product_id'];?>)">Add To Cart</a>
 						</div>
+						
+
+							
+						</div>
+						<p id="p1_<?php echo $list['product_id'];?>"></p>
 					</div>
 				</div>
 				<?php } ?>
@@ -152,7 +157,12 @@ if(isset($_REQUEST['cat_id'])){
 			</div>
 		</div>
 	</div>
-		
+	<!-- <?php
+	$cartobj=new cartadd();
+	$cart=$cartobj->countcart(); 
+	$cartcount=mysqli_fetch_assoc($cart);
+    print_r($cartcount);
+?> -->
 
 	<?php
         include 'footer.php';
@@ -174,6 +184,52 @@ if(isset($_REQUEST['cat_id'])){
 
 	<script src="js/custom.js" >
         
+    </script>
+
+<script type="text/javascript">
+    	function cartadd(product_id)
+    	{
+    		//alert(product_id);
+    		$.ajax({
+    			type:"post",
+    			url:"../ajax/cart_add.php",
+    			data:{pr_id:product_id}
+    		}).done(function(data){
+    			$("#p1_" + product_id).html(data).css("color","orange");
+
+    		});
+
+    		setTimeout(function()
+                 {  
+                  $("#p1_"+product_id).html('');
+                },5000);
+				
+				cartcount();
+
+    	}
+		
+
+
+
+
+    	function wishadd(product_id)
+    	{
+    		//alert(product_id);
+    		$.ajax({
+    			type:"post",
+    			url:"../ajax/wish_add.php",
+    			data:{pr_id:product_id}
+    		}).done(function(data){
+    			$("#p1_" + product_id).html(data).css("color","red");
+
+    		});
+
+    		setTimeout(function()
+                 {  
+                  $("#p1_"+product_id).html('');
+                },8000);
+				wishcount();
+    	}
     </script>
 	
 </body>

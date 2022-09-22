@@ -105,6 +105,113 @@ class users extends DB
       return $data;
    }
 
+   public function usersregister($fullname,$username,$email,$confirmpassword,$folder)
+  {
+   $sql="INSERT INTO `users`(`fullname`, `username`, `email`, `password`,`picture`) VALUES ('$fullname','$username','$email','$confirmpassword','$folder')";
+   $data=mysqli_query($this->conn,$sql);
+   if($data)
+   {
+      return true;
+   }
+   else
+   {
+      return false;
+   }
+  }
+
+  public function displayadmin()
+  {
+   $sql="SELECT * FROM users";
+   $data=mysqli_query($this->conn,$sql);
+   return $data;
+  }
+
+   function edituser($id)
+   {
+      $sql="SELECT * FROM users where user_id='".$id."'";
+      $data=mysqli_query($this->conn,$sql);
+      return $data;
+   }
+
+   function usersedit($fullname,$username,$email,$id,$folder,$oldpic,$role)
+   {
+      //echo $oldpic;
+      if($folder=="upload/profile/")
+      {
+         $sql="UPDATE `users` SET `fullname`='$fullname',`username`='$username',`email`='$email',`picture`='$oldpic',`role`='$role'WHERE user_id='".$id."'";
+      $data=mysqli_query($this->conn,$sql);
+      if($data)
+      {
+         header("location:admindisplay.php");
+      }
+      else
+      {
+         echo "Eror";
+      }
+      }
+
+      else
+      {
+         $sql="UPDATE `users` SET `fullname`='$fullname',`username`='$username',`email`='$email',`picture`='$folder',`role`='$role' WHERE user_id='".$id."'";
+      $data=mysqli_query($this->conn,$sql);
+      if($data)
+      {
+         header("location:admindisplay.php");
+      }
+      else
+      {
+         echo "Eror";
+      }
+
+      }
+   }
+
+   public function passwordchange($oldp,$newp,$confirmp,$id)
+   {
+      $sql1="SELECT * FROM `users` WHERE password='$oldp'";
+            $data1=mysqli_query($this->conn,$sql1);
+            $res= mysqli_num_rows($data1);
+            if ($res==0) 
+            {
+               echo "Old password and previous password are not same";
+            }
+            else
+            {
+
+            if ($oldp!=$newp) 
+            {
+               if ($newp==$confirmp) 
+               {
+                  $sql="UPDATE `users` SET `password`='$confirmp' WHERE user_id='$id'";
+                  $data=mysqli_query($this->conn,$sql);
+                  if ($data) 
+                  {
+                     echo "Password Updated";
+                  }
+                  else
+                  {
+                     echo "password not updated";
+                  }
+               }
+               else
+               {
+                  echo "New and confirm passwords are not same";
+               }
+            }
+            else
+            {
+               echo "Old and new passwords are same";
+            }
+            }
+   }
+
+   public function userdelete($del_id)
+      {
+         $sql="DELETE FROM users WHERE user_id='".$del_id."'";
+         $data=mysqli_query($this->conn,$sql);
+         return $data;
+      }
+
    
    
 
@@ -226,11 +333,83 @@ class castomer extends DB{
       }
       return $data;
    }
+}
+
+
+   class cartadd extends DB
+{
+   public function addtocart($product_id,$id,$quantity)
+   {
+      $sql="SELECT * FROM cart WHERE product_id='$product_id' AND user_id='$id'";
+      $data=mysqli_query($this->conn,$sql);
+      $result=mysqli_fetch_assoc($data);
+      $res=mysqli_num_rows($data);
+      $cart_id=$result['cart_id'];
+      if($result)
+      {
+         $sql="UPDATE `cart` SET `quantity`= quantity + 1 WHERE cart_id='$cart_id'";
+         $data=mysqli_query($this->conn,$sql);
+         if($data)
+         {
+            echo "item already added to cart";
+         }
+         else
+         {
+            return false;
+         }
+      }
+      else
+      {
+         $sql="INSERT INTO `cart`(`user_id`, `product_id`, `quantity`) VALUES ('$id','$product_id','$quantity')";
+         $data=mysqli_query($this->conn,$sql);
+         return $data;
+      }
+      
+   }
+
+   public function wishlistadd($product_id,$id,$quantity)
+   {
+      $sql="SELECT * FROM wishlist WHERE product_id='$product_id' AND user_id='$id'";
+      $data=mysqli_query($this->conn,$sql);
+      $result=mysqli_fetch_assoc($data);
+      if($result)
+      {
+
+            echo "item already added to wishlist";
+      }
+      else
+      {
+         $sql="INSERT INTO `wishlist`(`user_id`, `product_id`) VALUES ('$id','$product_id')";
+         $data=mysqli_query($this->conn,$sql);
+         return $data;
+      }
+      
+   }
+
+   public function countcart()
+   {
+      $id=$_SESSION['user'];
+      //echo $id;
+      $sql="SELECT count(*) FROM cart WHERE user_id='$id'";
+      $data=mysqli_query($this->conn,$sql);
+      return $data;
+      
+   }
+
+   public function countwish()
+   {
+      $id=$_SESSION['user'];
+      //echo $id;
+      $sql="SELECT count(*) FROM wishlist WHERE user_id='$id'";
+      $data=mysqli_query($this->conn,$sql);
+      return $data;
+   }
+}
 
    
 
 
 
-}
+
 
 ?>
