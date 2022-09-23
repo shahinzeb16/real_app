@@ -97,7 +97,7 @@ if(isset($_POST['category_update'])){
       <div class="input-center">
       <form action="" method="post" >
         <br><br>
-        <input type="text" name="name" value="<?php echo $result['name'] ; ?>" placeholder="Name"><br><br>
+        <br><input type="text" name="name" value="<?php echo $result['name'] ; ?>" placeholder="Name"><br><br>
         
         <select name="parent_id">
           <option value=""><?php echo $result['parent_id'] ;  ?></option>

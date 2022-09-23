@@ -147,25 +147,26 @@ if(isset($_GET['delete'])){
                                 <td><?php echo $result['product_category'];?></td>
                                 <td><?php echo $result['product_quantity'];?></td>
                                 <td><?php echo $result['product_price'];?></td>
-                                <td><?php
+                                <td>
+                                <?php
 
-                                $status=$result['product_status'];
-                                if($status==0)
-                                {
-                                    echo "Out of stock";
-                                }
-                                else if($status==1)
-                                {
-                                    echo "In Stock";
-                                }
-                                else if($status==2){
-                                  echo "Pending";
-                                }
-                                else{
-                                  echo "Disabled";
-                                }
+                                    $status=$result['product_status'];
+                                    if($status==0)
+                                    {
+                                        echo "Out of stock";
+                                    }
+                                    else if($status==1)
+                                    {
+                                        echo "In Stock";
+                                    }
+                                    else if($status==2){
+                                    echo "Pending";
+                                    }
+                                    else{
+                                    echo "Disabled";
+                                    }
 
-                            ?></td>
+                                  ?></td>
                                 <td class="td_action" align="center">
                                 <a href="../user_visit/view_admin_product.php?product_id=<?php  echo $result['product_id']  ?> "><i data-title="View" id="viewdetails" class="la la-eye"></i></a>
                                   <!-- <a href="viewproduct.php?product_id=<?php  echo $result['product_id']  ?> "><i data-title="View" id="viewdetails" class="la la-eye"></i></a> -->

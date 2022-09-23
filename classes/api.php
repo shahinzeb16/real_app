@@ -18,11 +18,11 @@ class users extends DB
          if($role == 0){
             // echo "login success";
             $_SESSION['id']=$result['admin_id'];
-            header("location:elements.php");
+            header("location:product.php");
          }else{
             // echo "login success";
             $_SESSION['id']=$result['admin_id'];
-            header("location:viewproduct.php");
+            header("location:../../../user_visit/index.php");
          }
       }
       else
@@ -227,10 +227,15 @@ class castomer extends DB{
       return $data;
    }
 
-   
-
-
 
 }
 
+class orders extends DB{
+   public function orderDisplay()
+   {
+      $sql="SELECT * FROM orders";
+      $data=mysqli_query($this->conn,$sql);
+      return $data;
+   }  
+}
 ?>
