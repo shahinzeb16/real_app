@@ -1,3 +1,6 @@
+<?php
+error_reporting(0);
+?>
 <!-- Header -->
 <?php include 'head.php'; ?>
 <header class="header-v4">
@@ -77,15 +80,34 @@
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
 						</div>
-
+						<?php
+						$id=$_SESSION['user'];
+						if($id == "")
+						{
+						?>
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11  js-show-cart" >
+							<i class="zmdi zmdi-shopping-cart">
+							</i>
+						</div>
+
+						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 p-l-10 ">
+							<i class="zmdi zmdi-favorite-outline"></i>
+						</a>
+						<a href="user_login.php">Login</a><?php
+						}
+						else{
+							?>
+							<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11  js-show-cart" >
 							<i class="zmdi zmdi-shopping-cart" id="cartitem" >
 							</i>
 						</div>
 
 						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 p-l-10 ">
 							<i class="zmdi zmdi-favorite-outline" id="wishitem"></i>
-						</a>
+						</a><a href="logout.php">Logout</a><?php
+						}
+						?>
+						
 					</div>
 				</nav>
 			</div>	
@@ -111,6 +133,7 @@
 				<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10  >
 					<i class="zmdi zmdi-favorite-outline" ></i>
 				</a>
+				
 			</div>
 
 			<!-- Button show menu -->
