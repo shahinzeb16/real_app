@@ -9,17 +9,17 @@ class DB
    protected $conn;
 
    public function __construct()
-   {
-    $this->conn= mysqli_connect($this->servername,$this->username,$this->password,$this->db);
-     
-     if($this->conn->connect_error)
-     {
-         die("Connection Failed");
-     }
-      else
       {
-         // echo "Connection Successfully";
-         // session_start();
+           $this->conn= mysqli_connect($this->servername,$this->username,$this->password,$this->db);
+        
+           if($this->conn->connect_error)
+           {
+               die("Connection Failed");
+           }
+           else
+            {
+               // echo "Connection Successfully";
+               //session_start();
+            }
       }
-   }
 }
