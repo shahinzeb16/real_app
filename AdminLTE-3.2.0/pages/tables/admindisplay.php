@@ -1,11 +1,11 @@
 <?php
 include '../../../classes/api.php';
-$categoryobj=new category();
-$categoryDisplay=$categoryobj->categoryDisplay();
+$adminobj=new users();
+$display=$adminobj->displayadmin();
 if(isset($_GET['delete'])){
-    $id = $_GET['delete'];
-    $delete = $categoryobj->deletecategory($id);
-    header('location:category.php');
+    $del_id = $_GET['delete'];
+    $delete = $adminobj->userdelete($del_id);
+    header('location:admindisplay.php');
 }
 
 ?>
@@ -15,7 +15,7 @@ if(isset($_GET['delete'])){
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Category</title>
+  <title>Admin panel</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -43,13 +43,13 @@ if(isset($_GET['delete'])){
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <button type="button" onclick="add_category()" class="btn btn-success waves-effect waves-green">Add Category</button>
-            <h1>Category Tables</h1>
+            <button type="button" onclick="register()" class="btn btn-success waves-effect waves-green">Register</button>
+            <h1>Users Tables</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">category Tables</li>
+              <li class="breadcrumb-item active">users Tables</li>
             </ol>
           </div>
         </div>
@@ -63,48 +63,40 @@ if(isset($_GET['delete'])){
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Product categories details</h3>
+                <h3 class="card-title">users details</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                     <th>Name</th>
-                     <th>Parent_id</th>
+                     <th>Fullname</th>
+                     <th>Username</th>
+                     <th>Email</th>
+                     <th>Image</th>
                      <th>Status</th>
                      <th class="text-center no-sorting">Action</th>
                   </tr>
                   </thead>
                   <tbody>
                     <?php
-                      while($result=mysqli_fetch_assoc($categoryDisplay))
+                      while($result=mysqli_fetch_assoc($display))
                       {
                     ?>
                     <tr>
-                      <td><?php echo $result['name'];?></td>
-                      <td><?php echo $result['parent_id'];?></td>
-                      <td><?php
-                            $status=$result['status'];
-                            if($status==0)
-                            {
-                                echo "Out of stock";
-                            }
-                            else if($status==1)
-                            {
-                                echo "In Stock";
-                            }
-                            else if($status==2){
-                            echo "Pending";
-                            }
-                            else{
-                            echo "Disabled";
-                            }
-
-                        ?></td>                
+                       <td><?php echo $result['fullname'];?></td>
+                       <td><?php echo $result['username'];?></td>
+                       <td><?php echo $result['email'];?></td>
+                       <td>
+                            <?php $_SESSION['oldfolder']=$result['image'];?>
+                            <img src="<?php echo $result['image'];?>" height="50" width="50">
+                       </td>
+                            <td><?php echo $result['access']=='0' ? 'Active' : 'In-Active';?></td>
+              
                         <td class="td_action" align="center">
-                        <a href="../examples/editcategory.php?edit=<?php echo $result['id'];  ?> "><i data-title="Edit" id="editdetails" class="fas fa-edit"></i></a>
-                        <a href="category.php?delete=<?php echo $result['id'];  ?>"><i data-title="Delete"  id="deleteproduct" class="fas fa-trash"></i></a>                        </td>
+                             <a href="../forms/edit.php?edit=<?php echo $result['admin_id'];  ?> "><i data-title="Edit" id="editdetails" class="fas fa-edit"></i></a>
+                             <a href="admindisplay.php?delete=<?php echo $result['admin_id'];  ?>"><i data-title="Delete"  id="deleteproduct" class="fas fa-trash"></i></a>                 
+                        </td>
                     </tr>
                     <?php } ?>
                   </tbody>
@@ -180,8 +172,8 @@ if(isset($_GET['delete'])){
   });
 </script>
 <script>
-    function add_category(){
-        window.location.href = "../examples/addcategory.php";
+    function register(){
+        window.location.href = "../forms/register.php";
     }
 </script>
 </body>

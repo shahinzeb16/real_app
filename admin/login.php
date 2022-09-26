@@ -80,6 +80,10 @@ if(isset($_POST['submit']))
                         </div>
                         
                         <div>
+<<<<<<< HEAD
+                        <input type="checkbox" name="remember_me" <?php if(isset($_COOKIE["emailcookie"])) { echo "checked" ; } ?>>Remember Me<br><br>
+=======
+>>>>>>> 5648ac8932d6167f596e2a6b61d267189fa1c131
 
                         <input type="checkbox" name="remember_me" <?php  if(in_array('emailcookie',$_COOKIE)) echo 'checked';?> ><b>Remember Me</b><br><br>
                         </div>

@@ -236,21 +236,21 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../forms/general.html" class="nav-link">
+                <a href="../forms/edit.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>General Elements</p>
+                  <p>Edit user's details</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../forms/advanced.html" class="nav-link">
+                <a href="../forms/passwordchange.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Advanced Elements</p>
+                  <p>Password Change</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../forms/editors.html" class="nav-link">
+                <a href="../forms/register.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Editors</p>
+                  <p>Register </p>
                 </a>
               </li>
               <li class="nav-item">
@@ -270,17 +270,28 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              
+              <li class="nav-item">
+                <a href="../tables/product.php" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Product Table</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="../tables/category.php" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Category table</p>
+                  <p>Category Table</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="../tables/order_view.php" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Ordert table</p>
+                  <p>Ordert Table</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../tables/admindisplay.php" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Users Table</p>
                 </a>
               </li>
             </ul>
@@ -374,9 +385,27 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="../examples/addproduct.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Product</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../examples/editproduct.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Edit Product</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="../examples/addcategory.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Category</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../examples/editcategory.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Edit Category</p>
                 </a>
               </li>
               <li class="nav-item">
