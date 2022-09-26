@@ -84,10 +84,6 @@ if(isset($_GET['product_id'])){
                             </div>
 
                             <div class="stext-102 cl3 p-t-23">
-                            	<?php  echo $result['product_category']; ?>
-                            </div>
-
-                            <div class="stext-102 cl3 p-t-23">
 								<p><span>Size:</span><?php  echo $result['product_size']; ?></p>
 
                             </div>

@@ -209,8 +209,6 @@ if(isset($_REQUEST['cat_id'])){
 		
 
 
-
-
     	function wishadd(product_id)
     	{
     		//alert(product_id);
