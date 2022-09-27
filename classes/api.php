@@ -7,31 +7,30 @@ class users extends DB
 
 public function userlogin($email,$password)
    {
-      $sql="SELECT * FROM users WHERE email='".$email."' AND password='".$password."'AND access=0";
+      $sql="SELECT * FROM users WHERE email='".$email."' AND password='".$password."'AND access=1";
       $data=mysqli_query($this->conn,$sql);
       $result=mysqli_fetch_assoc($data);
       $role=$result['role'];
       $res=mysqli_num_rows($data);
       if($res == 1)
       {  
-         if($role == 1)
+         if($role == 0)
          {
             // echo "login success";
-            $_SESSION['admin_id']=$result['user_id'];
-            header("location:elements.php");
-         }
-         else
-         {
-            //echo "login success";
-            $_SESSION['user']=$result['user_id'];
-            header("location:shop.php");
+            $_SESSION['admin']=$result['admin_id'];
+            header("location:../AdminLTE-3.2.0/pages/tables/product.php");
+         }else{
+            // echo "login success";
+            $_SESSION['user']=$result['admin_id'];
+            header("location:../user_visit/shop.php");
+
          }
       }
       else
-         {
-            return 404;
-            $_SESSION['id']="";
-         }
+      {
+         return 404;
+         $_SESSION['id']="";
+      }
    }
 
 public function addproduct( $product_array)
@@ -106,7 +105,7 @@ public function productfetch($product_id)
 
 public function usersregister($fullname,$username,$email,$confirmpassword,$folder)
    {
-      $sql="INSERT INTO `users`(`fullname`, `username`, `email`, `password`,`picture`) VALUES ('$fullname','$username','$email','$confirmpassword','$folder')";
+      $sql="INSERT INTO `users`(`fullname`, `username`, `email`, `password`,`image`) VALUES ('$fullname','$username','$email','$confirmpassword','$folder')";
       $data=mysqli_query($this->conn,$sql);
       if($data)
       {
@@ -125,43 +124,37 @@ public function displayadmin()
       return $data;
    }
 
-function edituser($id)
+   public function edituser($id)
    {
-      $sql="SELECT * FROM users where user_id='".$id."'";
+      $sql="SELECT * FROM users where admin_id='".$id."'";
       $data=mysqli_query($this->conn,$sql);
       return $data;
    }
 
-function usersedit($fullname,$username,$email,$id,$folder,$oldpic,$role)
+   public function usersedit($fullname,$username,$email,$id,$folder,$oldpic,$role,$filename)
    {
-   //echo $oldpic;
-   if($folder=="upload/profile/")
-   {
-      $sql="UPDATE `users` SET `fullname`='$fullname',`username`='$username',`email`='$email',`picture`='$oldpic',`role`='$role'WHERE user_id='".$id."'";
-      $data=mysqli_query($this->conn,$sql);
-   if($data)
-   {
-      header("location:admindisplay.php");
-   }
-   else
-   {
-      echo "Eror";
-   }
-   }
-   else
-   {
-      $sql="UPDATE `users` SET `fullname`='$fullname',`username`='$username',`email`='$email',`picture`='$folder',`role`='$role' WHERE user_id='".$id."'";
-      $data=mysqli_query($this->conn,$sql);
-   if($data)
-   {
-      header("location:admindisplay.php");
-   }
-   else
-   {
-      echo "Eror";
-   }
-
-   }
+      if($filename=="")
+      {
+         $sql="UPDATE `users` SET `fullname`='$fullname',`username`='$username',`email`='$email',`image`='$oldpic',`role`='$role' WHERE admin_id='".$id."'";
+         $data=mysqli_query($this->conn,$sql);
+         if($data){
+            return 200;
+      
+         }else{
+            return 404;
+         }
+      }
+      else
+      {
+         $sql="UPDATE `users` SET `fullname`='$fullname',`username`='$username',`email`='$email',`image`='$folder',`role`='$role' WHERE admin_id='".$id."'";
+         $data=mysqli_query($this->conn,$sql);
+         if($data){
+            return 200;
+      
+         }else{
+            return 404;
+         }
+      }
    }
 
 public function passwordchange($oldp,$newp,$confirmp,$id)
@@ -180,7 +173,7 @@ public function passwordchange($oldp,$newp,$confirmp,$id)
    {
       if ($newp==$confirmp) 
       {
-         $sql="UPDATE `users` SET `password`='$confirmp' WHERE user_id='$id'";
+         $sql="UPDATE `users` SET `password`='$confirmp' WHERE admin_id='$id'";
          $data=mysqli_query($this->conn,$sql);
          if ($data) 
          {
@@ -205,10 +198,11 @@ public function passwordchange($oldp,$newp,$confirmp,$id)
 
 public function userdelete($del_id)
    {
-      $sql="DELETE FROM users WHERE user_id='".$del_id."'";
+      $sql="DELETE FROM users WHERE admin_id='".$del_id."'";
       $data=mysqli_query($this->conn,$sql);
       return $data;
    }
+
 }
 
 class category extends DB{
@@ -358,7 +352,7 @@ public function addtocart($product_id,$id,$quantity)
 
    }
 
-public function wishlistadd($product_id,$id,$quantity)
+public function wishlistadd($product_id,$id)
    {
       $sql="SELECT * FROM wishlist WHERE product_id='$product_id' AND user_id='$id'";
       $data=mysqli_query($this->conn,$sql);
@@ -376,6 +370,7 @@ public function wishlistadd($product_id,$id,$quantity)
 
    }
 
+
 public function countcart()
    {
       $id=$_SESSION['user'];
@@ -387,7 +382,7 @@ public function countcart()
 
 public function countwish()
    {
-         $id=$_SESSION['user'];
+      $id=$_SESSION['user'];
          //echo $id;
       $sql="SELECT count(*) FROM wishlist WHERE user_id='$id'";
       $data=mysqli_query($this->conn,$sql);
@@ -397,4 +392,15 @@ public function countwish()
       
    }
 }
+
+class orders extends DB{
+   public function orderDisplay()
+   {
+      $sql="SELECT * FROM orders";
+      $data=mysqli_query($this->conn,$sql);
+      return $data;
+   }  
+}
+
+
 ?>

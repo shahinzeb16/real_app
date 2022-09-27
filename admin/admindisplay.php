@@ -2,6 +2,12 @@
 include '../classes/api.php';
 $adminobj=new users();
 $display=$adminobj->displayadmin();
+
+if(isset($_GET['delete'])){
+    $id = $_GET['delete'];
+    $delete = $categoryobj->deletecategory($id);
+    header('location:category.php');
+}
 ?>
 
 <!DOCTYPE html>

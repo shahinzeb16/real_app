@@ -11,8 +11,8 @@ else
 	if(isset($_REQUEST['pr_id']))
 	{
 		$product_id=$_REQUEST['pr_id'];
-		$quantity='1';
-		$wishlist=$wishobj->wishlistadd($product_id,$id,$quantity);
+		// $quantity='1';
+		$wishlist=$wishobj->wishlistadd($product_id,$id);
 		if($wishlist)
 		{
 			echo "Item Wishlisted";
