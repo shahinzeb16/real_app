@@ -347,7 +347,7 @@ class cartadd extends DB
    }
    else
    {
-      $sql="INSERT INTO `cart`(`user_id`, `product_id`, `quantity`) VALUES ('$id','$product_id','$quantity')";
+      $sql="INSERT INTO `cart`(`user_id`, `product_id`, `quantity`,`total`) VALUES ('$id','$product_id','$quantity')";
       $data=mysqli_query($this->conn,$sql);
       return $data;
    }

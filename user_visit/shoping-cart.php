@@ -1,6 +1,8 @@
 <?php
     include '../classes/api.php';
 	$carttobj = new cartadd();
+	$ordersobj= new orders();
+
 	$id=$_SESSION['user'];
 	$cartdisplay=$carttobj->get_cart_product($id);
 	$addressobj = new users_address();
@@ -11,12 +13,21 @@
 		$state=$_POST['state'];
 		$city=$_POST['city'];
 		$landmark=$_POST['landmark'];
+
+		$transaction_id="212";
+		while($cart=mysqli_fetch_assoc($cartdisplay)){
+		$product_id=$cart['product_id'];
+		$product_quantity=$cart['quantity'];
+		$total_price="23345";
+
+		$check1=$ordersobj->add_order($transaction_id,$user_id,$product_id,$total_price,$product_quantity);
 	    $check = $addressobj->add_address($user_id,$address,$pincode,$state,$city,$landmark);
-	   if($check==200){
+	   if($check1= $check==200){
 		 header('location:shop.php');
 	   }
 	   else{
 		 header('location:shoping-cart.php');
+	   }
 	   }
     }
 ?>
