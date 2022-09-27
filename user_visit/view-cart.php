@@ -55,6 +55,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!--===============================================================================================-->
 </head>
 <body class="animsition">
@@ -77,8 +78,9 @@
 									<th class="column-2"></th>
 									<th class="column-3">Price</th>
 									<th class="column-4">Quantity</th>
-									<th class="column-5">Total</th>
-                                    <th class="column-5">Action</th>
+									<th class="column-5">Price</th>
+									<th class="column-6">Total</th>
+                                    <th class="column-7">Action</th>
 
 								</tr>
 								<?php 
@@ -108,7 +110,8 @@
 											</div>
 										</div>
 									</td>
-									<td class="column-5"><?php  echo $productdisplay['product_price']*$cart['quantity'] ;?></td>
+									<td id="productprice"  class="column-5"><?php  echo $productdisplay['product_price'];?></td>
+									<td id="producttotal"><?php echo $productdisplay['product_price']?></td>
                                     <td><a href="view-cart.php?delete=<?php echo $cart['cart_id'];  ?>"><i  class=" fas fa-trash"></i></a></td>
 
 								</tr>

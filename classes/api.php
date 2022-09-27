@@ -14,7 +14,7 @@ public function userlogin($email,$password)
       $res=mysqli_num_rows($data);
       if($res == 1)
       {  
-         if($role == 0)
+         if($role == 1)
          {
             // echo "login success";
             $_SESSION['admin']=$result['admin_id'];
