@@ -156,12 +156,12 @@ if(isset($_REQUEST['cat_id'])){
 			</div>
 		</div>
 	</div>
-	<!-- <?php
+	<?php /*
 	$cartobj=new cartadd();
 	$cart=$cartobj->countcart(); 
 	$cartcount=mysqli_fetch_assoc($cart);
-    print_r($cartcount);
-?> -->
+    print_r($cartcount); */
+    ?>
 
 	<?php
         include 'footer.php';
