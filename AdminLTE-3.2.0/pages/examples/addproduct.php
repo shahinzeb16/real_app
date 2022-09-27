@@ -53,7 +53,7 @@ if(isset($_POST['submit'])){
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">
-       
+
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -63,7 +63,7 @@ if(isset($_POST['submit'])){
                         <div class="col-sm-6">
                             <h1>Add Product </h1>
                         </div>
-                        
+
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
@@ -112,7 +112,7 @@ if(isset($_POST['submit'])){
                                     <select id="sub_category" name="subcategory" class="form-control custom-select">
                                         <option>Subcategory</option>
                                     </select><br><br>
-                                    
+
                                     <div class="form-group">
                                         <label for="product_quantity">product quantity</label>
                                         <input type="text" name="product_quantity" id="inputClientCompany"
@@ -164,7 +164,7 @@ if(isset($_POST['submit'])){
                         <!-- /.card -->
                     </div>
                 </div>
-                
+
             </section>
             <!-- /.content -->
         </div>

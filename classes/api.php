@@ -402,5 +402,13 @@ class orders extends DB{
    }  
 }
 
+   
+class customers extends DB{
+   public function search($search){   
+      $sql = "SELECT * FROM product WHERE product_title LIKE '%$search%' OR product_description LIKE '%$search%'";   
+      $data=mysqli_query($this->conn,$sql);   
+      return $data;  
+   }
+}
 
 ?>
