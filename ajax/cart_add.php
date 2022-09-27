@@ -1,7 +1,7 @@
 <?php
 include '../classes/api.php';
-$id=$_SESSION['user'];
 $cartobj=new cartadd();
+$id=$_SESSION['user'];
 if($id=="")
 {
 	echo "Please Login To Continue";
