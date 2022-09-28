@@ -14,11 +14,11 @@
 		$city=$_POST['city'];
 		$landmark=$_POST['landmark'];
 
-		$transaction_id="212";
+		$transaction_id=rand();
 		while($cart=mysqli_fetch_assoc($cartdisplay)){
 		$product_id=$cart['product_id'];
 		$product_quantity=$cart['quantity'];
-		$total_price="23345";
+		$total_price=$_POST['total'];
 
 		$check1=$ordersobj->add_order($transaction_id,$user_id,$product_id,$total_price,$product_quantity);
 	    $check = $addressobj->add_address($user_id,$address,$pincode,$state,$city,$landmark);
@@ -168,7 +168,7 @@
 							</div>
 
 							<div class="size-209">
-								<span class="mtext-110 cl2">
+								<span name="total" class="mtext-110 cl2">
 									<?php  echo $sum ; ?>
 								</span>
 							</div>

@@ -64,7 +64,7 @@ $orderDisplay=$orderobj->orderDisplay();
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Product_name</th>
+                    <th>Product_id</th>
                     <th>Order_id</th>
                     <th>total_price</th>
                     <th>Quantity</th>
@@ -84,7 +84,7 @@ $orderDisplay=$orderobj->orderDisplay();
                       <td><?php echo $result['product_quantity'];?></td>
                       <td><?php echo $result['expected_delivery'];?></td>
                       <td class="td_action" align="center">
-                        <a href="../../user_visit/view_admin_product.php?product_id=<?php  echo $result['product_id']  ?> "><i class="fas fa-eye" aria-hidden="true"></i></a>
+                      <a href="../../../user_visit/view_admin_product.php?product_id=<?php  echo $result['product_id']  ?> "><i data-title="View" id="viewdetails" class="fas fa-eye"></i></a>
                       </td>
                     </tr>
                     <?php } ?>
