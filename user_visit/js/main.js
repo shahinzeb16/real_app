@@ -223,16 +223,18 @@
         var price=$("#productprice").text();
         var total=(numProduct > 0)?(total-price):0;
         $("#producttotal").html(total);
+        var sub=numProduct - 1;
         if(numProduct > 0) $(this).next().val(numProduct - 1);
+        //alert(sub);
 
         $.ajax({
             type:"post",
-            url:"ajax/ajax_quantity.php",
-            data:{pro_id:product_id,quantity:numProduct}
+            url:"../ajax/ajax_quantity.php",
+            data:{pro_id:product_id,quantity:sub}
         }).done(function(data){
             
-            console.log(data);
-            location.reload();
+            // console.log(data);
+            // location.reload();
             
 
         });
@@ -240,21 +242,25 @@
     });
 
     $('.btn-num-product-up').on('click', function(){
+        var product_id =$(this).parent().parent().find('input').data('product-id');
+        //alert(product_id);
         var numProduct = Number($(this).prev().val());
         var add=numProduct+1;
         var price=$("#productprice").text();
+        
+        //alert(add);
         $("#producttotal").html(price*add);
         $(this).prev().val(add);
         $.ajax({
             type:"post",
-            url:"ajax/quantity_update.php",
-            data:{pro_id:product_id,quantity:numProduct}
+            url:"../ajax/ajax_quantity.php",
+            data:{pro_id:product_id,quantity:add}
         }).done(function(data){
             console.log(data);
-            location.reload();
+            //location.reload();
             
 
-        });
+         });
     });
 
     /*==================================================================

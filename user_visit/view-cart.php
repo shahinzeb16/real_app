@@ -77,13 +77,13 @@
 									<th class="column-1">Product</th>
 									<th class="column-2"></th>
 									<th class="column-3">Price</th>
-									<th class="column-4">Quantity</th>
-									<th class="column-5">Price</th>
+									<td class="column-4">Quantity</td>
 									<th class="column-6">Total</th>
-                                    <th class="column-7">Action</th>
+                  <th class="column-7">Action</th>
 
 								</tr>
 								<?php 
+								$sum=0;
 								    while($cart=mysqli_fetch_assoc($cartdisplay)){
 										$product_id=$cart['product_id'];
 										$list=$carttobj->productdisplay($product_id);
@@ -103,7 +103,7 @@
 												<i class="fs-16 zmdi zmdi-minus"></i>
 											</div>
 
-											<input class="mtext-104 cl3 txt-center num-product" data-product-id="<?php echo $cart['cart_id'];?>"
+											<input class="mtext-104 cl3 txt-center num-product" data-product-id="<?php echo $cart['product_id'];?>"
 											type="text"  
 							
 											value="<?php echo $cart['quantity'];?>">
@@ -115,16 +115,10 @@
 									</td>
 									<td id="productprice"  class="column-5"><?php  echo $productdisplay['product_price'];?></td>
 									<td id="producttotal"><?php echo $productdisplay['product_price']?></td>
-                                    <td><a href="view-cart.php?delete=<?php echo $cart['cart_id'];  ?>"><i  class=" fas fa-trash"></i></a></td>
+									
+                  <td><a href="view-cart.php?delete=<?php echo $cart['cart_id'];  ?>"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
 
 								</tr>
-
-								<?php  
-									$sum=0;
-									$total= $productdisplay['product_price']*$cart['quantity'];
-									$sum=$sum+$total; 
-
-								?>
 								<?php  } ?>
 							</table>
 						</div>
