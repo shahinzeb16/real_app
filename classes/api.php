@@ -394,6 +394,13 @@ class cartadd extends DB
       
    }
 
+   public function updatecart($product_id,$id,$quantity)
+   {
+      $sql="UPDATE cart SET quantity='$quantity' WHERE user_id='$id' AND product_id='$product_id'";
+      $data=mysqli_query($this->conn,$sql);
+      return $data;
+   }
+
    public function get_cart_product($id){
       $sql="SELECT * FROM cart  WHERE user_id='$id'";
       $data=mysqli_query($this->conn,$sql);
