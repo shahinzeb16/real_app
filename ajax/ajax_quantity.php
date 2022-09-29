@@ -6,4 +6,11 @@ $product_id=$_REQUEST['pro_id'];
 $quantity=$_REQUEST['quantity'];
 //echo $quantity,$product_id;
 $cart=$cartupdateobj->updatecart($product_id,$id,$quantity);
+if($cart == true)
+{
+    echo 200;
+}
+else{
+    echo 404;
+}
 ?>
