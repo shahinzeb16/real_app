@@ -113,13 +113,21 @@
 											</div>
 										</div>
 									</td>
-									<td id="productprice"  class="column-5"><?php  echo $productdisplay['product_price'];?></td>
-									<td id="producttotal"><?php echo $productdisplay['product_price']?></td>
+									<!-- <td class="column-5"><?php  echo $productdisplay['product_price'];?></td> -->
+									<td><?php echo $total= $productdisplay['product_price'] * $cart['quantity'] ?></td>
+									<!-- <td id="productprice"  class="column-5"><?php  echo $productdisplay['product_price'];?></td>
+									<td id="producttotal"><?php echo $productdisplay['product_price']?></td> -->
 									
                   <td><a href="view-cart.php?delete=<?php echo $cart['cart_id'];  ?>"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
 
 								</tr>
-								<?php  } ?>
+								
+									<?php  $sum=$sum+$total;?>
+	
+								
+								<?php 
+							       
+							} ?>
 							</table>
 						</div>
 
@@ -131,7 +139,9 @@
 									Apply coupon
 								</div>
 							</div>
-
+							<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+								Sum Total=<?php echo $sum;?>
+							</div>
 							<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
 								Update Cart
 							</div>

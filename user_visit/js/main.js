@@ -219,12 +219,12 @@
         var product_id =$(this).parent().parent().find('input').data('product-id');
         //alert(product_id);
         var numProduct = Number($(this).next().val());
-        var total=$("#producttotal").text();
-        var price=$("#productprice").text();
-        var total=(numProduct > 0)?(total-price):0;
-        $("#producttotal").html(total);
+        // var total=$("#producttotal").text();
+        // var price=$("#productprice").text();
+        // var total=(numProduct > 0)?(total-price):0;
+        // $("#producttotal").html(total);
         var sub=numProduct - 1;
-        if(numProduct > 0) $(this).next().val(numProduct - 1);
+        //if(numProduct > 0) $(this).next().val(numProduct - 1);
         //alert(sub);
 
         $.ajax({
@@ -234,7 +234,7 @@
         }).done(function(data){
             
             // console.log(data);
-            // location.reload();
+            location.reload();
             
 
         });
@@ -246,21 +246,23 @@
         //alert(product_id);
         var numProduct = Number($(this).prev().val());
         var add=numProduct+1;
-        var price=$("#productprice").text();
+        // var price=$("#productprice").text();
         
         //alert(add);
-        $("#producttotal").html(price*add);
-        $(this).prev().val(add);
+        // $("#producttotal").html(price*add);
+        // $(this).prev().val(add);
         $.ajax({
             type:"post",
             url:"../ajax/ajax_quantity.php",
-            data:{pro_id:product_id,quantity:add}
-        }).done(function(data){
-            console.log(data);
-            //location.reload();
-            
-
-         });
+            data:{pro_id:product_id,quantity:add},
+            success:function(response){
+                if(response == 200)
+                {
+                    location.reload();
+                }
+                
+            }
+        });
     });
 
     /*==================================================================
