@@ -12,7 +12,8 @@ if(isset($_POST['submit'])){
    $product_quantity = $_POST['product_quantity'];
 
    $filename = $_FILES['product_image']['name']; 
-   $product_image="../../../user_visit/uploads/product".$filename;
+   $product_image="../../../user_visit/uploads/product/".$filename;
+   $imagepath = "uploads/product/".$filename;
    $tmpname = $_FILES['product_image']['tmp_name'];
    $a=move_uploaded_file($tmpname, $product_image); //localhost\real_app\user_visit\uploads
 
@@ -21,10 +22,9 @@ if(isset($_POST['submit'])){
    $product_discount = $_POST['product_discount'];
    $product_status = $_POST['product_status'];
 
-   $product_array =array($product_title,$product_price,$product_description,$product_category,$product_quantity,$product_image,$product_size,$product_color,$product_discount,$product_status);
+   $product_array =array($product_title,$product_price,$product_description,$product_category,$product_quantity,$imagepath,$product_size,$product_color,$product_discount,$product_status);
    $check = $dataobj->addproduct($product_array);
-   if($check==200){
-       
+   if($check==200){       
        header('location:../tables/product.php');
    }else{
        header('location:addproduct.php');

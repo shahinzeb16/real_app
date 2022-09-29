@@ -42,7 +42,8 @@ if(isset($_GET['delete'])){
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <button type="button" onclick="add_product()" class="btn btn-success waves-effect waves-green">Add Product</button>
+                            <button type="button" onclick="add_product()"
+                                class="btn btn-success waves-effect waves-green">Add Product</button>
                             <h1>Product Tables</h1>
                         </div>
                         <div class="col-sm-6">
@@ -108,28 +109,35 @@ if(isset($_GET['delete'])){
                                                     ?>
                                                 </td>
                                                 <td class="td_action" align="center">
-                                                    <a href="../../../user_visit/view_admin_product.php?product_id=<?php  echo $result['product_id']  ?> "><i data-title="View" id="viewdetails" class="fas fa-eye"></i></a>
-                                                    <a href="../../pages/examples/editproduct.php?edit=<?php echo $result['product_id']  ?> "><i data-title=" Edit" id="editdetails" class="fas fa-edit"></i></a>
-                                                    <a href="product.php?delete=<?php echo $result['product_id'];  ?>"><i data-title="Delete" id="deleteproduct" class="fas fa-trash"></i></a>
+                                                    <a
+                                                        href="../../../user_visit/view_admin_product.php?product_id=<?php  echo $result['product_id']  ?> "><i
+                                                            data-title="View" id="viewdetails"
+                                                            class="fas fa-eye"></i></a>
+                                                    <a
+                                                        href="../../pages/examples/editproduct.php?edit=<?php echo $result['product_id']  ?> "><i
+                                                            data-title=" Edit" id="editdetails"
+                                                            class="fas fa-edit"></i></a>
+                                                    <a href="product.php?delete=<?php echo $result['product_id'];  ?>"><i
+                                                            data-title="Delete" id="deleteproduct"
+                                                            class="fas fa-trash"></i></a>
                                                 </td>
                                                 <?php
                                                     }
-                                                 ?>
+                                                ?>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
                             <!-- /.card -->
-
-
-                            </table>
                         </div>
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
                 </div>
                 <!-- /.col -->
+            </section>
         </div>
         <!-- /.row -->
     </div>

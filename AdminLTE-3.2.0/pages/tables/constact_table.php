@@ -1,17 +1,21 @@
 <?php
-include '../../../classes/api.php';
-$orderobj=new orders();
-$orderDisplay=$orderobj->orderDisplay();
-
+include "../../../classes/api.php";
+ $contactobj=new contact();
+ $display=$contactobj->contactDisplay();
+// if(isset($_GET['delete'])){
+//     $product_id = $_GET['delete'];
+//     $delete = $productobj->deleteproduct($product_id);
+//     header('location:../tables/product.php');
+// }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Order | DataTables</title>
+    <title>Product Table</title>
+
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -27,13 +31,10 @@ $orderDisplay=$orderobj->orderDisplay();
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-
         <?php
-    include '../../navbar.php';
-
-    include '../../sidebar.php';
-  ?>
-
+            include '../../navbar.php';
+            include '../../sidebar.php';
+        ?>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -41,16 +42,19 @@ $orderDisplay=$orderobj->orderDisplay();
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Order Tables</h1>
+                            <!-- <button type="button" onclick="add_product()"
+                                class="btn btn-success waves-effect waves-green">Add Product</button> -->
+                            <h1>Contact us Tables</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Order Tables</li>
+                                <li class="breadcrumb-item active">Contact Us Tables</li>
                             </ol>
                         </div>
                     </div>
-                </div><!-- /.container-fluid -->
+                </div>
+                <!-- /.container-fluid -->
             </section>
 
             <!-- Main content -->
@@ -60,69 +64,83 @@ $orderDisplay=$orderobj->orderDisplay();
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Ordered products</h3>
+                                    <h3 class="card-title">Contact details</h3>
                                 </div>
-                                <!-- /.card-header -->
+                                <!-- /.card-header-->
                                 <div class="card-body">
                                     <table id="example2" class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Product_name</th>
-                                                <th>Order_id</th>
-                                                <th>total_price</th>
-                                                <th>Quantity</th>
-                                                <th>Expected_delivery</th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Phone</th>
+                                                <th>Message</th>
                                                 <th class="text-center no-sorting">Action</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                      while($result=mysqli_fetch_assoc($orderDisplay))
-                      {
-                    ?>
+                                            while($result=mysqli_fetch_assoc($display))
+                                            {
+                                            ?>
                                             <tr>
-                                                <td><?php echo $result['product_id'];?></td>
-                                                <td><?php echo $result['order_id'];?></td>
-                                                <td><?php echo $result['total_price'];?></td>
-                                                <td><?php echo $result['product_quantity'];?></td>
-                                                <td><?php echo $result['expected_delivery'];?></td>
-                                                <td class="td_action" align="center">
-                                                    <a
-                                                        href="../../user_visit/view_admin_product.php?product_id=<?php  echo $result['product_id']  ?> "><i
-                                                            class="fas fa-eye" aria-hidden="true"></i></a>
-                                                </td>
-                                            </tr>
-                                            <?php } ?>
-                                        </tbody>
+                                                <td><?php echo $result['name'];?></td>
+                                                <td><?php echo $result['email'];?></td>
+                                                <td><?php echo $result['phone'];?></td>
+                                                <td><?php echo $result['message'];?></td>
 
+                                                <td class="td_action" align="center">
+                                                    <!-- <a
+                                                        href="../../../user_visit/view_admin_product.php?product_id=<?php // echo $result['product_id']  ?> "><i
+                                                            data-title="View" id="viewdetails"
+                                                            class="fas fa-eye"></i></a>
+                                                    <a -->
+                                                    <!-- href="../../pages/examples/editproduct.php?edit=<?php //echo $result['product_id']  ?> "><i
+                                                            data-title=" Edit" id="editdetails"
+                                                            class="fas fa-edit"></i></a> -->
+                                                    <!-- <a
+                                                        href="product.php?delete=<?php //echo $result['product_id'];  ?>"><i
+                                                            data-title="Delete" id="deleteproduct"
+                                                            class="fas fa-trash"></i></a> -->
+                                                </td>
+                                                <?php
+                                                    }
+                                                ?>
+                                            </tr>
+                                        </tbody>
                                     </table>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
                             <!-- /.card -->
                         </div>
-                        <!-- /.col -->
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.row -->
+                    <!-- /.card -->
                 </div>
-                <!-- /.container-fluid -->
+                <!-- /.col -->
             </section>
-            <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>Version</b> 3.2.0
-            </div>
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
-            reserved.
-        </footer>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.2.0
+        </div>
+        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 
@@ -148,6 +166,11 @@ $orderDisplay=$orderobj->orderDisplay();
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
+    <script>
+    function add_product() {
+        window.location.href = "../../pages/examples/addproduct.php";
+    }
+    </script>
     <script>
     $(function() {
         $("#example1").DataTable({
