@@ -103,6 +103,7 @@ if(isset($_REQUEST['cat_id'])){
 				</div>
             </div>
 			<div class="row isotope-grid">
+
 			   <?php 
 					foreach($get_product as $list){
 
