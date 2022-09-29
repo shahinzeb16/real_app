@@ -1,12 +1,12 @@
 <?php
 include "../../../classes/api.php";
-$productobj=new users();
-$display=$productobj->productDisplay();
-if(isset($_GET['delete'])){
-    $product_id = $_GET['delete'];
-    $delete = $productobj->deleteproduct($product_id);
-    header('location:../tables/product.php');
-}
+ $contactobj=new contact();
+ $display=$contactobj->contactDisplay();
+// if(isset($_GET['delete'])){
+//     $product_id = $_GET['delete'];
+//     $delete = $productobj->deleteproduct($product_id);
+//     header('location:../tables/product.php');
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,14 +42,14 @@ if(isset($_GET['delete'])){
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <button type="button" onclick="add_product()"
-                                class="btn btn-success waves-effect waves-green">Add Product</button>
-                            <h1>Product Tables</h1>
+                            <!-- <button type="button" onclick="add_product()"
+                                class="btn btn-success waves-effect waves-green">Add Product</button> -->
+                            <h1>Contact us Tables</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Product Tables</li>
+                                <li class="breadcrumb-item active">Contact Us Tables</li>
                             </ol>
                         </div>
                     </div>
@@ -64,7 +64,7 @@ if(isset($_GET['delete'])){
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Product details</h3>
+                                    <h3 class="card-title">Contact details</h3>
                                 </div>
                                 <!-- /.card-header-->
                                 <div class="card-body">
@@ -72,10 +72,9 @@ if(isset($_GET['delete'])){
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Category</th>
-                                                <th>Units</th>
-                                                <th>prices(in₹)</th>
-                                                <th>Status</th>
+                                                <th>Email</th>
+                                                <th>Phone</th>
+                                                <th>Message</th>
                                                 <th class="text-center no-sorting">Action</th>
 
                                             </tr>
@@ -86,40 +85,24 @@ if(isset($_GET['delete'])){
                                             {
                                             ?>
                                             <tr>
-                                                <td><?php echo $result['product_title'];?></td>
-                                                <td><?php echo $result['product_category'];?></td>
-                                                <td><?php echo $result['product_quantity'];?></td>
-                                                <td><?php echo $result['product_price'];?></td>
-                                                <td><?php
-                                                    $status=$result['product_status'];
-                                                    if($status==0)
-                                                    {
-                                                        echo "Out of stock";
-                                                    }
-                                                    else if($status==1)
-                                                    {
-                                                       echo "In Stock";
-                                                    }
-                                                    else if($status==2){
-                                                        echo "Pending";
-                                                    }
-                                                    else{
-                                                        echo "Disabled";
-                                                    }
-                                                    ?>
-                                                </td>
+                                                <td><?php echo $result['name'];?></td>
+                                                <td><?php echo $result['email'];?></td>
+                                                <td><?php echo $result['phone'];?></td>
+                                                <td><?php echo $result['message'];?></td>
+
                                                 <td class="td_action" align="center">
-                                                    <a
-                                                        href="../../../user_visit/view_admin_product.php?product_id=<?php  echo $result['product_id']  ?> "><i
+                                                    <!-- <a
+                                                        href="../../../user_visit/view_admin_product.php?product_id=<?php // echo $result['product_id']  ?> "><i
                                                             data-title="View" id="viewdetails"
                                                             class="fas fa-eye"></i></a>
-                                                    <a
-                                                        href="../../pages/examples/editproduct.php?edit=<?php echo $result['product_id']  ?> "><i
+                                                    <a -->
+                                                    <!-- href="../../pages/examples/editproduct.php?edit=<?php //echo $result['product_id']  ?> "><i
                                                             data-title=" Edit" id="editdetails"
-                                                            class="fas fa-edit"></i></a>
-                                                    <a href="product.php?delete=<?php echo $result['product_id'];  ?>"><i
+                                                            class="fas fa-edit"></i></a> -->
+                                                    <!-- <a
+                                                        href="product.php?delete=<?php //echo $result['product_id'];  ?>"><i
                                                             data-title="Delete" id="deleteproduct"
-                                                            class="fas fa-trash"></i></a>
+                                                            class="fas fa-trash"></i></a> -->
                                                 </td>
                                                 <?php
                                                     }

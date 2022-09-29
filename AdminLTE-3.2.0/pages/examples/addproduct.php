@@ -13,6 +13,7 @@ if(isset($_POST['submit'])){
 
    $filename = $_FILES['product_image']['name']; 
    $product_image="../../../user_visit/uploads/product/".$filename;
+   $imagepath = "uploads/product/".$filename;
    $tmpname = $_FILES['product_image']['tmp_name'];
    move_uploaded_file($tmpname, $product_image); 
 
@@ -21,10 +22,9 @@ if(isset($_POST['submit'])){
    $product_discount = $_POST['product_discount'];
    $product_status = $_POST['product_status'];
 
-   $product_array =array($product_title,$product_price,$product_description,$product_category,$product_quantity,$product_image,$product_size,$product_color,$product_discount,$product_status);
+   $product_array =array($product_title,$product_price,$product_description,$product_category,$product_quantity,$imagepath,$product_size,$product_color,$product_discount,$product_status);
    $check = $dataobj->addproduct($product_array);
-   if($check==200){
-       
+   if($check==200){       
        header('location:../tables/product.php');
    }else{
        header('location:addproduct.php');
@@ -53,7 +53,7 @@ if(isset($_POST['submit'])){
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">
-       
+
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -63,7 +63,7 @@ if(isset($_POST['submit'])){
                         <div class="col-sm-6">
                             <h1>Add Product </h1>
                         </div>
-                        
+
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
@@ -112,7 +112,7 @@ if(isset($_POST['submit'])){
                                     <select id="sub_category" name="subcategory" class="form-control custom-select">
                                         <option>Subcategory</option>
                                     </select><br><br>
-                                    
+
                                     <div class="form-group">
                                         <label for="product_quantity">product quantity</label>
                                         <input type="text" name="product_quantity" id="inputClientCompany"
@@ -164,7 +164,7 @@ if(isset($_POST['submit'])){
                         <!-- /.card -->
                     </div>
                 </div>
-                
+
             </section>
             <!-- /.content -->
         </div>

@@ -89,21 +89,21 @@ public function updateproduct($filename,$old_image,$product_title, $product_pric
 
    }
 
-public function productDisplay()
+ public function productDisplay()
    {
       $sql="SELECT * FROM product";
       $data=mysqli_query($this->conn,$sql);
       return $data;
    }
 
-public function productfetch($product_id)
+ public function productfetch($product_id)
    {
       $sql="SELECT * FROM product WHERE product_id='$product_id'";
       $data=mysqli_query($this->conn,$sql);
       return $data;
    }
 
-public function usersregister($fullname,$username,$email,$confirmpassword,$folder)
+ public function usersregister($fullname,$username,$email,$confirmpassword,$folder)
    {
       $sql="INSERT INTO `users`(`fullname`, `username`, `email`, `password`,`image`) VALUES ('$fullname','$username','$email','$confirmpassword','$folder')";
       $data=mysqli_query($this->conn,$sql);
@@ -117,7 +117,7 @@ public function usersregister($fullname,$username,$email,$confirmpassword,$folde
       }
    }
 
-public function displayadmin()
+ public function displayadmin()
    {
       $sql="SELECT * FROM users";
       $data=mysqli_query($this->conn,$sql);
@@ -157,7 +157,7 @@ public function displayadmin()
       }
    }
 
-public function passwordchange($oldp,$newp,$confirmp,$id)
+ public function passwordchange($oldp,$newp,$confirmp,$id)
    {
       $sql1="SELECT * FROM `users` WHERE password='$oldp'";
       $data1=mysqli_query($this->conn,$sql1);
@@ -196,7 +196,7 @@ public function passwordchange($oldp,$newp,$confirmp,$id)
    }
    }
 
-public function userdelete($del_id)
+ public function userdelete($del_id)
    {
       $sql="DELETE FROM users WHERE admin_id='".$del_id."'";
       $data=mysqli_query($this->conn,$sql);
@@ -288,37 +288,37 @@ function sub_cat_fetch($cat_id)
 
 class castomer extends DB{
 
-public function prx($arr){
+   public function prx($arr){
       echo '<pre>';
       print_r($arr);
       die();
    }
 
-public function get_product($category_id=""){
+   public function get_product($category_id=""){
       $condition = "";
-   if($category_id!=""){ 
-      $condition = " WHERE product_category = $category_id ";
-   }
+      if($category_id!=""){ 
+         $condition = " WHERE product_category = $category_id ";
+      }
       $sql="SELECT * FROM product".$condition;
       $res=mysqli_query($this->conn,$sql);
       $data=array();
-   while($row=mysqli_fetch_assoc($res)){
-      $data[]=$row;
-   }
+      while($row=mysqli_fetch_assoc($res)){
+         $data[]=$row;
+      }
       return $data;
    }
 
 
-public function get_category(){
+   public function get_category(){
       $sql="SELECT * FROM categories WHERE parent_id=0";
       $res=mysqli_query($this->conn,$sql);
       $data=array();
-   while($row=mysqli_fetch_assoc($res)){
-      $data[]=$row;
-   }
+      while($row=mysqli_fetch_assoc($res)){
+         $data[]=$row;
+      }
       return $data;
    }
-   }
+}
 
 
 class cartadd extends DB
@@ -331,27 +331,26 @@ class cartadd extends DB
       $res=mysqli_num_rows($data);
       // $_SESSION['cart'] = $result['cart_id'];
       
-   if($result)
-   {
-      $cart_id=$result->cart_id;
-      $sql="UPDATE `cart` SET `quantity`= quantity + 1 WHERE cart_id='$cart_id'";
-      $data=mysqli_query($this->conn,$sql);
-   if($data)
-   {
-      echo "item already added to cart";
-   }
-   else
-   {
-      return false;
-   }
-   }
-   else
-   {
-      $sql="INSERT INTO `cart`(`user_id`, `product_id`, `quantity`) VALUES ('$id','$product_id','$quantity')";
-      $data=mysqli_query($this->conn,$sql);
-      return $data;
-   }
-
+      if($result)
+      {
+         $cart_id=$result->cart_id;
+         $sql="UPDATE `cart` SET `quantity`= quantity + 1 WHERE cart_id='$cart_id'";
+         $data=mysqli_query($this->conn,$sql);
+         if($data)
+         {
+            echo "item already added to cart";
+         }
+         else
+         {
+            return false;
+         }
+      }
+      else
+      {
+         $sql="INSERT INTO `cart`(`user_id`, `product_id`, `quantity`) VALUES ('$id','$product_id','$quantity')";
+         $data=mysqli_query($this->conn,$sql);
+         return $data;
+      }
    }
 
    public function wishlistadd($product_id,$id)
@@ -359,17 +358,16 @@ class cartadd extends DB
       $sql="SELECT * FROM wishlist WHERE product_id='$product_id' AND user_id='$id'";
       $data=mysqli_query($this->conn,$sql);
       $result=mysqli_fetch_assoc($data);
-   if($result)
-   {
-      echo "item already added to wishlist";
-   }
-   else
-   {
-      $sql="INSERT INTO `wishlist`(`user_id`, `product_id`) VALUES ('$id','$product_id')";
-      $data=mysqli_query($this->conn,$sql);
-      return $data;
-   }
-
+      if($result)
+      {
+         echo "item already added to wishlist";
+      }
+      else
+      {
+         $sql="INSERT INTO `wishlist`(`user_id`, `product_id`) VALUES ('$id','$product_id')";
+         $data=mysqli_query($this->conn,$sql);
+         return $data;
+      }
    }
 
 
@@ -388,10 +386,7 @@ class cartadd extends DB
          //echo $id;
       $sql="SELECT count(*) FROM wishlist WHERE user_id='$id'";
       $data=mysqli_query($this->conn,$sql);
-      return $data;
-      
-      
-      
+      return $data;      
    }
 
    public function updatecart($product_id,$id,$quantity)
@@ -462,7 +457,26 @@ class users_address extends DB{
 
    }
 }
-
-
-
+   
+class customers extends DB{
+   public function search($search){   
+      $sql = "SELECT * FROM product WHERE product_title LIKE '%$search%' OR product_description LIKE '%$search%'";   
+      $data=mysqli_query($this->conn,$sql);   
+      return $data;  
+   }
+}
+class contact extends DB{
+   public function contact_us($name,$email,$phone,$message){
+      $sql = "INSERT INTO contact_us(name,email,phone,message) VALUES('$name','$email','$phone','$message')";
+      $data = mysqli_query($this->conn,$sql);
+      return $data;
+   }
+   public function contactDisplay()
+   {
+      $sql="SELECT * FROM contact_us";
+      $data=mysqli_query($this->conn,$sql);
+      return $data;
+   }
+}
 ?>
+
