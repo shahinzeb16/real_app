@@ -108,72 +108,68 @@ if(isset($_REQUEST['cat_id'])){
                     </div>
                 </div>
             </div>
-            <div class="row isotope-grid">
-                <?php 
+            
+			<div class="row isotope-grid">
+
+			   <?php 
 					foreach($get_product as $list){
 
 				?>
-                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-pic hov-img0">
-                            <img src="<?php  echo  $list['product_image']; ?>" class="rounded mx-auto d-block"
-                                height="250" alt="IMG-PRODUCT">
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-pic hov-img0">
+							<img src="<?php  echo  $list['product_image']; ?>" class="rounded mx-auto d-block" height="250"  alt="IMG-PRODUCT" >
 
-                        </div>
-                        <div class="block2-txt flex-w flex-t p-t-14">
-                            <div class="block2-txt-child1 flex-col-l ">
+						</div>
+						<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt-child1 flex-col-l ">
+								
+								<span class="stext-105 cl3">
+									<?php  echo $list['product_title']; ?>
+								</span>
+								<span class="stext-105 cl3">
+									<?php  echo "₹".$list['product_price']; ?>
+								</span>
+							</div>
+							<div class="block2-txt-child2 flex-r p-t-3">
+								<a href="#"onClick="wishadd(<?php echo $list['product_id'];?>)" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+									<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
+									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
+								</a>
+							</div>
+						<div>
+						<a type="button" class="btn btn-primary" href="view_product.php?product_id=<?php echo $list['product_id']; ?>">
+							View
+						</a> 
 
-                                <span class="stext-105 cl3">
-                                    <?php  echo $list['product_title']; ?>
-                                </span>
-                                <span class="stext-105 cl3">
-                                    <?php  echo "₹".$list['product_price']; ?>
-                                </span>
-                            </div>
-                            <div class="block2-txt-child2 flex-r p-t-3">
-                                <a href="#" onClick="wishadd(<?php echo $list['product_id'];?>)"
-                                    class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                    <img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png"
-                                        alt="ICON">
-                                    <img class="icon-heart2 dis-block trans-04 ab-t-l"
-                                        src="images/icons/icon-heart-02.png" alt="ICON">
-                                </a>
-                            </div>
-                            <div>
-                                <a type="button" class="btn btn-primary"
-                                    href="view_product.php?product_id=<?php echo $list['product_id']; ?>">
-                                    View
-                                </a>
+						<a type="button" class="btn btn-primary" onClick="cartadd(<?php echo $list['product_id'];?>)">Add To Cart</a>
+						</div>
+						
 
-                                <a type="button" class="btn btn-primary"
-                                    onClick="cartadd(<?php echo $list['product_id'];?>)">Add To Cart</a>
-                            </div>
+							
+						</div>
+						<p id="p1_<?php echo $list['product_id'];?>"></p>
+					</div>
+				</div>
+				<?php } ?>
 
+			</div>
 
-
-                        </div>
-                        <p id="p1_<?php echo $list['product_id'];?>"></p>
-                    </div>
-                </div>
-                <?php } ?>
-
-            </div>
-
-            <!-- Load more -->
-            <div class="flex-c-m flex-w w-full p-t-45">
-                <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-                    Load More
-                </a>
-            </div>
-        </div>
-    </div>
-    <!-- <?php
+			<!-- Load more -->
+			<div class="flex-c-m flex-w w-full p-t-45">
+				<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+					Load More
+				</a>
+			</div>
+		</div>
+	</div>
+	<?php /*
 	$cartobj=new cartadd();
 	$cart=$cartobj->countcart(); 
 	$cartcount=mysqli_fetch_assoc($cart);
-    print_r($cartcount);
-?> -->
+    print_r($cartcount); */
+    ?>
 
     <?php
         include 'footer.php';

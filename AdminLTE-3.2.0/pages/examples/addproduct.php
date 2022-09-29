@@ -15,7 +15,7 @@ if(isset($_POST['submit'])){
    $product_image="../../../user_visit/uploads/product/".$filename;
    $imagepath = "uploads/product/".$filename;
    $tmpname = $_FILES['product_image']['tmp_name'];
-   $a=move_uploaded_file($tmpname, $product_image); //localhost\real_app\user_visit\uploads
+   move_uploaded_file($tmpname, $product_image); 
 
    $product_size = $_POST['product_size'];
    $product_color = $_POST['product_color'];

@@ -34,66 +34,53 @@ $orderDisplay=$orderobj->orderDisplay();
     include '../../sidebar.php';
   ?>
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>Order Tables</h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Order Tables</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div><!-- /.container-fluid -->
-            </section>
 
-            <!-- Main content -->
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">Ordered products</h3>
-                                </div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <table id="example2" class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>Product_name</th>
-                                                <th>Order_id</th>
-                                                <th>total_price</th>
-                                                <th>Quantity</th>
-                                                <th>Expected_delivery</th>
-                                                <th class="text-center no-sorting">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Ordered products</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>Product_id</th>
+                    <th>Order_id</th>
+                    <th>total_price</th>
+                    <th>Quantity</th>
+                    <th>Expected_delivery</th>
+                    <th class="text-center no-sorting">Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <?php
                       while($result=mysqli_fetch_assoc($orderDisplay))
                       {
                     ?>
-                                            <tr>
-                                                <td><?php echo $result['product_id'];?></td>
-                                                <td><?php echo $result['order_id'];?></td>
-                                                <td><?php echo $result['total_price'];?></td>
-                                                <td><?php echo $result['product_quantity'];?></td>
-                                                <td><?php echo $result['expected_delivery'];?></td>
-                                                <td class="td_action" align="center">
-                                                    <a
-                                                        href="../../user_visit/view_admin_product.php?product_id=<?php  echo $result['product_id']  ?> "><i
-                                                            class="fas fa-eye" aria-hidden="true"></i></a>
-                                                </td>
-                                            </tr>
-                                            <?php } ?>
-                                        </tbody>
+                    <tr>
+                      <td><?php echo $result['product_id'];?></td>
+                      <td><?php echo $result['order_id'];?></td>
+                      <td><?php echo $result['total_price'];?></td>
+                      <td><?php echo $result['product_quantity'];?></td>
+                      <td><?php echo $result['expected_delivery'];?></td>
+                      <td class="td_action" align="center">
+                      <a href="../../../user_visit/view_admin_product.php?product_id=<?php  echo $result['product_id']  ?> "><i data-title="View" id="viewdetails" class="fas fa-eye"></i></a>
+                      </td>
+                    </tr>
+                    <?php } ?>
+                  </tbody>
+                  
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
 
                                     </table>
                                 </div>

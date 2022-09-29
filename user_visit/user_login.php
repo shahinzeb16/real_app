@@ -1,12 +1,5 @@
 <?php
-// include '../classes/api.php';
-// $loginobj = new users();
-// if(isset($_REQUEST['submit']))
-// {
-// 	$email=$_REQUEST['email'];
-// 	$password=$_REQUEST['password'];
-// 	$loginobj->userlogin($email,$password);
-// }
+
 include('../classes/api.php');
 $dataobj=new users();
 if(isset($_POST['submit']))
@@ -67,11 +60,11 @@ if(isset($_POST['submit']))
                     </button>
                 </form>
 
-                <div class="social-login">
-                    <!-- <h3>log in via</h3> -->
-                    <a href="forgot.html" class="text-primary btn-link">Forgot password?</a>
-                    <a href="../AdminLTE-3.2.0/pages/forms/register.php"
-                        class=" btn-outline-primary waves-effect waves-primary w-100 btn-md">Create an account</a>
+			<div class="social-login">
+				<!-- <h3>log in via</h3> -->
+				<a href="../AdminLTE-3.2.0/pages/examples/forgot-password.php" class="text-primary btn-link">Forgot password?</a>
+				<a href="../AdminLTE-3.2.0/pages/forms/register.php" class=" btn-outline-primary waves-effect waves-primary w-100 btn-md">Create an account</a>
+
 
 
                     <div class="social-icons">

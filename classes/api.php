@@ -242,29 +242,30 @@ public function categoryfetch($id)
       return $data;
    }
 
-public function updatecategory($name,$parent_id,$status,$id)
+   public function updatecategory($name,$parent_id,$status,$id)
    {
 
       $update_query = "UPDATE categories set name='$name', parent_id='$parent_id', status='$status' WHERE id='$id'";
       $data = mysqli_query($this->conn, $update_query);
-   if($data){
-      return 200;
+      if($data){
+         return 200;
 
-   }else{
-      return 404;
-   }
+      }else{
+         return 404;
+      }
    }
 
-public function deletecategory($id){
+   public function deletecategory($id)
+   {
       $sql = "DELETE FROM categories WHERE id='$id'";
       $data = mysqli_query($this->conn, $sql);
-   if($data){
-      return 200;
+      if($data){
+         return 200;
 
-   }
-   else{
-      return 404;
-   }
+      }
+      else{
+         return 404;
+      }
    }
 
 public function subcatdisplay($category)
@@ -328,6 +329,7 @@ class cartadd extends DB
       $data=mysqli_query($this->conn,$sql);
       $result=mysqli_fetch_object($data);
       $res=mysqli_num_rows($data);
+      // $_SESSION['cart'] = $result['cart_id'];
       
       if($result)
       {
@@ -386,7 +388,48 @@ class cartadd extends DB
       $data=mysqli_query($this->conn,$sql);
       return $data;      
    }
+
+   public function updatecart($product_id,$id,$quantity)
+   {
+      $sql="UPDATE cart SET quantity='$quantity' WHERE user_id='$id' AND product_id='$product_id'";
+      $data=mysqli_query($this->conn,$sql);
+      return $data;
+   }
+
+   public function get_cart_product($id){
+      $sql="SELECT * FROM cart  WHERE user_id='$id'";
+      $data=mysqli_query($this->conn,$sql);
+      return $data;
+
+   }
+
+   public function productdisplay($product_id)
+   {
+      $sql="SELECT * FROM product WHERE product_id='$product_id'";
+      $data=mysqli_query($this->conn,$sql);
+      return $data;
+   }
+
+   public function deletecartproduct($id)
+   {
+      $sql = "DELETE FROM cart WHERE cart_id='$id'";
+      $data = mysqli_query($this->conn, $sql);
+      if($data){
+         return 200;
+
+      }
+      else{
+         return 404;
+      }
+   }
+
+   public function prx($arr){
+      echo '<pre>';
+      print_r($arr);
+      die();
+   }
 }
+
 
 class orders extends DB{
    public function orderDisplay()
@@ -394,9 +437,26 @@ class orders extends DB{
       $sql="SELECT * FROM orders";
       $data=mysqli_query($this->conn,$sql);
       return $data;
-   }  
+   } 
+   
+   public function add_order($transaction_id,$user_id,$product_id,$total_price,$product_quantity){
+      $insert_query="INSERT INTO orders(transaction_id,user_id,product_id,total_price,product_quantity) VALUES ('$transaction_id','$user_id','$product_id','$total_price','$product_quantity')";
+      $data=mysqli_query($this->conn,$insert_query);
+      return $data;
+
+   }
 }
 
+
+
+class users_address extends DB{
+   public function add_address($user_id,$address,$pincode,$state,$city,$landmark){
+      $insert_query="INSERT INTO user_address(user_id,address,pincode,state,city,landmark) VALUES ('$user_id','$address','$pincode','$state','$city','$landmark')";
+      $data=mysqli_query($this->conn,$insert_query);
+      return $data;
+
+   }
+}
    
 class customers extends DB{
    public function search($search){   
@@ -419,3 +479,4 @@ class contact extends DB{
    }
 }
 ?>
+
