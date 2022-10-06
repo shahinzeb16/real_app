@@ -16,6 +16,7 @@ else
 		if($cart)
 		{
 			echo "Item Added to Cart";
+		
 		}
 	}
 }
