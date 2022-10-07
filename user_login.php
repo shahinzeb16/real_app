@@ -1,6 +1,6 @@
 <?php
-include('../classes/functions_user.php');
-$dataobj = new users();
+include('classes/api/Users.php');
+$dataobj = new Users();
 if (isset($_POST['submit'])) {
     $email = $_REQUEST['email'];
     $password = $_REQUEST['pass'];
@@ -11,6 +11,7 @@ if (isset($_POST['submit'])) {
         if ($_POST['remember_me']) {
             setcookie('emailcookie', $email, time() + 86400);
             setcookie('passwordcookie', $password, time() + 86400);
+
         }
     }
 }
@@ -62,8 +63,8 @@ if (isset($_POST['submit'])) {
 
 				<div class="social-login">
 					<!-- <h3>log in via</h3> -->
-					<a href="../AdminLTE-3.2.0/pages/examples/forgot-password.php" class="text-primary btn-link">Forgot password?</a>
-					<a href="../AdminLTE-3.2.0/pages/forms/register.php" class=" btn-outline-primary waves-effect waves-primary w-100 btn-md">Create an account</a>
+					<a href="../admin/pages/examples/forgot-password.php" class="text-primary btn-link">Forgot password?</a>
+					<a href="../admin/pages/forms/register.php" class=" btn-outline-primary waves-effect waves-primary w-100 btn-md">Create an account</a>
 
 
 					<div class="social-icons">

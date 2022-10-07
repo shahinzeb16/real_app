@@ -1,8 +1,8 @@
 <?php
-include '../classes/api.php';
-$ordersodj = new orders();
-$productobj= new users();
-$addressobj = new users_address();
+include 'classes/api/Index.php';
+$ordersodj = new Orders();
+$productobj= new Product();
+$addressobj = new Users_address();
 
 if(isset($_GET['product_id'])){
     $product_id = $_GET['product_id'];

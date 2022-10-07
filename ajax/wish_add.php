@@ -1,6 +1,6 @@
 <?php
-include '../classes/api.php';
-$wishobj=new cartadd();
+include '../classes/api/Index.php';
+$wishobj=new Wishadd();
 $id=$_SESSION['user'];
 if($id=="")
 {

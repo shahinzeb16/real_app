@@ -1,6 +1,6 @@
 <?php
-include '../classes/api.php';
-$wishobj=new cartadd();
+include '../classes/api/Index.php';
+$wishobj=new Wishadd();
 $wish=$wishobj->countwish();
 $wishcount=mysqli_fetch_assoc($wish);
 //print_r($cartcount);

@@ -1,7 +1,6 @@
 <?php
 $id=$_SESSION['user'];
 
-// $cartdisplay = $productobj->get_cart_product($id);
 $cartdisplay = $carttobj->get_cart_product($id);
 
 ?>

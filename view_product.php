@@ -1,9 +1,9 @@
 <?php
-include '../classes/api.php';
-$productobj = new castomer();
+include 'classes/api/Index.php';
+$productobj = new Product();
 $display = $productobj->get_product();
 $get_category = $productobj->get_category();
-$productobj=new users();
+// $productobj=new Users();
 
 if(isset($_GET['product_id'])){
     $product_id = $_GET['product_id'];

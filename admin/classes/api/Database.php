@@ -1,6 +1,6 @@
 <?php
 
-class DB
+class Database
 {
    protected $servername = "localhost";
    protected $username = "root";
@@ -17,7 +17,7 @@ class DB
          die("Connection Failed");
       } else {
          // echo "Connection Successfully";
-         session_start();
+         // session_start();
       }
    }
 }

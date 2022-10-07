@@ -1,14 +1,15 @@
 <?php 
 error_reporting(0);
-include '../../../classes/functions_user.php';
-$userobj=new users();
+include '../../classes/api/Users.php';
+$userobj=new Users();
 if(isset($_REQUEST['submit']))
 {
 	$fullname=$_REQUEST['fname'];
 	$username=$_REQUEST['uname'];
   $filename=$_FILES['image']['name'];
   $tempname=$_FILES['image']['tmp_name'];
-  $folder="../../../user_visit/uploads/profile/".$filename;
+  $folder="../../../uploads/profile/".$filename;
+  $imagepath = "uploads/profile".$filename;
   move_uploaded_file($tempname, $folder);
 	$email=$_REQUEST['email'];
 	$password=$_REQUEST['password'];
@@ -25,11 +26,11 @@ if(isset($_REQUEST['submit']))
 	}
 	else
 	{
-		$register=$userobj->usersregister($fullname,$username,$email,$confirmpassword,$folder);
+		$register=$userobj->usersregister($fullname,$username,$email,$confirmpassword,$imagepath);
 		if($register)
 		{
 			// echo "Successfully registered";
-      header("location:../../../user_visit/user_login.php");
+      header("location:../../../user_login.php");
 		}
 		else
 		{
@@ -116,7 +117,7 @@ if(isset($_REQUEST['submit']))
                             <label for="check1">I accept the terms & conditions.</label>
                         </div>
                         <div class="d-flex align-items-center justify-content-between">
-                            <a href="../../../user_visit/user_login.php" class="btn btn-outline-primary waves-effect waves-primary">Login</a>
+                            <a href="../../../user_login.php" class="btn btn-outline-primary waves-effect waves-primary">Login</a>
                             <button type="submit" name="submit" class="btn btn-primary waves-effect waves-primary w-50">Register</button>
                         </div>
                     </div>

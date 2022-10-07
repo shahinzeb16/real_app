@@ -1,7 +1,6 @@
 <?php
-// include '../classes/.php';
 session_start();
 session_unset();
-header("location:shop.php");
+header("location:index.php");
 
 ?>

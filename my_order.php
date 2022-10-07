@@ -1,9 +1,9 @@
 <?php
-    include '../classes/api.php';
-	$orderobj=new orders();
+    include 'classes/api/Index.php';
+	$orderobj=new Orders();
     $id=$_SESSION['user'];
     $get_order_product=$orderobj->get_order_product($id);
-    $cartobj = new cartadd();
+    $cartobj = new Cartadd();
     
 	if(isset($_GET['cancel'])){
 		$order_id=$_GET['cancel'];
@@ -96,7 +96,7 @@
 									<td class="column-6"><?php  echo $productdisplay['product_price']*$result['product_quantity'] ;?></td>
 									<td class="column-1">
 										<a href="my_order.php?cancel=<?php echo $result['order_id'] ?>">cancel</a>
-										<a href="view_admin_product.php?product_id=<?php  echo $result['product_id'] ; ?>&user_id=<?php  echo $result['user_id'] ; ?> "><i data-title="View" id="viewdetails" class="fas fa-eye"></i></a>
+										<a href="view_order_product.php?product_id=<?php  echo $result['product_id'] ; ?>&user_id=<?php  echo $result['user_id'] ; ?> "><i data-title="View" id="viewdetails" class="fas fa-eye"></i></a>
 									</td>
 
 								</tr>

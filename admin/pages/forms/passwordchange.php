@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
-include '../../../classes/functions_user.php';
-$passobj = new users();
+include '../../classes/api/Users.php';
+$passobj = new Users();
 if (isset($_REQUEST['uid'])) {
   $id = $_REQUEST['uid'];
 }

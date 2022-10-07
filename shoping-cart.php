@@ -1,11 +1,11 @@
 <?php
-    include '../classes/api.php';
-	$carttobj = new cartadd();
-	$ordersobj= new orders();
+    include 'classes/api/Index.php';
+	$carttobj = new Cartadd();
+	$ordersobj= new Orders();
 
 	$id=$_SESSION['user'];
 	$cartdisplay=$carttobj->get_cart_product($id);
-	$addressobj = new users_address();
+	$addressobj = new Users_address();
 	if(isset($_POST['submit'])){
 		$user_id=$_SESSION['user'];
 		$address=$_POST['address'];
@@ -24,7 +24,7 @@
 		$check1=$ordersobj->add_order($order_id,$transaction_id,$user_id,$product_id,$total_price,$product_quantity);
 	    $check = $addressobj->add_address($user_id,$address,$pincode,$state,$city,$landmark);
 	    if($check1= $check==200){
-		    header('location:shop.php');
+		    header('location:index.php');
 	    }
 	    else{
 		 header('location:shoping-cart.php');

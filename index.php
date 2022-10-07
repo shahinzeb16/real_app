@@ -1,13 +1,11 @@
 <?php
-include '../classes/api.php';
-$productobj = new castomer();
+include 'classes/api/Index.php';
+$productobj = new Product();
 $get_category = $productobj->get_category();
 
-$carttobj = new cartadd();
-// $cartdisplay = $carttobj->get_cart_product($id);
+$carttobj = new Cartadd();
 
-$ordersobj= new orders();
-
+// $ordersobj= new Orders();
 
 if (isset($_REQUEST['cat_id'])) {
 	$category_id = $_REQUEST['cat_id'];
@@ -107,6 +105,9 @@ if (isset($_REQUEST['cat_id'])) {
 						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
 					</div>
 				</div>
+				<?php
+					include 'filter.php';
+				?>
 			</div>
 			<div class="row isotope-grid">
 

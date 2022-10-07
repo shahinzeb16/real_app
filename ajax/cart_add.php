@@ -1,7 +1,7 @@
 <?php
-include '../classes/api.php';
+include '../classes/api/Index.php';
 $id=$_SESSION['user'];
-$cartobj=new cartadd();
+$cartobj=new Cartadd();
 if($id=="")
 {
 	echo "Please Login To Continue";
