@@ -1,7 +1,8 @@
 <?php
-include "../../../classes/api.php";
- $contactobj=new contact();
- $display=$contactobj->contactDisplay();
+//include "../../classes/Database.php";
+include '../../autoload/autoload.php';
+ $contactobj = new Contact();
+ $display = $contactobj->contactDisplay();
 // if(isset($_GET['delete'])){
 //     $product_id = $_GET['delete'];
 //     $delete = $productobj->deleteproduct($product_id);

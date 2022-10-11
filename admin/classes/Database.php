@@ -1,7 +1,7 @@
 <?php
 
 class Database
-{
+{   
    protected $servername = "localhost";
    protected $username = "root";
    protected $password = "";
@@ -11,13 +11,17 @@ class Database
 
    public function __construct()
    {
-      $this->conn = mysqli_connect($this->servername, $this->username, $this->password, $this->db);
-
-      if ($this->conn->connect_error) {
+      $this->conn= mysqli_connect($this->servername,$this->username,$this->password,$this->db);
+        
+      if($this->conn->connect_error)
+      {
          die("Connection Failed");
-      } else {
+      }
+      else
+      {
          // echo "Connection Successfully";
-         // session_start();
+         //session_start();
       }
    }
 }
+?>

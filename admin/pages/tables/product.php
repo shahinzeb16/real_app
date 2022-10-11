@@ -1,8 +1,9 @@
 <?php
-include "../../../classes/Product.php";
-$productobj = new product();
-$display = $productobj->productDisplay();
-if (isset($_GET['delete'])) {
+//include "../../classes/Database.php";
+include '../../autoload/autoload.php';
+$productobj=new product();
+$display=$productobj->productDisplay();
+if(isset($_GET['delete'])){
     $product_id = $_GET['delete'];
     $delete = $productobj->deleteproduct($product_id);
     header('location:../tables/product.php');
@@ -17,7 +18,8 @@ if (isset($_GET['delete'])) {
     <title>Product Table</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <!-- DataTables -->
@@ -31,8 +33,8 @@ if (isset($_GET['delete'])) {
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <?php
-        include '../../navbar.php';
-        include '../../sidebar.php';
+            include '../../navbar.php';
+            include '../../sidebar.php';
         ?>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -81,34 +83,49 @@ if (isset($_GET['delete'])) {
                                         </thead>
                                         <tbody>
                                             <?php
-                                            while ($result = mysqli_fetch_assoc($display)) {
+                                            while($result=mysqli_fetch_assoc($display))
+                                            {
                                             ?>
-                                                <tr>
-                                                    <td><?php echo $result['product_title']; ?></td>
-                                                    <td><?php echo $result['product_category']; ?></td>
-                                                    <td><?php echo $result['product_quantity']; ?></td>
-                                                    <td><?php echo $result['product_price']; ?></td>
-                                                    <td><?php
-                                                        $status = $result['product_status'];
-                                                        if ($status == 0) {
-                                                            echo "Out of stock";
-                                                        } elseif ($status == 1) {
-                                                            echo "In Stock";
-                                                        } elseif ($status == 2) {
-                                                            echo "Pending";
-                                                        } else {
-                                                            echo "Disabled";
-                                                        }
-                                                        ?>
-                                                    </td>
-                                                    <td class="td_action" align="center">
-                                                        <a href="../../../view_admin_product.php?product_id=<?php echo $result['product_id']  ?> "><i data-title="View" id="viewdetails" class="fas fa-eye"></i></a>
-                                                        <a href="../../pages/examples/editproduct.php?edit=<?php echo $result['product_id']  ?> "><i data-title=" Edit" id="editdetails" class="fas fa-edit"></i></a>
-                                                        <a href="product.php?delete=<?php echo $result['product_id'];  ?>"><i data-title="Delete" id="deleteproduct" class="fas fa-trash"></i></a>
-                                                    </td>
+                                            <tr>
+                                                <td><?php echo $result['product_title'];?></td>
+                                                <td><?php echo $result['product_category'];?></td>
+                                                <td><?php echo $result['product_quantity'];?></td>
+                                                <td><?php echo $result['product_price'];?></td>
+                                                <td><?php
+                                                    $status=$result['product_status'];
+                                                    if($status==0)
+                                                    {
+                                                        echo "Out of stock";
+                                                    }
+                                                    else if($status==1)
+                                                    {
+                                                       echo "In Stock";
+                                                    }
+                                                    else if($status==2){
+                                                        echo "Pending";
+                                                    }
+                                                    else{
+                                                        echo "Disabled";
+                                                    }
+                                                    ?>
+                                                </td>
+                                                <td class="td_action" align="center">
+                                                    <a
+                                                        href="../../view_admin_product.php?product_id=<?php  echo $result['product_id']  ?> "><i
+                                                            data-title="View" id="viewdetails"
+                                                            class="fas fa-eye"></i></a>
+                                                    <a
+                                                        href="../../pages/forms/editproduct.php?edit=<?php echo $result['product_id']  ?> "><i
+                                                            data-title=" Edit" id="editdetails"
+                                                            class="fas fa-edit"></i></a>
+                                                    <a href="product.php?delete=<?php echo $result['product_id'];  ?>"><i
+                                                            data-title="Delete" id="deleteproduct"
+                                                            class="fas fa-trash"></i></a>
+                                                </td>
                                                 <?php
-                                            }
+                                                    }
                                                 ?>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -126,9 +143,9 @@ if (isset($_GET['delete'])) {
         <!-- /.row -->
     </div>
     <!-- /.container-fluid -->
-    </section>
+    <!-- </section> -->
     <!-- /.content -->
-    </div>
+    <!-- </div> -->
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="float-right d-none d-sm-block">
@@ -168,28 +185,28 @@ if (isset($_GET['delete'])) {
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
-        function add_product() {
-            window.location.href = "../../pages/examples/addproduct.php";
-        }
+    function add_product() {
+        window.location.href = "../../pages/forms/addproduct.php";
+    }
     </script>
     <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+    $(function() {
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
         });
+    });
     </script>
 </body>
 

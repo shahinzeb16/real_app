@@ -1,16 +1,13 @@
 <?php
-include "../../../classes/functions_product.php";
-$dataobj=new product();
-$parentfetch=$dataobj->parentcategory();
-
-// $categoryobj=new category();
-
+include '../../autoload/autoload.php';
+$dataobj = new Product();
+//$categoryobj=new category();
 if(isset($_GET['edit'])){
     $product_id = $_GET['edit'];
     $display = $dataobj->productfetch($product_id);
     $result = mysqli_fetch_assoc($display);
-
 }
+$parentfetch = $dataobj->parentcategory();
 
 if(isset($_POST['product_update'])){
     $product_id = $result['product_id'];
@@ -61,7 +58,7 @@ if(isset($_POST['product_update'])){
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">
-        
+
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -180,8 +177,10 @@ if(isset($_POST['product_update'])){
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
-                                            <button class="btn btn-primary" type="submit" value="product_update" name="product_update">update</button>
-                                            <button class="btn btn-secondary" type="button" onclick="product_cancel()" name="product_Cancel">Cancel</button>
+                                            <button class="btn btn-primary" type="submit" value="product_update"
+                                                name="product_update">update</button>
+                                            <button class="btn btn-secondary" type="button" onclick="product_cancel()"
+                                                name="product_Cancel">Cancel</button>
                                         </div>
                                     </div>
                             </div>
@@ -191,11 +190,11 @@ if(isset($_POST['product_update'])){
                     </div>
                     <!-- /.card -->
                 </div>
-            </div>
+        </div>
         </section>
         <!-- /.content -->
     </div>
-   
+
     </div>
     <!-- ./wrapper -->
 

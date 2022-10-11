@@ -1,5 +1,8 @@
 <?php
-include "../../classes/api/Contact.php";
+//include "../../../classes/api.php";
+//include "../../classes/Contact.class.php";
+include "../../classes/Database.php";
+include '../../autoload/autoload.php';
 $contact = new contact();
 
 if(isset($_POST['submit'])){
@@ -10,7 +13,7 @@ if(isset($_POST['submit'])){
     
   $res = $contact->contact_us($name,$email,$phone,$message);
   if($res == 200){
-    header('location:../../../user_visit/shop.php');
+    header('location:../../../index.php');
   }
 }
 ?>
