@@ -1,15 +1,15 @@
 <?php
-    include 'classes/api/Index.php';
-	$orderobj=new Orders();
-    $id=$_SESSION['user'];
-    $get_order_product=$orderobj->get_order_product($id);
-    $cartobj = new Cartadd();
-    
-	if(isset($_GET['cancel'])){
-		$order_id=$_GET['cancel'];
-		$orderobj->cancel_order($order_id);
-        header('location:my_order.php');
-	}
+include_once 'autoload/autoload.php';
+$cartobj = new Cartadd();
+$orderobj=new Orders();
+$id=$_SESSION['user'];
+$get_order_product=$orderobj->get_order_product($id);
+
+if (isset($_GET['cancel'])) {
+    $order_id=$_GET['cancel'];
+    $orderobj->cancel_order($order_id);
+    header('location:my_order.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,6 +40,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!--===============================================================================================-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -47,7 +48,7 @@
 <body class="animsition">
 	<?php
         include 'header.php';
-    ?>
+?>
     <div class=" txt-center " >
 		<h2 class=" txt-center">
 			My Orders
@@ -76,12 +77,12 @@
 
 
 								</tr>
-								<?php 
-								    while($result=mysqli_fetch_assoc($get_order_product)){
-										$product_id=$result['product_id'];
-										$list=$cartobj->productdisplay($product_id);
-									    $productdisplay = mysqli_fetch_assoc($list);
-								 ?>
+								<?php
+                                while ($result=mysqli_fetch_assoc($get_order_product)) {
+                                    $product_id=$result['product_id'];
+                                    $list=$cartobj->productdisplay($product_id);
+                                    $productdisplay = mysqli_fetch_assoc($list);
+                                    ?>
 								<tr class="table_row">
 									<td class="column-1">
 										<div class="how-itemcart1">
@@ -114,7 +115,7 @@
 	
 	<?php
         include 'footer.php';
-    ?>
+?>
 
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">

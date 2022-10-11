@@ -2,7 +2,7 @@
 error_reporting(0);
 ?>
 <!-- Header -->
-<?php include 'head.php'; ?>
+
 <header class="header-v4">
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
@@ -54,7 +54,7 @@ error_reporting(0);
 							</li>
 
 							<li class="active-menu">
-								<a href="shop.php">Shop</a>
+								<a href="index.php">Shop</a>
 							</li>
 
 							<li class="label1" data-label1="hot">

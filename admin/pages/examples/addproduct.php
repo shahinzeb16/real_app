@@ -1,5 +1,5 @@
 <?php
-include "../../../classes/functions_product.php";
+include "../../../classes/Product.php";
 $productobj = new product();
 $parentfetch = $productobj->parentcategory();
 
