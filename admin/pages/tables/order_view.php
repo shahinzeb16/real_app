@@ -1,7 +1,7 @@
 <?php
-include '../../../classes/api.php';
-$orderobj=new orders();
-$orderDisplay=$orderobj->orderDisplay();
+include '../../autoload/autoload.php';
+$orderobj = new Orders();
+$orderDisplay = $orderobj->orderDisplay();
 
 ?>
 
@@ -30,88 +30,73 @@ $orderDisplay=$orderobj->orderDisplay();
 
         <?php
     include '../../navbar.php';
-
     include '../../sidebar.php';
-  ?>
+    ?>
 
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Ordered products</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
-                  <thead>
-                  <tr>
-                    <th>Product_id</th>
-                    <th>Order_id</th>
-                    <th>user_id</th>
-                    <th>total_price</th>
-                    <th>Quantity</th>
-                    <th>Expected_delivery</th>
-                    <th class="text-center no-sorting">Action</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                      while($result=mysqli_fetch_assoc($orderDisplay))
-                      {
-                    ?>
-                    <tr>
-                      <td><?php echo $result['product_id'];?></td>
-                      <td><?php echo $result['order_id'];?></td>
-                      <td><?php echo $result['user_id'];?></td>
-                      <td><?php echo $result['total_price'];?></td>
-                      <td><?php echo $result['product_quantity'];?></td>
-                      <td><?php echo $result['expected_delivery'];?></td>
-                      <td class="td_action" align="center">
-                      <a href="../../../user_visit/view_admin_product.php?product_id=<?php  echo $result['product_id'] ; ?>&user_id=<?php  echo $result['user_id'] ; ?> "><i data-title="View" id="viewdetails" class="fas fa-eye"></i></a>
-                      </td>
-                    </tr>
-                    <?php } ?>
-                  </tbody>
-                  
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-
-                                    </table>
-                                </div>
-                                <!-- /.card-body -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Ordered products</h3>
                             </div>
-                            <!-- /.card -->
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Product_id</th>
+                                            <th>Order_id</th>
+                                            <th>total_price</th>
+                                            <th>Quantity</th>
+                                            <th>Expected_delivery</th>
+                                            <th class="text-center no-sorting">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                    while ($result = mysqli_fetch_assoc($orderDisplay)) {
+                    ?>
+                                        <tr>
+                                            <td><?php echo $result['product_id']; ?></td>
+                                            <td><?php echo $result['order_id']; ?></td>
+                                            <td><?php echo $result['total_price']; ?></td>
+                                            <td><?php echo $result['product_quantity']; ?></td>
+                                            <td><?php echo $result['expected_delivery']; ?></td>
+                                            <td class="td_action" align="center">
+                                                <a
+                                                    href="../../view_admin_product.php?product_id=<?php echo $result['product_id']  ?> "><i
+                                                        data-title="View" id="viewdetails" class="fas fa-eye"></i></a>
+                                            </td>
+                                        </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <!-- /.col -->
                     </div>
-                    <!-- /.row -->
+                    <!-- /.card-body -->
                 </div>
-                <!-- /.container-fluid -->
-            </section>
-            <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>Version</b> 3.2.0
+                <!-- /.card -->
             </div>
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
-            reserved.
-        </footer>
+        </section> <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.2.0
+        </div>
+        <strong>Copyright &copy; 2021-2022 <a href="https://adminlte.io">Admin</a>.</strong> All rights
+        reserved.
+    </footer>
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 
