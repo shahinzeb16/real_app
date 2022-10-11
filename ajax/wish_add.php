@@ -1,6 +1,6 @@
 <?php
-include '../classes/api.php';
-$wishobj=new cartadd();
+include_once '../autoload/autoload.php';
+$wishobj=new Wishadd();
 $id=$_SESSION['user'];
 if($id=="")
 {

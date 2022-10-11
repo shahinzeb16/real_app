@@ -1,6 +1,6 @@
 <?php
-include '../classes/api.php';
-$cartobj=new cartadd();
+include_once '../autoload/autoload.php';
+$cartobj=new Cartadd();
 $id=$_SESSION['user'];
 if($id=="")
 {
@@ -16,6 +16,7 @@ else
 		if($cart)
 		{
 			echo "Item Added to Cart";
+		
 		}
 	}
 }
