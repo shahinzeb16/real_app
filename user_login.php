@@ -1,5 +1,7 @@
 <?php
-include('classes/api/Users.php');
+include_once 'autoload/autoload.php';
+session_start();
+
 $dataobj = new Users();
 if (isset($_POST['submit'])) {
     $email = $_REQUEST['email'];

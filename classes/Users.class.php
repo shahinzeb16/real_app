@@ -1,6 +1,5 @@
 <?php
-include 'database.php';
-session_start();
+include_once 'Database.php';
 
 class Users extends Database
 {

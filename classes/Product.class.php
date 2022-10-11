@@ -1,4 +1,6 @@
-<?php
+<?php 
+include_once 'Database.php';
+
 class Product extends Database
 {
     public function get_product($category_id = "")
@@ -42,7 +44,12 @@ class Product extends Database
         return $data;
     }
 
-
+    public function subcatdisplay($category)
+    {
+       $sql = "SELECT * FROM categories WHERE parent_id='" . $category . "'";
+       $data = mysqli_query($this->conn, $sql);
+       return $data;
+    }
 
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-include '../classes/api/Index.php';
+include_once '../autoload/autoload.php';
 $wishobj=new Wishadd();
 $id=$_SESSION['user'];
 if($id=="")

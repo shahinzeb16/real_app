@@ -1,44 +1,41 @@
 <?php
-    include 'classes/api/Index.php';
-	$carttobj = new Cartadd();
-	$ordersobj= new Orders();
+include_once 'autoload/autoload.php';
+$carttobj = new Cartadd();
+$ordersobj= new Orders();
 
-	$id=$_SESSION['user'];
-	$cartdisplay=$carttobj->get_cart_product($id);
-	$addressobj = new Users_address();
-	if(isset($_POST['submit'])){
-		$user_id=$_SESSION['user'];
-		$address=$_POST['address'];
-		$pincode=$_POST['pincode'];
-		$state=$_POST['state'];
-		$city=$_POST['city'];
-		$landmark=$_POST['landmark'];
-		$total_price=$_POST['total'];
+$id=$_SESSION['user'];
+$cartdisplay=$carttobj->get_cart_product($id);
+$addressobj = new Users_address();
+if (isset($_POST['submit'])) {
+    $user_id=$_SESSION['user'];
+    $address=$_POST['address'];
+    $pincode=$_POST['pincode'];
+    $state=$_POST['state'];
+    $city=$_POST['city'];
+    $landmark=$_POST['landmark'];
+    $total_price=$_POST['total'];
 
-		$transaction_id=rand();
-		while($cart=mysqli_fetch_assoc($cartdisplay)){
-		$product_id=$cart['product_id'];
-		$product_quantity=$cart['quantity'];
-		$order_id=$cart['cart_id'];
+    $transaction_id=rand();
+    while ($cart=mysqli_fetch_assoc($cartdisplay)) {
+        $product_id=$cart['product_id'];
+        $product_quantity=$cart['quantity'];
+        $order_id=$cart['cart_id'];
 
-		$check1=$ordersobj->add_order($order_id,$transaction_id,$user_id,$product_id,$total_price,$product_quantity);
-	    $check = $addressobj->add_address($user_id,$address,$pincode,$state,$city,$landmark);
-	    if($check1= $check==200){
-		    header('location:index.php');
-	    }
-	    else{
-		 header('location:shoping-cart.php');
-	    }
-	    
-	    }
-
+        $check1=$ordersobj->add_order($order_id, $transaction_id, $user_id, $product_id, $total_price, $product_quantity);
+        $check = $addressobj->add_address($user_id, $address, $pincode, $state, $city, $landmark);
+        if ($check1= $check==200) {
+            header('location:index.php');
+        } else {
+            header('location:shoping-cart.php');
+        }
     }
+}
 
-	if(isset($_GET['delete'])){
-        $id = $_GET['delete'];
-        $delete = $carttobj->deletecartproduct($id);
-        header('location:shoping-cart.php');
-    }
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+    $delete = $carttobj->deletecartproduct($id);
+    header('location:shoping-cart.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +72,7 @@
 <body class="animsition">
 	<?php
         include 'header.php';
-    ?>
+?>
 	
 	<!-- breadcrumb -->
 	<div class="container">
@@ -109,12 +106,12 @@
 									<th class="column-6">Action</th>
 
 								</tr>
-								<?php 
-								    while($cart=mysqli_fetch_assoc($cartdisplay)){
-										$product_id=$cart['product_id'];
-										$list=$carttobj->productdisplay($product_id);
-									    $productdisplay = mysqli_fetch_assoc($list);
-								 ?>
+								<?php
+                                while ($cart=mysqli_fetch_assoc($cartdisplay)) {
+                                    $product_id=$cart['product_id'];
+                                    $list=$carttobj->productdisplay($product_id);
+                                    $productdisplay = mysqli_fetch_assoc($list);
+                                    ?>
 								<tr class="table_row">
 									<td class="column-1">
 										<div class="how-itemcart1">
@@ -141,12 +138,12 @@
 
 								</tr>
 
-								<?php  
-									$sum=0;
-									$total= $productdisplay['product_price']*$cart['quantity'];
-									$sum=$sum+$total; 
+								<?php
+                                       $sum=0;
+                                    $total= $productdisplay['product_price']*$cart['quantity'];
+                                    $sum=$sum+$total;
 
-								?>
+                                    ?>
 								<?php  } ?>
 							</table>
 						</div>
@@ -263,7 +260,7 @@
 	
 	<?php
         include 'footer.php';
-    ?>
+?>
 
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">

@@ -1,4 +1,6 @@
 <?php
+include_once 'Database.php';
+
 class users_address extends Database
 {
    public function add_address($user_id, $address, $pincode, $state, $city, $landmark)

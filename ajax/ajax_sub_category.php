@@ -1,12 +1,10 @@
 <?php
-include '../classes/api.php';
-$subcatobj=new category();
+include_once '../autoload/autoload.php';
+$subcatobj=new Product();
 if(isset($_REQUEST['category']))
 {
 	$category=$_REQUEST['category'];
-	//echo $category;
 	$result=$subcatobj->subcatdisplay($category);
-	//print_r($result);
 	$subcat="";
    while($res=mysqli_fetch_assoc($result))
    {

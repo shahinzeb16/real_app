@@ -1,4 +1,6 @@
 <?php
+session_start();
+include_once 'Database.php';
 class Cartadd extends Database
 {
    public function addtocart($product_id, $id, $quantity)
@@ -57,6 +59,13 @@ class Cartadd extends Database
       } else {
          return 404;
       }
+   }
+
+   public function updatecart($product_id,$id,$quantity)
+   {
+      $sql="UPDATE cart SET quantity='$quantity' WHERE user_id='$id' AND product_id='$product_id'";
+      $data=mysqli_query($this->conn,$sql);
+      return $data;
    }
 }
 

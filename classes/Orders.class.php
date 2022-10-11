@@ -1,4 +1,6 @@
 <?php
+include_once 'Database.php';
+
 class Orders extends Database
 {
    public function orderDisplay()

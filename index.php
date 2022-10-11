@@ -1,11 +1,11 @@
 <?php
-include 'classes/api/Index.php';
+include_once  'autoload/autoload.php';
+// session_start();
+
 $productobj = new Product();
 $get_category = $productobj->get_category();
 
 $carttobj = new Cartadd();
-
-// $ordersobj= new Orders();
 
 if (isset($_REQUEST['cat_id'])) {
 	$category_id = $_REQUEST['cat_id'];
@@ -26,9 +26,9 @@ if (isset($_REQUEST['cat_id'])) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="images/icons/favicon.png" />
+	<!-- <link rel="icon" type="image/png" href="assets/images/icons/favicon.png" /> -->
 	<!--===============================================================================================-->
-	<!-- <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 	<!--===============================================================================================-->
@@ -188,7 +188,7 @@ if (isset($_REQUEST['cat_id'])) {
 			//alert(product_id);
 			$.ajax({
 				type: "post",
-				url: "../ajax/cart_add.php",
+				url: "ajax/cart_add.php",
 				data: {
 					pr_id: product_id
 				}
@@ -211,7 +211,7 @@ if (isset($_REQUEST['cat_id'])) {
 			//alert(product_id);
 			$.ajax({
 				type: "post",
-				url: "../ajax/wish_add.php",
+				url: "ajax/wish_add.php",
 				data: {
 					pr_id: product_id
 				}
