@@ -1,29 +1,29 @@
 <?php
 include_once 'autoload/autoload.php';
 $carttobj = new Cartadd();
-$ordersobj= new Orders();
+$ordersobj = new Orders();
 
-$id=$_SESSION['user'];
-$cartdisplay=$carttobj->get_cart_product($id);
+$id = $_SESSION['user'];
+$cartdisplay = $carttobj->get_cart_product($id);
 $addressobj = new Users_address();
 if (isset($_POST['submit'])) {
-    $user_id=$_SESSION['user'];
-    $address=$_POST['address'];
-    $pincode=$_POST['pincode'];
-    $state=$_POST['state'];
-    $city=$_POST['city'];
-    $landmark=$_POST['landmark'];
-    $total_price=$_POST['total'];
+    $user_id = $_SESSION['user'];
+    $address = $_POST['address'];
+    $pincode = $_POST['pincode'];
+    $state = $_POST['state'];
+    $city = $_POST['city'];
+    $landmark = $_POST['landmark'];
+    $total_price = $_POST['total'];
 
-    $transaction_id=rand();
-    while ($cart=mysqli_fetch_assoc($cartdisplay)) {
-        $product_id=$cart['product_id'];
-        $product_quantity=$cart['quantity'];
-        $order_id=$cart['cart_id'];
+    $transaction_id = rand();
+    while ($cart = mysqli_fetch_assoc($cartdisplay)) {
+        $product_id = $cart['product_id'];
+        $product_quantity = $cart['quantity'];
+        $order_id = $cart['cart_id'];
 
-        $check1=$ordersobj->add_order($order_id, $transaction_id, $user_id, $product_id, $total_price, $product_quantity);
+        $check1 = $ordersobj->add_order($order_id, $transaction_id, $user_id, $product_id, $total_price, $product_quantity);
         $check = $addressobj->add_address($user_id, $address, $pincode, $state, $city, $landmark);
-        if ($check1= $check==200) {
+        if ($check1 = $check == 200) {
             header('location:index.php');
         } else {
             header('location:shoping-cart.php');
@@ -73,8 +73,8 @@ if (isset($_GET['delete'])) {
 
 <body class="animsition">
     <?php
-        include 'header.php';
-?>
+    include 'header.php';
+    ?>
 
     <!-- breadcrumb -->
     <div class="container">
@@ -100,55 +100,51 @@ if (isset($_GET['delete'])) {
                         <div class="wrap-table-shopping-cart">
                             <table class="table-shopping-cart">
                                 <tr class="table_head">
-                                    <th class="column-1">Product</th>
+                                    <th class="column-2">Product</th>
                                     <th class="column-2"></th>
-                                    <th class="column-3">Price</th>
-                                    <th class="column-4">Quantity</th>
-                                    <th class="column-5">Total</th>
-                                    <th class="column-6">Action</th>
+                                    <th class="column-2">Price</th>
+                                    <th class="column-2">Quantity</th>
+                                    <th class="column-2">Total</th>
+                                    <th class="column-2">Action</th>
 
                                 </tr>
                                 <?php
-                                while ($cart=mysqli_fetch_assoc($cartdisplay)) {
-                                    $product_id=$cart['product_id'];
-                                    $list=$carttobj->productdisplay($product_id);
+                                $sum = 0;
+
+                                while ($cart = mysqli_fetch_assoc($cartdisplay)) {
+                                    $product_id = $cart['product_id'];
+                                    $list = $carttobj->productdisplay($product_id);
                                     $productdisplay = mysqli_fetch_assoc($list);
-                                    ?>
-                                <tr class="table_row">
-                                    <td class="column-1">
-                                        <div class="how-itemcart1">
-                                            <img src="<?php  echo $productdisplay['product_image'] ?>" alt="IMG">
-                                        </div>
-                                    </td>
-                                    <td class="column-2"><?php echo $productdisplay['product_title'] ; ?></td>
-                                    <td class="column-3"><?php echo $productdisplay['product_price'] ; ?></td>
-                                    <td class="column-4">
-                                        <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                            <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                                <i class="fs-16 zmdi zmdi-minus"></i>
+
+                                ?>
+                                    <tr class="table_row">
+                                        <td class="column-2">
+                                            <div class="how-itemcart1">
+                                                <img src="<?php echo $productdisplay['product_image'] ?>" alt="IMG">
                                             </div>
+                                        </td>
+                                        <td class="column-2"><?php echo $productdisplay['product_title']; ?></td>
+                                        <td class="column-2"><?php echo "₹".$productdisplay['product_price']; ?></td>
+                                        <td class="column-2">
+                                            <div class="wrap-num-product flex-w m-l-auto m-r-0">
+                                                <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                    <i class="fs-16 zmdi zmdi-minus"></i>
+                                                </div>
 
-                                            <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                                name="num-product1" data-product-id="<?php echo $cart['product_id'];?>"
-                                                value="<?php echo $cart['quantity'];?>">
+                                                <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" data-product-id="<?php echo $cart['product_id']; ?>" value="<?php echo $cart['quantity']; ?>">
 
-                                            <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                                <i class="fs-16 zmdi zmdi-plus"></i>
+                                                <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                                    <i class="fs-16 zmdi zmdi-plus"></i>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="column-5">
-                                        <?php  echo $productdisplay['product_price']*$cart['quantity'] ;?></td>
-                                    <td class="column-6"><a
-                                            href="shoping-cart.php?delete=<?php echo $cart['cart_id'];  ?>"><i
-                                                class=" fas fa-trash"></i></a></td>
+                                        </td>
+                                        <td class="column-2"><?php echo "₹".$total = $productdisplay['product_price'] * $cart['quantity'] ?></td>
+                                        <td class="column-2"><a href="shoping-cart.php?delete=<?php echo $cart['cart_id'];  ?>"><i class=" fas fa-trash"></i></a></td>
 
-                                </tr>
+                                    </tr>
 
-                                <?php
-                                       $sum=0;
-                                    $total= $productdisplay['product_price']*$cart['quantity'];
-                                    $sum=$sum+$total;
+                                    <?php
+                                    $sum = $sum + $total;
 
                                     ?>
                                 <?php  } ?>
@@ -157,17 +153,14 @@ if (isset($_GET['delete'])) {
 
                         <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
                             <div class="flex-w flex-m m-r-20 m-tb-5">
-                                <input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text"
-                                    name="coupon" placeholder="Coupon Code">
+                                <input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Coupon Code">
 
-                                <div
-                                    class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+                                <div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
                                     Apply coupon
                                 </div>
                             </div>
 
-                            <div
-                                class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+                            <div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
                                 Update Cart
                             </div>
                         </div>
@@ -189,7 +182,7 @@ if (isset($_GET['delete'])) {
 
                             <div class="size-209">
                                 <span name="total" class="mtext-110 cl2">
-                                    <?php  echo $sum ; ?>
+                                    <?php echo "₹".$sum; ?>
                                 </span>
                             </div>
                         </div>
@@ -207,15 +200,12 @@ if (isset($_GET['delete'])) {
                                 </p>
 
                                 <div class="p-t-15">
-                                    <span class="stext-112 cl8">
-                                        Calculate Shipping
-                                    </span>
+                                    
                                     <div class="bor8 bg0 m-b-12">
                                         <textarea type="text" name="address" placeholder="Address"></textarea>
                                     </div>
                                     <div class="bor8 bg0 m-b-12">
-                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="pincode"
-                                            placeholder="Pincode">
+                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="pincode" placeholder="Pincode">
                                     </div>
 
                                     <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
@@ -229,16 +219,14 @@ if (isset($_GET['delete'])) {
                                     </div>
 
                                     <div class="bor8 bg0 m-b-22">
-                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="city"
-                                            placeholder="City">
+                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="city" placeholder="City">
                                     </div>
                                     <div class="bor8 bg0 m-b-12">
                                         <textarea type="text" name="landmark" placeholder="Landmark"></textarea>
                                     </div>
 
                                     <div class="flex-w">
-                                        <div
-                                            class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
+                                        <div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
                                             Update Totals
                                         </div>
                                     </div>
@@ -256,13 +244,12 @@ if (isset($_GET['delete'])) {
 
                             <div class="size-209 p-t-1">
                                 <span class="mtext-110 cl2">
-                                    <?php  echo $sum ; ?>
+                                    <?php echo "₹".$sum; ?>
                                 </span>
                             </div>
                         </div>
 
-                        <button type="submit" name="submit"
-                            class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                        <button type="submit" name="submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
                             Proceed to Checkout
                         </button>
                     </div>
@@ -273,8 +260,8 @@ if (isset($_GET['delete'])) {
 
 
     <?php
-        include 'footer.php';
-?>
+    include 'footer.php';
+    ?>
 
     <!-- Back to top -->
     <div class="btn-back-to-top" id="myBtn">
@@ -293,31 +280,31 @@ if (isset($_GET['delete'])) {
     <!--===============================================================================================-->
     <script src="vendor/select2/select2.min.js"></script>
     <script>
-    $(".js-select2").each(function() {
-        $(this).select2({
-            minimumResultsForSearch: 20,
-            dropdownParent: $(this).next('.dropDownSelect2')
-        });
-    })
+        $(".js-select2").each(function() {
+            $(this).select2({
+                minimumResultsForSearch: 20,
+                dropdownParent: $(this).next('.dropDownSelect2')
+            });
+        })
     </script>
     <!--===============================================================================================-->
     <script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
     <!--===============================================================================================-->
     <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script>
-    $('.js-pscroll').each(function() {
-        $(this).css('position', 'relative');
-        $(this).css('overflow', 'hidden');
-        var ps = new PerfectScrollbar(this, {
-            wheelSpeed: 1,
-            scrollingThreshold: 1000,
-            wheelPropagation: false,
-        });
+        $('.js-pscroll').each(function() {
+            $(this).css('position', 'relative');
+            $(this).css('overflow', 'hidden');
+            var ps = new PerfectScrollbar(this, {
+                wheelSpeed: 1,
+                scrollingThreshold: 1000,
+                wheelPropagation: false,
+            });
 
-        $(window).on('resize', function() {
-            ps.update();
-        })
-    });
+            $(window).on('resize', function() {
+                ps.update();
+            })
+        });
     </script>
     <!--===============================================================================================-->
     <script src="js/main.js"></script>

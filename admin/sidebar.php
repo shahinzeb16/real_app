@@ -294,6 +294,12 @@
                   <p>Users Table</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="../tables/contact_table.php" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Contact Table</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-header">EXAMPLES</li>

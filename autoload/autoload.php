@@ -5,7 +5,7 @@ spl_autoload_register('autoload');
 function autoload($classname)
 {
 
-    // echo     $fullpath = __DIR__ . "/../classes/" . $classname . ".class.php";
+    // echo    $fullpath = __DIR__ . "/../classes/" . $classname . ".class.php";
     $fullpath = __DIR__ . "/../classes/" . $classname . ".class.php";
     // die();
 

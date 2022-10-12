@@ -1,9 +1,7 @@
 <?php
-//include '../../classes/Product.class.php';
-//include "../../classes/Database.php";
+
 include '../../autoload/autoload.php';
 $dataobj = new Product();
-//$categoryobj = new Product();
 $parentfetch = $dataobj->parentcategory();
 
 if(isset($_POST['submit'])){
@@ -41,7 +39,7 @@ if(isset($_POST['submit'])){
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Project Add</title>
+    <title>Product Add</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
