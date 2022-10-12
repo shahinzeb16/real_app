@@ -1,5 +1,5 @@
 <?php
-$id=$_SESSION['user'];
+$id = $_SESSION['user'];
 
 $cartdisplay = $carttobj->get_cart_product($id);
 
@@ -23,11 +23,11 @@ $cartdisplay = $carttobj->get_cart_product($id);
 		<div class="header-cart-content flex-w js-pscroll">
 			<ul class="header-cart-wrapitem w-full">
 				<?php
-                while ($cart = mysqli_fetch_assoc($cartdisplay)) {
-                    $product_id = $cart['product_id'];
-                    $list = $carttobj->productdisplay($product_id);
-                    $productdisplay = mysqli_fetch_assoc($list);
-                    ?>
+				while ($cart = mysqli_fetch_assoc($cartdisplay)) {
+					$product_id = $cart['product_id'];
+					$list = $carttobj->productdisplay($product_id);
+					$productdisplay = mysqli_fetch_assoc($list);
+				?>
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
 							<img src="<?php echo $productdisplay['product_image']; ?>" alt="IMG">
@@ -39,17 +39,21 @@ $cartdisplay = $carttobj->get_cart_product($id);
 							</a>
 
 							<span class="header-cart-item-info">
-								<?php echo $productdisplay['product_price'] * $cart['quantity']; ?>
+								<?php echo "₹".$total = $productdisplay['product_price'] * $cart['quantity']; ?>
 							</span>
 						</div>
 					</li>
+					<?php
+					$sum = $sum + $total;
+
+					?>
 				<?php  }  ?>
 
 			</ul>
 
 			<div class="w-full">
 				<div class="header-cart-total w-full p-tb-40">
-					Total: $75.00
+				<?php echo "Total:₹".$sum; ?>
 				</div>
 
 				<div class="header-cart-buttons flex-w w-full">
